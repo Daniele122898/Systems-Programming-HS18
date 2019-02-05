@@ -1,0 +1,13 @@
+#!/usr/bin/awk -f 
+
+{ 
+    # If line matches this regular expression .. 
+    if ($0 ~ /^pml4.*PS=0$/) { 
+	# Replace second word with XXXXXXXX
+	print $1" XXXXXXXX "$3" "$4" "$5 
+    } else if ($0 ~ /^pml4\[[0-9]+\] .*RW=[01]$/) {
+    	print $1" XXXXXXXX "$3" "$4" "$5
+    } else { # Otherwise .. 
+	print $0 # print original line
+    } 
+}

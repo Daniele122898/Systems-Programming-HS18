@@ -1,0 +1,3195 @@
+ Percent |	Source code & Disassembly of libc-2.27.so for cycles:uppp (467 samples)
+---------------------------------------------------------------------------------------
+         :
+         :
+         :
+         :	Disassembly of section .text:
+         :
+         :	0000000000044300 <random_r@@GLIBC_2.2.5>:
+    6.42 :	  44300:       test   %rdi,%rdi
+    0.00 :	  44303:       je     44380 <random_r@@GLIBC_2.2.5+0x80>
+    9.42 :	  44305:       test   %rsi,%rsi
+    0.00 :	  44308:       je     44380 <random_r@@GLIBC_2.2.5+0x80>
+    0.21 :	  4430a:       mov    0x18(%rdi),%eax
+    0.00 :	  4430d:       mov    0x10(%rdi),%r8
+    5.78 :	  44311:       test   %eax,%eax
+    0.00 :	  44313:       je     44360 <random_r@@GLIBC_2.2.5+0x60>
+    7.92 :	  44315:       mov    (%rdi),%rdx
+    0.00 :	  44318:       mov    0x8(%rdi),%rcx
+    0.00 :	  4431c:       mov    0x28(%rdi),%r9
+    6.21 :	  44320:       mov    (%rcx),%eax
+    9.21 :	  44322:       add    (%rdx),%eax
+    0.00 :	  44324:       add    $0x4,%rdx
+    0.00 :	  44328:       add    $0x4,%rcx
+    8.35 :	  4432c:       mov    %eax,-0x4(%rdx)
+    5.57 :	  4432f:       shr    %eax
+    0.00 :	  44331:       cmp    %rdx,%r9
+    3.21 :	  44334:       mov    %eax,(%rsi)
+    3.85 :	  44336:       ja     44348 <random_r@@GLIBC_2.2.5+0x48>
+    6.64 :	  44338:       mov    %r8,(%rdi)
+    1.71 :	  4433b:       mov    %rcx,0x8(%rdi)
+    0.00 :	  4433f:       xor    %eax,%eax
+    0.21 :	  44341:       retq
+    0.00 :	  44342:       nopw   0x0(%rax,%rax,1)
+    0.00 :	  44348:       cmp    %rcx,%r9
+   10.92 :	  4434b:       ja     44350 <random_r@@GLIBC_2.2.5+0x50>
+    0.00 :	  4434d:       mov    %r8,%rcx
+    0.00 :	  44350:       mov    %rdx,%r8
+    0.21 :	  44353:       mov    %rcx,0x8(%rdi)
+    0.21 :	  44357:       xor    %eax,%eax
+   13.92 :	  44359:       mov    %r8,(%rdi)
+    0.00 :	  4435c:       retq
+    0.00 :	  4435d:       nopl   (%rax)
+    0.00 :	  44360:       imul   $0x41c64e6d,(%r8),%edx
+    0.00 :	  44367:       add    $0x3039,%edx
+    0.00 :	  4436d:       and    $0x7fffffff,%edx
+    0.00 :	  44373:       mov    %edx,(%r8)
+    0.00 :	  44376:       mov    %edx,(%rsi)
+    0.00 :	  44378:       retq
+    0.00 :	  44379:       nopl   0x0(%rax)
+    0.00 :	  44380:       mov    0x3a6ae1(%rip),%rax        # 3eae68 <h_errlist@@GLIBC_2.2.5+0xdc8>
+    0.00 :	  44387:       movl   $0x16,%fs:(%rax)
+    0.00 :	  4438e:       mov    $0xffffffff,%eax
+    0.00 :	  44393:       retq
+ Percent |	Source code & Disassembly of mmul for cycles:uppp (462 samples)
+-------------------------------------------------------------------------------
+         :
+         :
+         :
+         :	Disassembly of section .text:
+         :
+         :	0000000000000880 <randmatrix>:
+         :	randmatrix():
+         :	#include <assert.h>
+         :	#include <stdio.h>
+         :	#include <stdlib.h>
+         :
+         :	static int *randmatrix(int size) {
+    0.00 :	  880:   push   %r15
+    0.00 :	  882:   push   %r14
+    0.00 :	  884:   mov    %edi,%r14d
+         :	  int *matrix = malloc(size * size * sizeof(int));
+    0.00 :	  887:   imul   %edi,%edi
+         :	static int *randmatrix(int size) {
+    0.00 :	  88a:   push   %r13
+    0.00 :	  88c:   push   %r12
+    0.00 :	  88e:   push   %rbp
+    0.00 :	  88f:   push   %rbx
+         :	  int *matrix = malloc(size * size * sizeof(int));
+    0.00 :	  890:   movslq %edi,%rdi
+         :	static int *randmatrix(int size) {
+    0.00 :	  893:   sub    $0x28,%rsp
+         :	  int *matrix = malloc(size * size * sizeof(int));
+    0.00 :	  897:   shl    $0x2,%rdi
+    0.00 :	  89b:   callq  6a0 <malloc@plt>
+         :	  assert(matrix != NULL);
+    0.00 :	  8a0:   test   %rax,%rax
+         :	  int *matrix = malloc(size * size * sizeof(int));
+    0.00 :	  8a3:   mov    %rax,0x18(%rsp)
+         :	  assert(matrix != NULL);
+    0.00 :	  8a8:   je     938 <randmatrix+0xb8>
+         :
+         :	  for (int row = 0; row < size; row++) {
+    0.00 :	  8ae:   test   %r14d,%r14d
+    0.00 :	  8b1:   jle    924 <randmatrix+0xa4>
+    0.00 :	  8b3:   mov    %rax,%r12
+    0.00 :	  8b6:   movslq %r14d,%rax
+    0.00 :	  8b9:   xor    %r13d,%r13d
+    0.00 :	  8bc:   shl    $0x2,%rax
+         :	    for (int col = 0; col < size; col++) {
+         :	      matrix[row * size + col] = random() / (RAND_MAX / 100);
+    0.00 :	  8c0:   movabs $0xc800004b00001c21,%rbp
+    0.00 :	  8ca:   mov    %rax,0x8(%rsp)
+    0.00 :	  8cf:   lea    -0x1(%r14),%eax
+    0.00 :	  8d3:   lea    0x4(,%rax,4),%rax
+    0.00 :	  8db:   mov    %rax,0x10(%rsp)
+    0.00 :	  8e0:   mov    0x10(%rsp),%rax
+         :	static int *randmatrix(int size) {
+    0.00 :	  8e5:   mov    %r12,%r15
+    0.00 :	  8e8:   lea    (%rax,%r12,1),%rbx
+    0.00 :	  8ec:   nopl   0x0(%rax)
+         :	      matrix[row * size + col] = random() / (RAND_MAX / 100);
+   16.45 :	  8f0:   callq  690 <random@plt>
+    0.22 :	  8f5:   mov    %rax,%rcx
+    8.01 :	  8f8:   add    $0x4,%r15
+   25.11 :	  8fc:   imul   %rbp
+   10.61 :	  8ff:   add    %rcx,%rdx
+    6.28 :	  902:   sar    $0x3f,%rcx
+    0.00 :	  906:   sar    $0x18,%rdx
+    5.63 :	  90a:   sub    %rcx,%rdx
+   27.06 :	  90d:   mov    %edx,-0x4(%r15)
+         :	    for (int col = 0; col < size; col++) {
+    0.00 :	  911:   cmp    %rbx,%r15
+    0.65 :	  914:   jne    8f0 <randmatrix+0x70>
+         :	  for (int row = 0; row < size; row++) {
+    0.00 :	  916:   add    $0x1,%r13d
+    0.00 :	  91a:   add    0x8(%rsp),%r12
+    0.00 :	  91f:   cmp    %r13d,%r14d
+    0.00 :	  922:   jne    8e0 <randmatrix+0x60>
+         :	    }
+         :	  }
+         :
+         :	  return matrix;
+         :	}
+    0.00 :	  924:   mov    0x18(%rsp),%rax
+    0.00 :	  929:   add    $0x28,%rsp
+    0.00 :	  92d:   pop    %rbx
+    0.00 :	  92e:   pop    %rbp
+    0.00 :	  92f:   pop    %r12
+    0.00 :	  931:   pop    %r13
+    0.00 :	  933:   pop    %r14
+    0.00 :	  935:   pop    %r15
+    0.00 :	  937:   retq
+         :	  assert(matrix != NULL);
+    0.00 :	  938:   lea    0xf1(%rip),%rcx        # a30 <__PRETTY_FUNCTION__.2975>
+    0.00 :	  93f:   lea    0x9e(%rip),%rsi        # 9e4 <_IO_stdin_used+0x4>
+    0.00 :	  946:   lea    0x9e(%rip),%rdi        # 9eb <_IO_stdin_used+0xb>
+    0.00 :	  94d:   mov    $0x7,%edx
+    0.00 :	  952:   callq  670 <__assert_fail@plt>
+ Percent |	Source code & Disassembly of libc-2.27.so for cycles:uppp (432 samples)
+---------------------------------------------------------------------------------------
+         :
+         :
+         :
+         :	Disassembly of section .text:
+         :
+         :	0000000000043da0 <random@@GLIBC_2.2.5>:
+    0.00 :	  43da0:       sub    $0x18,%rsp
+    0.00 :	  43da4:       mov    $0x1,%esi
+    3.70 :	  43da9:       mov    %fs:0x28,%rax
+    8.10 :	  43db2:       mov    %rax,0x8(%rsp)
+    0.00 :	  43db7:       xor    %eax,%eax
+    4.86 :	  43db9:       cmpl   $0x0,0x3acb38(%rip)        # 3f08f8 <argp_program_version_hook@@GLIBC_2.2.5+0x1d8>
+    8.33 :	  43dc0:       je     43dce <random@@GLIBC_2.2.5+0x2e>
+    0.00 :	  43dc2:       lock cmpxchg %esi,0x3a97f6(%rip)        # 3ed5c0 <__abort_msg@@GLIBC_PRIVATE+0x8a0>
+    0.00 :	  43dca:       jne    43dd7 <random@@GLIBC_2.2.5+0x37>
+    0.00 :	  43dcc:       jmp    43df1 <random@@GLIBC_2.2.5+0x51>
+   14.58 :	  43dce:       cmpxchg %esi,0x3a97eb(%rip)        # 3ed5c0 <__abort_msg@@GLIBC_PRIVATE+0x8a0>
+    0.00 :	  43dd5:       je     43df1 <random@@GLIBC_2.2.5+0x51>
+    0.00 :	  43dd7:       lea    0x3a97e2(%rip),%rdi        # 3ed5c0 <__abort_msg@@GLIBC_PRIVATE+0x8a0>
+    0.00 :	  43dde:       sub    $0x80,%rsp
+    0.00 :	  43de5:       callq  130690 <pthread_setcanceltype@@GLIBC_2.2.5+0x30>
+    0.00 :	  43dea:       add    $0x80,%rsp
+    6.71 :	  43df1:       lea    0x3a7948(%rip),%rdi        # 3eb740 <__ctype_b@GLIBC_2.2.5+0x38>
+    9.49 :	  43df8:       lea    0x4(%rsp),%rsi
+    0.00 :	  43dfd:       callq  44300 <random_r@@GLIBC_2.2.5>
+    0.46 :	  43e02:       cmpl   $0x0,0x3acaef(%rip)        # 3f08f8 <argp_program_version_hook@@GLIBC_2.2.5+0x1d8>
+   14.12 :	  43e09:       je     43e16 <random@@GLIBC_2.2.5+0x76>
+    0.00 :	  43e0b:       lock decl 0x3a97ae(%rip)        # 3ed5c0 <__abort_msg@@GLIBC_PRIVATE+0x8a0>
+    0.00 :	  43e12:       jne    43e1e <random@@GLIBC_2.2.5+0x7e>
+    0.00 :	  43e14:       jmp    43e38 <random@@GLIBC_2.2.5+0x98>
+    0.93 :	  43e16:       decl   0x3a97a4(%rip)        # 3ed5c0 <__abort_msg@@GLIBC_PRIVATE+0x8a0>
+   13.43 :	  43e1c:       je     43e38 <random@@GLIBC_2.2.5+0x98>
+    0.00 :	  43e1e:       lea    0x3a979b(%rip),%rdi        # 3ed5c0 <__abort_msg@@GLIBC_PRIVATE+0x8a0>
+    0.00 :	  43e25:       sub    $0x80,%rsp
+    0.00 :	  43e2c:       callq  1306c0 <pthread_setcanceltype@@GLIBC_2.2.5+0x60>
+    0.00 :	  43e31:       add    $0x80,%rsp
+    0.00 :	  43e38:       mov    0x8(%rsp),%rdx
+    1.85 :	  43e3d:       xor    %fs:0x28,%rdx
+    0.93 :	  43e46:       movslq 0x4(%rsp),%rax
+   12.04 :	  43e4b:       jne    43e52 <random@@GLIBC_2.2.5+0xb2>
+    0.00 :	  43e4d:       add    $0x18,%rsp
+    0.46 :	  43e51:       retq
+    0.00 :	  43e52:       callq  134c80 <__stack_chk_fail@@GLIBC_2.4>
+ Percent |	Source code & Disassembly of mmul for cycles:uppp (67 samples)
+------------------------------------------------------------------------------
+         :
+         :
+         :
+         :	Disassembly of section .plt:
+         :
+         :	0000000000000690 <random@plt>:
+  100.00 :	  690:   jmpq   *0x20092a(%rip)        # 200fc0 <random@GLIBC_2.2.5>
+    0.00 :	  696:   pushq  $0x3
+    0.00 :	  69b:   jmpq   650 <.plt>
+ Percent |	Source code & Disassembly of libc-2.27.so for cycles:uppp (1 samples)
+-------------------------------------------------------------------------------------
+         :
+         :
+         :
+         :	Disassembly of section .text:
+         :
+         :	0000000000165fb0 <_dl_addr@@GLIBC_PRIVATE>:
+    0.00 :	  165fb0:       push   %r15
+    0.00 :	  165fb2:       push   %r14
+    0.00 :	  165fb4:       mov    %rdx,%r14
+    0.00 :	  165fb7:       push   %r13
+    0.00 :	  165fb9:       push   %r12
+    0.00 :	  165fbb:       mov    %rsi,%r13
+    0.00 :	  165fbe:       push   %rbp
+    0.00 :	  165fbf:       push   %rbx
+    0.00 :	  165fc0:       mov    %rdi,%rbp
+    0.00 :	  165fc3:       xor    %r12d,%r12d
+    0.00 :	  165fc6:       sub    $0x28,%rsp
+    0.00 :	  165fca:       mov    0x284e17(%rip),%r15        # 3eade8 <_rtld_global@GLIBC_PRIVATE>
+    0.00 :	  165fd1:       mov    %rcx,0x8(%rsp)
+    0.00 :	  165fd6:       lea    0x908(%r15),%rdi
+    0.00 :	  165fdd:       callq  *0xf00(%r15)
+    0.00 :	  165fe4:       mov    %rbp,%rdi
+    0.00 :	  165fe7:       callq  211a0 <_dl_find_dso_for_object@plt>
+    0.00 :	  165fec:       test   %rax,%rax
+    0.00 :	  165fef:       je     16616e <_dl_addr@@GLIBC_PRIVATE+0x1be>
+    0.00 :	  165ff5:       mov    %rax,%rbx
+    0.00 :	  165ff8:       mov    0x8(%rax),%rax
+    0.00 :	  165ffc:       mov    0x340(%rbx),%rdx
+    0.00 :	  166003:       mov    %rax,0x0(%r13)
+    0.00 :	  166007:       mov    %rdx,0x8(%r13)
+    0.00 :	  16600b:       cmpb   $0x0,(%rax)
+    0.00 :	  16600e:       je     166280 <_dl_addr@@GLIBC_PRIVATE+0x2d0>
+    0.00 :	  166014:       mov    0x70(%rbx),%rax
+    0.00 :	  166018:       cmpq   $0x0,0x298(%rbx)
+    0.00 :	  166020:       mov    0x8(%rax),%r10
+    0.00 :	  166024:       mov    0x68(%rbx),%rax
+    0.00 :	  166028:       mov    0x8(%rax),%rax
+    0.00 :	  16602c:       mov    %rax,0x10(%rsp)
+    0.00 :	  166031:       mov    0x90(%rbx),%rax
+    0.00 :	  166038:       mov    0x8(%rax),%eax
+    0.00 :	  16603b:       mov    %eax,0x1c(%rsp)
+    0.00 :	  16603f:       je     1661b0 <_dl_addr@@GLIBC_PRIVATE+0x200>
+    0.00 :	  166045:       mov    0x2ec(%rbx),%eax
+    0.00 :	  16604b:       test   %eax,%eax
+    0.00 :	  16604d:       je     166130 <_dl_addr@@GLIBC_PRIVATE+0x180>
+    0.00 :	  166053:       mov    0x300(%rbx),%rcx
+    0.00 :	  16605a:       lea    -0x1(%rax),%edx
+    0.00 :	  16605d:       lea    0x4(%rcx),%rax
+    0.00 :	  166061:       lea    (%rax,%rdx,4),%rsi
+    0.00 :	  166065:       xor    %edx,%edx
+    0.00 :	  166067:       jmp    166080 <_dl_addr@@GLIBC_PRIVATE+0xd0>
+    0.00 :	  166069:       nopl   0x0(%rax)
+    0.00 :	  166070:       cmp    %rax,%rsi
+    0.00 :	  166073:       mov    %rax,%rcx
+    0.00 :	  166076:       je     166138 <_dl_addr@@GLIBC_PRIVATE+0x188>
+    0.00 :	  16607c:       add    $0x4,%rax
+    0.00 :	  166080:       mov    (%rcx),%edi
+    0.00 :	  166082:       test   %edi,%edi
+    0.00 :	  166084:       je     166070 <_dl_addr@@GLIBC_PRIVATE+0xc0>
+    0.00 :	  166086:       mov    0x308(%rbx),%r8
+    0.00 :	  16608d:       mov    %edi,%ecx
+    0.00 :	  16608f:       lea    (%r8,%rcx,4),%r8
+    0.00 :	  166093:       jmp    1660c0 <_dl_addr@@GLIBC_PRIVATE+0x110>
+    0.00 :	  166095:       nopl   (%rax)
+    0.00 :	  166098:       mov    0x10(%rcx),%r11
+    0.00 :	  16609c:       test   %r11,%r11
+    0.00 :	  16609f:       jne    166107 <_dl_addr@@GLIBC_PRIVATE+0x157>
+    0.00 :	  1660a1:       cmp    %r9,%rbp
+    0.00 :	  1660a4:       je     16610f <_dl_addr@@GLIBC_PRIVATE+0x15f>
+    0.00 :	  1660a6:       nopw   %cs:0x0(%rax,%rax,1)
+    0.00 :	  1660b0:       add    $0x4,%r8
+    0.00 :	  1660b4:       add    $0x1,%edi
+    0.00 :	  1660b7:       testb  $0x1,-0x4(%r8)
+    0.00 :	  1660bc:       jne    166070 <_dl_addr@@GLIBC_PRIVATE+0xc0>
+    0.00 :	  1660be:       mov    %edi,%ecx
+    0.00 :	  1660c0:       lea    (%rcx,%rcx,2),%rcx
+    0.00 :	  1660c4:       lea    (%r10,%rcx,8),%rcx
+  100.00 :	  1660c8:       movzwl 0x6(%rcx),%r11d
+    0.00 :	  1660cd:       test   %r11w,%r11w
+    0.00 :	  1660d1:       jne    1660da <_dl_addr@@GLIBC_PRIVATE+0x12a>
+    0.00 :	  1660d3:       cmpq   $0x0,0x8(%rcx)
+    0.00 :	  1660d8:       je     1660b0 <_dl_addr@@GLIBC_PRIVATE+0x100>
+    0.00 :	  1660da:       movzbl 0x4(%rcx),%r9d
+    0.00 :	  1660df:       and    $0xf,%r9d
+    0.00 :	  1660e3:       cmp    $0x6,%r9b
+    0.00 :	  1660e7:       je     1660b0 <_dl_addr@@GLIBC_PRIVATE+0x100>
+    0.00 :	  1660e9:       mov    0x8(%rcx),%r12
+    0.00 :	  1660ed:       mov    (%rbx),%r9
+    0.00 :	  1660f0:       add    %r12,%r9
+    0.00 :	  1660f3:       cmp    %r9,%rbp
+    0.00 :	  1660f6:       jb     1660b0 <_dl_addr@@GLIBC_PRIVATE+0x100>
+    0.00 :	  1660f8:       test   %r11w,%r11w
+    0.00 :	  1660fc:       jne    166098 <_dl_addr@@GLIBC_PRIVATE+0xe8>
+    0.00 :	  1660fe:       cmp    %r9,%rbp
+    0.00 :	  166101:       je     16610f <_dl_addr@@GLIBC_PRIVATE+0x15f>
+    0.00 :	  166103:       mov    0x10(%rcx),%r11
+    0.00 :	  166107:       add    %r11,%r9
+    0.00 :	  16610a:       cmp    %r9,%rbp
+    0.00 :	  16610d:       jae    1660b0 <_dl_addr@@GLIBC_PRIVATE+0x100>
+    0.00 :	  16610f:       test   %rdx,%rdx
+    0.00 :	  166112:       je     16611a <_dl_addr@@GLIBC_PRIVATE+0x16a>
+    0.00 :	  166114:       cmp    0x8(%rdx),%r12
+    0.00 :	  166118:       jbe    1660b0 <_dl_addr@@GLIBC_PRIVATE+0x100>
+    0.00 :	  16611a:       mov    0x1c(%rsp),%r11d
+    0.00 :	  16611f:       cmp    (%rcx),%r11d
+    0.00 :	  166122:       cmova  %rcx,%rdx
+    0.00 :	  166126:       jmp    1660b0 <_dl_addr@@GLIBC_PRIVATE+0x100>
+    0.00 :	  166128:       nopl   0x0(%rax,%rax,1)
+    0.00 :	  166130:       xor    %edx,%edx
+    0.00 :	  166132:       nopw   0x0(%rax,%rax,1)
+    0.00 :	  166138:       test   %r14,%r14
+    0.00 :	  16613b:       je     166140 <_dl_addr@@GLIBC_PRIVATE+0x190>
+    0.00 :	  16613d:       mov    %rbx,(%r14)
+    0.00 :	  166140:       mov    0x8(%rsp),%rax
+    0.00 :	  166145:       test   %rax,%rax
+    0.00 :	  166148:       je     16614d <_dl_addr@@GLIBC_PRIVATE+0x19d>
+    0.00 :	  16614a:       mov    %rdx,(%rax)
+    0.00 :	  16614d:       test   %rdx,%rdx
+    0.00 :	  166150:       je     166190 <_dl_addr@@GLIBC_PRIVATE+0x1e0>
+    0.00 :	  166152:       mov    (%rdx),%eax
+    0.00 :	  166154:       mov    $0x1,%r12d
+    0.00 :	  16615a:       add    0x10(%rsp),%rax
+    0.00 :	  16615f:       mov    %rax,0x10(%r13)
+    0.00 :	  166163:       mov    0x8(%rdx),%rax
+    0.00 :	  166167:       add    (%rbx),%rax
+    0.00 :	  16616a:       mov    %rax,0x18(%r13)
+    0.00 :	  16616e:       lea    0x908(%r15),%rdi
+    0.00 :	  166175:       callq  *0xf08(%r15)
+    0.00 :	  16617c:       add    $0x28,%rsp
+    0.00 :	  166180:       mov    %r12d,%eax
+    0.00 :	  166183:       pop    %rbx
+    0.00 :	  166184:       pop    %rbp
+    0.00 :	  166185:       pop    %r12
+    0.00 :	  166187:       pop    %r13
+    0.00 :	  166189:       pop    %r14
+    0.00 :	  16618b:       pop    %r15
+    0.00 :	  16618d:       retq
+    0.00 :	  16618e:       xchg   %ax,%ax
+    0.00 :	  166190:       movq   $0x0,0x10(%r13)
+    0.00 :	  166198:       movq   $0x0,0x18(%r13)
+    0.00 :	  1661a0:       mov    $0x1,%r12d
+    0.00 :	  1661a6:       jmp    16616e <_dl_addr@@GLIBC_PRIVATE+0x1be>
+    0.00 :	  1661a8:       nopl   0x0(%rax,%rax,1)
+    0.00 :	  1661b0:       mov    0x60(%rbx),%rax
+    0.00 :	  1661b4:       mov    0x10(%rsp),%rsi
+    0.00 :	  1661b9:       test   %rax,%rax
+    0.00 :	  1661bc:       je     1661cd <_dl_addr@@GLIBC_PRIVATE+0x21d>
+    0.00 :	  1661be:       mov    0x8(%rax),%rax
+    0.00 :	  1661c2:       mov    0x4(%rax),%eax
+    0.00 :	  1661c5:       lea    (%rax,%rax,2),%rax
+    0.00 :	  1661c9:       lea    (%r10,%rax,8),%rsi
+    0.00 :	  1661cd:       xor    %edx,%edx
+    0.00 :	  1661cf:       cmp    %rsi,%r10
+    0.00 :	  1661d2:       jb     16624d <_dl_addr@@GLIBC_PRIVATE+0x29d>
+    0.00 :	  1661d4:       jmpq   166138 <_dl_addr@@GLIBC_PRIVATE+0x188>
+    0.00 :	  1661d9:       nopl   0x0(%rax)
+    0.00 :	  1661e0:       movzbl 0x5(%r10),%eax
+    0.00 :	  1661e5:       and    $0x3,%eax
+    0.00 :	  1661e8:       sub    $0x1,%eax
+    0.00 :	  1661eb:       cmp    $0x1,%eax
+    0.00 :	  1661ee:       jbe    166240 <_dl_addr@@GLIBC_PRIVATE+0x290>
+    0.00 :	  1661f0:       and    $0xf,%ecx
+    0.00 :	  1661f3:       cmp    $0x6,%cl
+    0.00 :	  1661f6:       je     166240 <_dl_addr@@GLIBC_PRIVATE+0x290>
+    0.00 :	  1661f8:       cmpw   $0x0,0x6(%r10)
+    0.00 :	  1661fe:       mov    0x8(%r10),%rax
+    0.00 :	  166202:       jne    166260 <_dl_addr@@GLIBC_PRIVATE+0x2b0>
+    0.00 :	  166204:       test   %rax,%rax
+    0.00 :	  166207:       je     166240 <_dl_addr@@GLIBC_PRIVATE+0x290>
+    0.00 :	  166209:       mov    (%rbx),%rcx
+    0.00 :	  16620c:       add    %rax,%rcx
+    0.00 :	  16620f:       cmp    %rcx,%rbp
+    0.00 :	  166212:       jb     166240 <_dl_addr@@GLIBC_PRIVATE+0x290>
+    0.00 :	  166214:       je     166222 <_dl_addr@@GLIBC_PRIVATE+0x272>
+    0.00 :	  166216:       mov    0x10(%r10),%rdi
+    0.00 :	  16621a:       add    %rdi,%rcx
+    0.00 :	  16621d:       cmp    %rcx,%rbp
+    0.00 :	  166220:       jae    166240 <_dl_addr@@GLIBC_PRIVATE+0x290>
+    0.00 :	  166222:       test   %rdx,%rdx
+    0.00 :	  166225:       je     16622d <_dl_addr@@GLIBC_PRIVATE+0x27d>
+    0.00 :	  166227:       cmp    %rax,0x8(%rdx)
+    0.00 :	  16622b:       jae    166240 <_dl_addr@@GLIBC_PRIVATE+0x290>
+    0.00 :	  16622d:       mov    0x1c(%rsp),%eax
+    0.00 :	  166231:       cmp    (%r10),%eax
+    0.00 :	  166234:       cmova  %r10,%rdx
+    0.00 :	  166238:       nopl   0x0(%rax,%rax,1)
+    0.00 :	  166240:       add    $0x18,%r10
+    0.00 :	  166244:       cmp    %rsi,%r10
+    0.00 :	  166247:       jae    166138 <_dl_addr@@GLIBC_PRIVATE+0x188>
+    0.00 :	  16624d:       movzbl 0x4(%r10),%ecx
+    0.00 :	  166252:       mov    %ecx,%eax
+    0.00 :	  166254:       shr    $0x4,%al
+    0.00 :	  166257:       sub    $0x1,%eax
+    0.00 :	  16625a:       cmp    $0x1,%al
+    0.00 :	  16625c:       ja     166240 <_dl_addr@@GLIBC_PRIVATE+0x290>
+    0.00 :	  16625e:       jmp    1661e0 <_dl_addr@@GLIBC_PRIVATE+0x230>
+    0.00 :	  166260:       mov    (%rbx),%rcx
+    0.00 :	  166263:       add    %rax,%rcx
+    0.00 :	  166266:       cmp    %rcx,%rbp
+    0.00 :	  166269:       jb     166240 <_dl_addr@@GLIBC_PRIVATE+0x290>
+    0.00 :	  16626b:       mov    0x10(%r10),%rdi
+    0.00 :	  16626f:       test   %rdi,%rdi
+    0.00 :	  166272:       jne    16621a <_dl_addr@@GLIBC_PRIVATE+0x26a>
+    0.00 :	  166274:       cmp    %rcx,%rbp
+    0.00 :	  166277:       jne    166240 <_dl_addr@@GLIBC_PRIVATE+0x290>
+    0.00 :	  166279:       jmp    166222 <_dl_addr@@GLIBC_PRIVATE+0x272>
+    0.00 :	  16627b:       nopl   0x0(%rax,%rax,1)
+    0.00 :	  166280:       testb  $0x3,0x314(%rbx)
+    0.00 :	  166287:       jne    166014 <_dl_addr@@GLIBC_PRIVATE+0x64>
+    0.00 :	  16628d:       mov    0x284d44(%rip),%rax        # 3eafd8 <_dl_argv@GLIBC_PRIVATE>
+    0.00 :	  166294:       mov    (%rax),%rax
+    0.00 :	  166297:       mov    (%rax),%rax
+    0.00 :	  16629a:       mov    %rax,0x0(%r13)
+    0.00 :	  16629e:       jmpq   166014 <_dl_addr@@GLIBC_PRIVATE+0x64>
+ Percent |	Source code & Disassembly of ld-2.27.so for cycles:uppp (1 samples)
+-----------------------------------------------------------------------------------
+         :
+         :
+         :
+         :	Disassembly of section .text:
+         :
+         :	0000000000002660 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE-0x7530>:
+    0.00 :	  2660:       push   %rbp
+    0.00 :	  2661:       lea    0x9f68(%rip),%rax        # c5d0 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x2a40>
+    0.00 :	  2668:       mov    %rsp,%rbp
+    0.00 :	  266b:       push   %r15
+    0.00 :	  266d:       push   %r14
+    0.00 :	  266f:       push   %r13
+    0.00 :	  2671:       push   %r12
+    0.00 :	  2673:       mov    %rdx,%r13
+    0.00 :	  2676:       push   %rbx
+    0.00 :	  2677:       mov    %rcx,%r12
+    0.00 :	  267a:       mov    %rdi,%rbx
+    0.00 :	  267d:       sub    $0x1b8,%rsp
+    0.00 :	  2684:       mov    %rax,0x226935(%rip)        # 228fc0 <_rtld_global@@GLIBC_PRIVATE+0xf60>
+    0.00 :	  268b:       lea    -0x15b2(%rip),%rax        # 10e0 <free@plt+0x1e0>
+    0.00 :	  2692:       mov    %esi,-0x1a0(%rbp)
+    0.00 :	  2698:       mov    0x2257c2(%rip),%esi        # 227e60 <__libc_enable_secure@@GLIBC_PRIVATE>
+    0.00 :	  269e:       mov    %rax,0x2268bb(%rip)        # 228f60 <_rtld_global@@GLIBC_PRIVATE+0xf00>
+    0.00 :	  26a5:       lea    -0x15bc(%rip),%rax        # 10f0 <free@plt+0x1f0>
+    0.00 :	  26ac:       movl   $0x0,-0x198(%rbp)
+    0.00 :	  26b6:       mov    %rax,0x2268ab(%rip)        # 228f68 <_rtld_global@@GLIBC_PRIVATE+0xf08>
+    0.00 :	  26bd:       lea    0x1163c(%rip),%rax        # 13d00 <_dl_make_stack_executable@@GLIBC_PRIVATE>
+    0.00 :	  26c4:       test   %esi,%esi
+    0.00 :	  26c6:       mov    %rax,0x2268a3(%rip)        # 228f70 <_rtld_global@@GLIBC_PRIVATE+0xf10>
+    0.00 :	  26cd:       mov    0x226a44(%rip),%rax        # 229118 <_rtld_global@@GLIBC_PRIVATE+0x10b8>
+    0.00 :	  26d4:       mov    %rax,-0x160(%rbp)
+    0.00 :	  26db:       lea    0x1d4c3(%rip),%rax        # 1fba5 <_dl_catch_error@@GLIBC_PRIVATE+0x3ee5>
+    0.00 :	  26e2:       lea    -0x9(%rax),%rdx
+    0.00 :	  26e6:       cmove  %rdx,%rax
+    0.00 :	  26ea:       xor    %r14d,%r14d
+    0.00 :	  26ed:       mov    %rax,0x22519c(%rip)        # 227890 <_rtld_global_ro@@GLIBC_PRIVATE+0x130>
+    0.00 :	  26f4:       lea    -0x160(%rbp),%rax
+    0.00 :	  26fb:       mov    %rax,-0x1a8(%rbp)
+    0.00 :	  2702:       mov    -0x1a8(%rbp),%rdi
+    0.00 :	  2709:       callq  1b3f0 <__get_cpu_features@@GLIBC_PRIVATE+0x19c0>
+    0.00 :	  270e:       test   %rax,%rax
+    0.00 :	  2711:       mov    %rax,%r15
+    0.00 :	  2714:       je     2ab8 <free@plt+0x1bb8>
+    0.00 :	  271a:       movzbl (%rax),%edx
+    0.00 :	  271d:       cmp    $0x3d,%dl
+    0.00 :	  2720:       je     2702 <free@plt+0x1802>
+    0.00 :	  2722:       xor    %eax,%eax
+    0.00 :	  2724:       test   %dl,%dl
+    0.00 :	  2726:       jne    2735 <free@plt+0x1835>
+    0.00 :	  2728:       jmp    2702 <free@plt+0x1802>
+    0.00 :	  272a:       nopw   0x0(%rax,%rax,1)
+    0.00 :	  2730:       cmp    $0x3d,%dl
+    0.00 :	  2733:       je     2742 <free@plt+0x1842>
+    0.00 :	  2735:       add    $0x1,%rax
+    0.00 :	  2739:       movzbl (%r15,%rax,1),%edx
+    0.00 :	  273e:       test   %dl,%dl
+    0.00 :	  2740:       jne    2730 <free@plt+0x1830>
+    0.00 :	  2742:       cmp    $0x3d,%dl
+    0.00 :	  2745:       jne    2702 <free@plt+0x1802>
+    0.00 :	  2747:       sub    $0x4,%rax
+    0.00 :	  274b:       cmp    $0x11,%rax
+    0.00 :	  274f:       ja     2702 <free@plt+0x1802>
+    0.00 :	  2751:       lea    0x1d45c(%rip),%rcx        # 1fbb4 <_dl_catch_error@@GLIBC_PRIVATE+0x3ef4>
+    0.00 :	  2758:       movslq (%rcx,%rax,4),%rax
+    0.00 :	  275c:       add    %rcx,%rax
+    0.00 :	  275f:       jmpq   *%rax
+    0.00 :	  2761:       movabs $0x54494232335f5041,%rdx
+    0.00 :	  276b:       movabs $0x4d5f524546455250,%rax
+    0.00 :	  2775:       xor    0x8(%r15),%rdx
+    0.00 :	  2779:       xor    (%r15),%rax
+    0.00 :	  277c:       or     %rax,%rdx
+    0.00 :	  277f:       jne    2702 <free@plt+0x1802>
+    0.00 :	  2781:       cmpl   $0x4558455f,0x10(%r15)
+    0.00 :	  2789:       jne    2702 <free@plt+0x1802>
+    0.00 :	  278f:       cmpb   $0x43,0x14(%r15)
+    0.00 :	  2794:       jne    2702 <free@plt+0x1802>
+    0.00 :	  279a:       orl    $0x10000,0x225070(%rip)        # 227814 <_rtld_global_ro@@GLIBC_PRIVATE+0xb4>
+    0.00 :	  27a4:       jmpq   2702 <free@plt+0x1802>
+    0.00 :	  27a9:       nopl   0x0(%rax)
+    0.00 :	  27b0:       movabs $0x4a424f5f44454441,%rax
+    0.00 :	  27ba:       movabs $0x4f4c5f4543415254,%rdx
+    0.00 :	  27c4:       xor    0x8(%r15),%rax
+    0.00 :	  27c8:       xor    (%r15),%rdx
+    0.00 :	  27cb:       or     %rdx,%rax
+    0.00 :	  27ce:       jne    2702 <free@plt+0x1802>
+    0.00 :	  27d4:       cmpl   $0x53544345,0x10(%r15)
+    0.00 :	  27dc:       mov    $0x3,%eax
+    0.00 :	  27e1:       cmovne -0x198(%rbp),%eax
+    0.00 :	  27e8:       mov    %eax,-0x198(%rbp)
+    0.00 :	  27ee:       jmpq   2702 <free@plt+0x1802>
+    0.00 :	  27f3:       movabs $0x474e494b4e494c45,%rdx
+    0.00 :	  27fd:       movabs $0x52505f4543415254,%rax
+    0.00 :	  2807:       xor    0x8(%r15),%rdx
+    0.00 :	  280b:       xor    (%r15),%rax
+    0.00 :	  280e:       or     %rax,%rdx
+    0.00 :	  2811:       jne    2702 <free@plt+0x1802>
+    0.00 :	  2817:       add    $0x11,%r15
+    0.00 :	  281b:       movl   $0x1,0x224f77(%rip)        # 22779c <_rtld_global_ro@@GLIBC_PRIVATE+0x3c>
+    0.00 :	  2825:       orl    $0x800,0x224f31(%rip)        # 227760 <_rtld_global_ro@@GLIBC_PRIVATE>
+    0.00 :	  282f:       mov    %r15,0x225062(%rip)        # 227898 <_rtld_global_ro@@GLIBC_PRIVATE+0x138>
+    0.00 :	  2836:       movl   $0x3,-0x198(%rbp)
+    0.00 :	  2840:       jmpq   2702 <free@plt+0x1802>
+    0.00 :	  2845:       mov    0x225615(%rip),%eax        # 227e60 <__libc_enable_secure@@GLIBC_PRIVATE>
+    0.00 :	  284b:       test   %eax,%eax
+    0.00 :	  284d:       jne    2702 <free@plt+0x1802>
+    0.00 :	  2853:       lea    0x1e216(%rip),%rsi        # 20a70 <_dl_catch_error@@GLIBC_PRIVATE+0x4db0>
+    0.00 :	  285a:       mov    $0xe,%edx
+    0.00 :	  285f:       mov    %r15,%rdi
+    0.00 :	  2862:       callq  1ecd0 <_dl_catch_error@@GLIBC_PRIVATE+0x3010>
+    0.00 :	  2867:       test   %eax,%eax
+    0.00 :	  2869:       jne    2702 <free@plt+0x1802>
+    0.00 :	  286f:       cmpb   $0x0,0xf(%r15)
+    0.00 :	  2874:       je     2702 <free@plt+0x1802>
+    0.00 :	  287a:       add    $0xf,%r15
+    0.00 :	  287e:       mov    %r15,0x22500b(%rip)        # 227890 <_rtld_global_ro@@GLIBC_PRIVATE+0x130>
+    0.00 :	  2885:       jmpq   2702 <free@plt+0x1802>
+    0.00 :	  288a:       nopw   0x0(%rax,%rax,1)
+    0.00 :	  2890:       movabs $0x4b5f454d55535341,%rax
+    0.00 :	  289a:       cmp    %rax,(%r15)
+    0.00 :	  289d:       je     55dc <free@plt+0x46dc>
+    0.00 :	  28a3:       mov    0x2255b7(%rip),%eax        # 227e60 <__libc_enable_secure@@GLIBC_PRIVATE>
+    0.00 :	  28a9:       test   %eax,%eax
+    0.00 :	  28ab:       jne    2702 <free@plt+0x1802>
+    0.00 :	  28b1:       lea    0x1e1aa(%rip),%rsi        # 20a62 <_dl_catch_error@@GLIBC_PRIVATE+0x4da2>
+    0.00 :	  28b8:       mov    $0xd,%edx
+    0.00 :	  28bd:       mov    %r15,%rdi
+    0.00 :	  28c0:       callq  1ecd0 <_dl_catch_error@@GLIBC_PRIVATE+0x3010>
+    0.00 :	  28c5:       test   %eax,%eax
+    0.00 :	  28c7:       jne    2702 <free@plt+0x1802>
+    0.00 :	  28cd:       xor    %eax,%eax
+    0.00 :	  28cf:       cmpb   $0x31,0xe(%r15)
+    0.00 :	  28d4:       sete   %al
+    0.00 :	  28d7:       neg    %rax
+    0.00 :	  28da:       mov    %rax,0x224f9f(%rip)        # 227880 <_rtld_global_ro@@GLIBC_PRIVATE+0x120>
+    0.00 :	  28e1:       jmpq   2702 <free@plt+0x1802>
+    0.00 :	  28e6:       nopw   %cs:0x0(%rax,%rax,1)
+    0.00 :	  28f0:       mov    0x22556a(%rip),%eax        # 227e60 <__libc_enable_secure@@GLIBC_PRIVATE>
+    0.00 :	  28f6:       test   %eax,%eax
+    0.00 :	  28f8:       jne    382d <free@plt+0x292d>
+    0.00 :	  28fe:       lea    0x1e63a(%rip),%rsi        # 20f3f <_dl_catch_error@@GLIBC_PRIVATE+0x527f>
+    0.00 :	  2905:       mov    $0xc,%edx
+    0.00 :	  290a:       mov    %r15,%rdi
+    0.00 :	  290d:       callq  1ecd0 <_dl_catch_error@@GLIBC_PRIVATE+0x3010>
+    0.00 :	  2912:       test   %eax,%eax
+    0.00 :	  2914:       je     55cc <free@plt+0x46cc>
+    0.00 :	  291a:       lea    0x1e119(%rip),%rsi        # 20a3a <_dl_catch_error@@GLIBC_PRIVATE+0x4d7a>
+    0.00 :	  2921:       mov    $0xc,%edx
+    0.00 :	  2926:       mov    %r15,%rdi
+    0.00 :	  2929:       callq  1ecd0 <_dl_catch_error@@GLIBC_PRIVATE+0x3010>
+    0.00 :	  292e:       test   %eax,%eax
+    0.00 :	  2930:       je     384e <free@plt+0x294e>
+    0.00 :	  2936:       lea    0x1e10a(%rip),%rsi        # 20a47 <_dl_catch_error@@GLIBC_PRIVATE+0x4d87>
+    0.00 :	  293d:       mov    $0xc,%edx
+    0.00 :	  2942:       mov    %r15,%rdi
+    0.00 :	  2945:       callq  1ecd0 <_dl_catch_error@@GLIBC_PRIVATE+0x3010>
+    0.00 :	  294a:       test   %eax,%eax
+    0.00 :	  294c:       jne    2702 <free@plt+0x1802>
+    0.00 :	  2952:       movl   $0x1,0x224e50(%rip)        # 2277ac <_rtld_global_ro@@GLIBC_PRIVATE+0x4c>
+    0.00 :	  295c:       jmpq   2702 <free@plt+0x1802>
+    0.00 :	  2961:       nopl   0x0(%rax)
+    0.00 :	  2968:       mov    0x2254f2(%rip),%edx        # 227e60 <__libc_enable_secure@@GLIBC_PRIVATE>
+    0.00 :	  296e:       test   %edx,%edx
+    0.00 :	  2970:       jne    2702 <free@plt+0x1802>
+    0.00 :	  2976:       lea    0x1e0b1(%rip),%rsi        # 20a2e <_dl_catch_error@@GLIBC_PRIVATE+0x4d6e>
+    0.00 :	  297d:       mov    $0xb,%edx
+    0.00 :	  2982:       mov    %r15,%rdi
+    0.00 :	  2985:       callq  1ecd0 <_dl_catch_error@@GLIBC_PRIVATE+0x3010>
+    0.00 :	  298a:       test   %eax,%eax
+    0.00 :	  298c:       jne    2702 <free@plt+0x1802>
+    0.00 :	  2992:       add    $0xc,%r15
+    0.00 :	  2996:       mov    %r15,0x224edb(%rip)        # 227878 <_rtld_global_ro@@GLIBC_PRIVATE+0x118>
+    0.00 :	  299d:       jmpq   2702 <free@plt+0x1802>
+    0.00 :	  29a2:       nopw   0x0(%rax,%rax,1)
+    0.00 :	  29a8:       mov    0x2254b2(%rip),%ecx        # 227e60 <__libc_enable_secure@@GLIBC_PRIVATE>
+    0.00 :	  29ae:       test   %ecx,%ecx
+    0.00 :	  29b0:       jne    2702 <free@plt+0x1802>
+    0.00 :	  29b6:       lea    0x1e067(%rip),%rsi        # 20a24 <_dl_catch_error@@GLIBC_PRIVATE+0x4d64>
+    0.00 :	  29bd:       mov    $0x9,%edx
+    0.00 :	  29c2:       mov    %r15,%rdi
+    0.00 :	  29c5:       callq  1ecd0 <_dl_catch_error@@GLIBC_PRIVATE+0x3010>
+    0.00 :	  29ca:       test   %eax,%eax
+    0.00 :	  29cc:       jne    2702 <free@plt+0x1802>
+    0.00 :	  29d2:       callq  1b090 <__get_cpu_features@@GLIBC_PRIVATE+0x1660>
+    0.00 :	  29d7:       jmpq   2702 <free@plt+0x1802>
+    0.00 :	  29dc:       nopl   0x0(%rax)
+    0.00 :	  29e0:       movabs $0x574f4e5f444e4942,%rax
+    0.00 :	  29ea:       cmp    %rax,(%r15)
+    0.00 :	  29ed:       jne    3aef <free@plt+0x2bef>
+    0.00 :	  29f3:       xor    %eax,%eax
+    0.00 :	  29f5:       cmpb   $0x0,0x9(%r15)
+    0.00 :	  29fa:       sete   %al
+    0.00 :	  29fd:       mov    %eax,0x224da1(%rip)        # 2277a4 <_rtld_global_ro@@GLIBC_PRIVATE+0x44>
+    0.00 :	  2a03:       jmpq   2702 <free@plt+0x1802>
+    0.00 :	  2a08:       nopl   0x0(%rax,%rax,1)
+    0.00 :	  2a10:       cmpl   $0x42524556,(%r15)
+    0.00 :	  2a17:       je     559f <free@plt+0x469f>
+    0.00 :	  2a1d:       lea    0x1dfc3(%rip),%rsi        # 209e7 <_dl_catch_error@@GLIBC_PRIVATE+0x4d27>
+    0.00 :	  2a24:       mov    $0x7,%edx
+    0.00 :	  2a29:       mov    %r15,%rdi
+    0.00 :	  2a2c:       callq  1ecd0 <_dl_catch_error@@GLIBC_PRIVATE+0x3010>
+    0.00 :	  2a31:       test   %eax,%eax
+    0.00 :	  2a33:       jne    3b17 <free@plt+0x2c17>
+    0.00 :	  2a39:       add    $0x8,%r15
+    0.00 :	  2a3d:       mov    %r15,0x224c44(%rip)        # 227688 <_dl_catch_error@@GLIBC_PRIVATE+0x20b9c8>
+    0.00 :	  2a44:       jmpq   2702 <free@plt+0x1802>
+    0.00 :	  2a49:       nopl   0x0(%rax)
+    0.00 :	  2a50:       cmpl   $0x4e524157,(%r15)
+    0.00 :	  2a57:       jne    2702 <free@plt+0x1802>
+    0.00 :	  2a5d:       xor    %eax,%eax
+    0.00 :	  2a5f:       cmpb   $0x0,0x5(%r15)
+    0.00 :	  2a64:       setne  %al
+    0.00 :	  2a67:       mov    %eax,0x224d2f(%rip)        # 22779c <_rtld_global_ro@@GLIBC_PRIVATE+0x3c>
+    0.00 :	  2a6d:       jmpq   2702 <free@plt+0x1802>
+    0.00 :	  2a72:       nopw   0x0(%rax,%rax,1)
+    0.00 :	  2a78:       cmpl   $0x55424544,(%r15)
+    0.00 :	  2a7f:       je     5586 <free@plt+0x4686>
+    0.00 :	  2a85:       lea    0x1df82(%rip),%rsi        # 20a0e <_dl_catch_error@@GLIBC_PRIVATE+0x4d4e>
+    0.00 :	  2a8c:       mov    $0x5,%edx
+    0.00 :	  2a91:       mov    %r15,%rdi
+    0.00 :	  2a94:       callq  1ecd0 <_dl_catch_error@@GLIBC_PRIVATE+0x3010>
+    0.00 :	  2a99:       test   %eax,%eax
+    0.00 :	  2a9b:       jne    2702 <free@plt+0x1802>
+    0.00 :	  2aa1:       lea    0x2266c0(%rip),%rax        # 229168 <_r_debug@@GLIBC_2.2.5+0x28>
+    0.00 :	  2aa8:       add    $0x6,%r15
+    0.00 :	  2aac:       mov    %r15,(%rax)
+    0.00 :	  2aaf:       jmpq   2702 <free@plt+0x1802>
+    0.00 :	  2ab4:       nopl   0x0(%rax)
+    0.00 :	  2ab8:       mov    0x2253a2(%rip),%eax        # 227e60 <__libc_enable_secure@@GLIBC_PRIVATE>
+    0.00 :	  2abe:       test   %eax,%eax
+    0.00 :	  2ac0:       jne    552a <free@plt+0x462a>
+    0.00 :	  2ac6:       mov    0x224bb4(%rip),%eax        # 227680 <_dl_catch_error@@GLIBC_PRIVATE+0x20b9c0>
+    0.00 :	  2acc:       test   %eax,%eax
+    0.00 :	  2ace:       je     2ad9 <free@plt+0x1bd9>
+    0.00 :	  2ad0:       test   %r14,%r14
+    0.00 :	  2ad3:       jne    39d9 <free@plt+0x2ad9>
+    0.00 :	  2ad9:       lea    -0x1a50(%rip),%rax        # 1090 <free@plt+0x190>
+    0.00 :	  2ae0:       cmp    %rax,0x0(%r13)
+    0.00 :	  2ae4:       jne    2eab <free@plt+0x1fab>
+    0.00 :	  2aea:       mov    0x224c4f(%rip),%rax        # 227740 <_dl_argv@@GLIBC_PRIVATE>
+    0.00 :	  2af1:       lea    -0x178(%rbp),%rcx
+    0.00 :	  2af8:       lea    0x1dfcc(%rip),%r14        # 20acb <_dl_catch_error@@GLIBC_PRIVATE+0x4e0b>
+    0.00 :	  2aff:       mov    %rcx,-0x1b0(%rbp)
+    0.00 :	  2b06:       mov    (%rax),%rax
+    0.00 :	  2b09:       mov    %rax,0x225ee8(%rip)        # 2289f8 <_rtld_global@@GLIBC_PRIVATE+0x998>
+    0.00 :	  2b10:       mov    0x224c32(%rip),%eax        # 227748 <_dl_argv@@GLIBC_PRIVATE+0x8>
+    0.00 :	  2b16:       cmp    $0x1,%eax
+    0.00 :	  2b19:       jle    2b69 <free@plt+0x1c69>
+    0.00 :	  2b1b:       mov    0x224c1e(%rip),%rdx        # 227740 <_dl_argv@@GLIBC_PRIVATE>
+    0.00 :	  2b22:       mov    $0x7,%ecx
+    0.00 :	  2b27:       mov    %r14,%rdi
+    0.00 :	  2b2a:       mov    0x8(%rdx),%r10
+    0.00 :	  2b2e:       mov    %r10,%rsi
+    0.00 :	  2b31:       repz cmpsb %es:(%rdi),%ds:(%rsi)
+    0.00 :	  2b33:       jne    2b8b <free@plt+0x1c8b>
+    0.00 :	  2b35:       sub    $0x1,%eax
+    0.00 :	  2b38:       add    $0x8,%rdx
+    0.00 :	  2b3c:       addl   $0x1,0x224bf5(%rip)        # 227738 <_dl_catch_error@@GLIBC_PRIVATE+0x20ba78>
+    0.00 :	  2b43:       cmp    $0x1,%eax
+    0.00 :	  2b46:       movl   $0xffffffff,0x224c54(%rip)        # 2277a4 <_rtld_global_ro@@GLIBC_PRIVATE+0x44>
+    0.00 :	  2b50:       mov    %eax,0x224bf2(%rip)        # 227748 <_dl_argv@@GLIBC_PRIVATE+0x8>
+    0.00 :	  2b56:       mov    %rdx,0x224be3(%rip)        # 227740 <_dl_argv@@GLIBC_PRIVATE>
+    0.00 :	  2b5d:       movl   $0x1,-0x198(%rbp)
+    0.00 :	  2b67:       jg     2b1b <free@plt+0x1c1b>
+    0.00 :	  2b69:       lea    0x1f340(%rip),%rbx        # 21eb0 <_dl_catch_error@@GLIBC_PRIVATE+0x61f0>
+    0.00 :	  2b70:       mov    %rbx,%rsi
+    0.00 :	  2b73:       mov    $0x2,%edi
+    0.00 :	  2b78:       xor    %eax,%eax
+    0.00 :	  2b7a:       callq  11660 <_dl_debug_state@@GLIBC_PRIVATE+0x8c0>
+    0.00 :	  2b7f:       mov    $0x7f,%edi
+    0.00 :	  2b84:       callq  1d030 <_dl_catch_error@@GLIBC_PRIVATE+0x1370>
+    0.00 :	  2b89:       jmp    2b70 <free@plt+0x1c70>
+    0.00 :	  2b8b:       lea    0x1df40(%rip),%rdi        # 20ad2 <_dl_catch_error@@GLIBC_PRIVATE+0x4e12>
+    0.00 :	  2b92:       mov    $0x9,%ecx
+    0.00 :	  2b97:       mov    %r10,%rsi
+    0.00 :	  2b9a:       repz cmpsb %es:(%rdi),%ds:(%rsi)
+    0.00 :	  2b9c:       jne    2bc8 <free@plt+0x1cc8>
+    0.00 :	  2b9e:       sub    $0x1,%eax
+    0.00 :	  2ba1:       add    $0x8,%rdx
+    0.00 :	  2ba5:       addl   $0x1,0x224b8c(%rip)        # 227738 <_dl_catch_error@@GLIBC_PRIVATE+0x20ba78>
+    0.00 :	  2bac:       mov    %eax,0x224b96(%rip)        # 227748 <_dl_argv@@GLIBC_PRIVATE+0x8>
+    0.00 :	  2bb2:       mov    %rdx,0x224b87(%rip)        # 227740 <_dl_argv@@GLIBC_PRIVATE>
+    0.00 :	  2bb9:       movl   $0x2,-0x198(%rbp)
+    0.00 :	  2bc3:       jmpq   2b16 <free@plt+0x1c16>
+    0.00 :	  2bc8:       lea    0x1df0c(%rip),%rdi        # 20adb <_dl_catch_error@@GLIBC_PRIVATE+0x4e1b>
+    0.00 :	  2bcf:       mov    $0x10,%ecx
+    0.00 :	  2bd4:       mov    %r10,%rsi
+    0.00 :	  2bd7:       repz cmpsb %es:(%rdi),%ds:(%rsi)
+    0.00 :	  2bd9:       jne    2c05 <free@plt+0x1d05>
+    0.00 :	  2bdb:       sub    $0x1,%eax
+    0.00 :	  2bde:       add    $0x8,%rdx
+    0.00 :	  2be2:       movl   $0x1,0x224b94(%rip)        # 227780 <_rtld_global_ro@@GLIBC_PRIVATE+0x20>
+    0.00 :	  2bec:       addl   $0x1,0x224b45(%rip)        # 227738 <_dl_catch_error@@GLIBC_PRIVATE+0x20ba78>
+    0.00 :	  2bf3:       mov    %eax,0x224b4f(%rip)        # 227748 <_dl_argv@@GLIBC_PRIVATE+0x8>
+    0.00 :	  2bf9:       mov    %rdx,0x224b40(%rip)        # 227740 <_dl_argv@@GLIBC_PRIVATE>
+    0.00 :	  2c00:       jmpq   2b16 <free@plt+0x1c16>
+    0.00 :	  2c05:       lea    0x1dedf(%rip),%rdi        # 20aeb <_dl_catch_error@@GLIBC_PRIVATE+0x4e2b>
+    0.00 :	  2c0c:       mov    $0xf,%ecx
+    0.00 :	  2c11:       mov    %r10,%rsi
+    0.00 :	  2c14:       repz cmpsb %es:(%rdi),%ds:(%rsi)
+    0.00 :	  2c16:       seta   %sil
+    0.00 :	  2c1a:       setb   %cl
+    0.00 :	  2c1d:       cmp    $0x2,%eax
+    0.00 :	  2c20:       setne  %r8b
+    0.00 :	  2c24:       cmp    %cl,%sil
+    0.00 :	  2c27:       jne    2c32 <free@plt+0x1d32>
+    0.00 :	  2c29:       test   %r8b,%r8b
+    0.00 :	  2c2c:       jne    3860 <free@plt+0x2960>
+    0.00 :	  2c32:       lea    0x1dec1(%rip),%rdi        # 20afa <_dl_catch_error@@GLIBC_PRIVATE+0x4e3a>
+    0.00 :	  2c39:       mov    $0x10,%ecx
+    0.00 :	  2c3e:       mov    %r10,%rsi
+    0.00 :	  2c41:       repz cmpsb %es:(%rdi),%ds:(%rsi)
+    0.00 :	  2c43:       jne    2c4e <free@plt+0x1d4e>
+    0.00 :	  2c45:       test   %r8b,%r8b
+    0.00 :	  2c48:       jne    2e80 <free@plt+0x1f80>
+    0.00 :	  2c4e:       lea    0x1deb5(%rip),%rdi        # 20b0a <_dl_catch_error@@GLIBC_PRIVATE+0x4e4a>
+    0.00 :	  2c55:       mov    $0x8,%ecx
+    0.00 :	  2c5a:       mov    %r10,%rsi
+    0.00 :	  2c5d:       repz cmpsb %es:(%rdi),%ds:(%rsi)
+    0.00 :	  2c5f:       jne    2d12 <free@plt+0x1e12>
+    0.00 :	  2c65:       cmp    $0x2,%eax
+    0.00 :	  2c68:       je     2d12 <free@plt+0x1e12>
+    0.00 :	  2c6e:       mov    0x10(%rdx),%rax
+    0.00 :	  2c72:       mov    %rax,-0x178(%rbp)
+    0.00 :	  2c79:       mov    -0x1b0(%rbp),%rdi
+    0.00 :	  2c80:       lea    0x1dd5b(%rip),%rsi        # 209e2 <_dl_catch_error@@GLIBC_PRIVATE+0x4d22>
+    0.00 :	  2c87:       callq  1b930 <realloc@@GLIBC_2.2.5+0x150>
+    0.00 :	  2c8c:       test   %rax,%rax
+    0.00 :	  2c8f:       mov    %rax,%rdx
+    0.00 :	  2c92:       je     2cdf <free@plt+0x1ddf>
+    0.00 :	  2c94:       mov    0x2251c6(%rip),%eax        # 227e60 <__libc_enable_secure@@GLIBC_PRIVATE>
+    0.00 :	  2c9a:       test   %eax,%eax
+    0.00 :	  2c9c:       jne    2c79 <free@plt+0x1d79>
+    0.00 :	  2c9e:       cmpb   $0x0,(%rdx)
+    0.00 :	  2ca1:       je     2c79 <free@plt+0x1d79>
+    0.00 :	  2ca3:       mov    $0x10,%edi
+    0.00 :	  2ca8:       mov    %rdx,-0x1b8(%rbp)
+    0.00 :	  2caf:       callq  ea0 <malloc@plt>
+    0.00 :	  2cb4:       mov    -0x1b8(%rbp),%rdx
+    0.00 :	  2cbb:       mov    %rdx,(%rax)
+    0.00 :	  2cbe:       mov    0x226383(%rip),%rdx        # 229048 <_rtld_global@@GLIBC_PRIVATE+0xfe8>
+    0.00 :	  2cc5:       test   %rdx,%rdx
+    0.00 :	  2cc8:       je     2d02 <free@plt+0x1e02>
+    0.00 :	  2cca:       mov    0x8(%rdx),%rcx
+    0.00 :	  2cce:       mov    %rax,0x226373(%rip)        # 229048 <_rtld_global@@GLIBC_PRIVATE+0xfe8>
+    0.00 :	  2cd5:       mov    %rcx,0x8(%rax)
+    0.00 :	  2cd9:       mov    %rax,0x8(%rdx)
+    0.00 :	  2cdd:       jmp    2c79 <free@plt+0x1d79>
+    0.00 :	  2cdf:       mov    0x224a63(%rip),%eax        # 227748 <_dl_argv@@GLIBC_PRIVATE+0x8>
+    0.00 :	  2ce5:       addl   $0x2,0x224a4c(%rip)        # 227738 <_dl_catch_error@@GLIBC_PRIVATE+0x20ba78>
+    0.00 :	  2cec:       addq   $0x10,0x224a4c(%rip)        # 227740 <_dl_argv@@GLIBC_PRIVATE>
+    0.00 :	  2cf4:       sub    $0x2,%eax
+    0.00 :	  2cf7:       mov    %eax,0x224a4b(%rip)        # 227748 <_dl_argv@@GLIBC_PRIVATE+0x8>
+    0.00 :	  2cfd:       jmpq   2b16 <free@plt+0x1c16>
+    0.00 :	  2d02:       mov    %rax,0x8(%rax)
+    0.00 :	  2d06:       mov    %rax,0x22633b(%rip)        # 229048 <_rtld_global@@GLIBC_PRIVATE+0xfe8>
+    0.00 :	  2d0d:       jmpq   2c79 <free@plt+0x1d79>
+    0.00 :	  2d12:       add    $0x8,%rdx
+    0.00 :	  2d16:       sub    $0x1,%eax
+    0.00 :	  2d19:       addl   $0x1,0x224a18(%rip)        # 227738 <_dl_catch_error@@GLIBC_PRIVATE+0x20ba78>
+    0.00 :	  2d20:       mov    %rdx,0x224a19(%rip)        # 227740 <_dl_argv@@GLIBC_PRIVATE>
+    0.00 :	  2d27:       mov    -0x1a0(%rbp),%edx
+    0.00 :	  2d2d:       mov    %eax,0x224a15(%rip)        # 227748 <_dl_argv@@GLIBC_PRIVATE+0x8>
+    0.00 :	  2d33:       lea    0x0(,%rdx,8),%rax
+    0.00 :	  2d3b:       sub    %rdx,%rax
+    0.00 :	  2d3e:       lea    (%rbx,%rax,8),%rax
+    0.00 :	  2d42:       cmp    %rbx,%rax
+    0.00 :	  2d45:       ja     2d59 <free@plt+0x1e59>
+    0.00 :	  2d47:       jmp    2d6a <free@plt+0x1e6a>
+    0.00 :	  2d49:       nopl   0x0(%rax)
+    0.00 :	  2d50:       add    $0x38,%rbx
+    0.00 :	  2d54:       cmp    %rbx,%rax
+    0.00 :	  2d57:       jbe    2d6a <free@plt+0x1e6a>
+    0.00 :	  2d59:       cmpl   $0x6474e551,(%rbx)
+    0.00 :	  2d5f:       jne    2d50 <free@plt+0x1e50>
+    0.00 :	  2d61:       mov    0x4(%rbx),%eax
+    0.00 :	  2d64:       mov    %eax,0x22620e(%rip)        # 228f78 <_rtld_global@@GLIBC_PRIVATE+0xf18>
+    0.00 :	  2d6a:       cmpl   $0x2,-0x198(%rbp)
+    0.00 :	  2d71:       je     54bb <free@plt+0x45bb>
+    0.00 :	  2d77:       rdtsc
+    0.00 :	  2d79:       shl    $0x20,%rdx
+    0.00 :	  2d7d:       mov    %eax,%eax
+    0.00 :	  2d7f:       xor    %r9d,%r9d
+    0.00 :	  2d82:       or     %rax,%rdx
+    0.00 :	  2d85:       mov    $0x20000000,%r8d
+    0.00 :	  2d8b:       xor    %ecx,%ecx
+    0.00 :	  2d8d:       mov    %rdx,%rbx
+    0.00 :	  2d90:       mov    %r10,%rsi
+    0.00 :	  2d93:       xor    %edx,%edx
+    0.00 :	  2d95:       xor    %edi,%edi
+    0.00 :	  2d97:       callq  8e00 <free@plt+0x7f00>
+    0.00 :	  2d9c:       rdtsc
+    0.00 :	  2d9e:       shl    $0x20,%rdx
+    0.00 :	  2da2:       mov    %eax,%eax
+    0.00 :	  2da4:       mov    0x2252b5(%rip),%r14        # 228060 <_rtld_global@@GLIBC_PRIVATE>
+    0.00 :	  2dab:       or     %rdx,%rax
+    0.00 :	  2dae:       sub    %rbx,%rax
+    0.00 :	  2db1:       mov    -0x198(%rbp),%ebx
+    0.00 :	  2db7:       mov    %rax,0x22496a(%rip)        # 227728 <_dl_catch_error@@GLIBC_PRIVATE+0x20ba68>
+    0.00 :	  2dbe:       test   %ebx,%ebx
+    0.00 :	  2dc0:       jne    2e02 <free@plt+0x1f02>
+    0.00 :	  2dc2:       mov    0x225cd7(%rip),%rax        # 228aa0 <_rtld_global@@GLIBC_PRIVATE+0xa40>
+    0.00 :	  2dc9:       test   %rax,%rax
+    0.00 :	  2dcc:       je     2e02 <free@plt+0x1f02>
+    0.00 :	  2dce:       mov    0xb0(%r14),%rdx
+    0.00 :	  2dd5:       test   %rdx,%rdx
+    0.00 :	  2dd8:       je     2e02 <free@plt+0x1f02>
+    0.00 :	  2dda:       mov    0x68(%r14),%rcx
+    0.00 :	  2dde:       mov    0x8(%rax),%rdi
+    0.00 :	  2de2:       mov    0x225c6f(%rip),%rax        # 228a58 <_rtld_global@@GLIBC_PRIVATE+0x9f8>
+    0.00 :	  2de9:       mov    0x8(%rdx),%rsi
+    0.00 :	  2ded:       add    0x8(%rcx),%rsi
+    0.00 :	  2df1:       add    0x8(%rax),%rdi
+    0.00 :	  2df5:       callq  1d360 <_dl_catch_error@@GLIBC_PRIVATE+0x16a0>
+    0.00 :	  2dfa:       test   %eax,%eax
+    0.00 :	  2dfc:       je     5495 <free@plt+0x4595>
+    0.00 :	  2e02:       movzwl 0x2b0(%r14),%eax
+    0.00 :	  2e0a:       mov    0x2a0(%r14),%rbx
+    0.00 :	  2e11:       mov    %rax,%rdx
+    0.00 :	  2e14:       mov    %eax,-0x1a0(%rbp)
+    0.00 :	  2e1a:       lea    0x1ddfe(%rip),%rax        # 20c1f <_dl_catch_error@@GLIBC_PRIVATE+0x4f5f>
+    0.00 :	  2e21:       mov    %rax,0x8(%r14)
+    0.00 :	  2e25:       mov    0x2a8(%r14),%rax
+    0.00 :	  2e2c:       mov    %rax,0x0(%r13)
+    0.00 :	  2e30:       mov    (%r12),%rax
+    0.00 :	  2e34:       test   %rax,%rax
+    0.00 :	  2e37:       je     2e75 <free@plt+0x1f75>
+    0.00 :	  2e39:       mov    0x224900(%rip),%rcx        # 227740 <_dl_argv@@GLIBC_PRIVATE>
+    0.00 :	  2e40:       cmp    $0x5,%rax
+    0.00 :	  2e44:       je     3892 <free@plt+0x2992>
+    0.00 :	  2e4a:       jbe    387e <free@plt+0x297e>
+    0.00 :	  2e50:       cmp    $0x9,%rax
+    0.00 :	  2e54:       je     3870 <free@plt+0x2970>
+    0.00 :	  2e5a:       cmp    $0x1f,%rax
+    0.00 :	  2e5e:       jne    2e68 <free@plt+0x1f68>
+    0.00 :	  2e60:       mov    (%rcx),%rax
+    0.00 :	  2e63:       mov    %rax,0x8(%r12)
+    0.00 :	  2e68:       add    $0x10,%r12
+    0.00 :	  2e6c:       mov    (%r12),%rax
+    0.00 :	  2e70:       test   %rax,%rax
+    0.00 :	  2e73:       jne    2e40 <free@plt+0x1f40>
+    0.00 :	  2e75:       mov    $0x1,%r13d
+    0.00 :	  2e7b:       jmpq   2f0e <free@plt+0x200e>
+    0.00 :	  2e80:       mov    0x10(%rdx),%rcx
+    0.00 :	  2e84:       mov    %rcx,0x2249e5(%rip)        # 227870 <_rtld_global_ro@@GLIBC_PRIVATE+0x110>
+    0.00 :	  2e8b:       sub    $0x2,%eax
+    0.00 :	  2e8e:       add    $0x10,%rdx
+    0.00 :	  2e92:       addl   $0x2,0x22489f(%rip)        # 227738 <_dl_catch_error@@GLIBC_PRIVATE+0x20ba78>
+    0.00 :	  2e99:       mov    %eax,0x2248a9(%rip)        # 227748 <_dl_argv@@GLIBC_PRIVATE+0x8>
+    0.00 :	  2e9f:       mov    %rdx,0x22489a(%rip)        # 227740 <_dl_argv@@GLIBC_PRIVATE>
+    0.00 :	  2ea6:       jmpq   2b16 <free@plt+0x1c16>
+    0.00 :	  2eab:       lea    0x1dd6d(%rip),%rsi        # 20c1f <_dl_catch_error@@GLIBC_PRIVATE+0x4f5f>
+    0.00 :	  2eb2:       xor    %r9d,%r9d
+    0.00 :	  2eb5:       xor    %ecx,%ecx
+    0.00 :	  2eb7:       xor    %edx,%edx
+    0.00 :	  2eb9:       mov    $0x20000000,%r8d
+    0.00 :	  2ebf:       mov    %rsi,%rdi
+    0.00 :	  2ec2:       callq  c090 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x2500>
+    0.00 :	  2ec7:       test   %rax,%rax
+    0.00 :	  2eca:       mov    %rax,%r14
+    0.00 :	  2ecd:       je     5476 <free@plt+0x4576>
+    0.00 :	  2ed3:       mov    %rbx,0x2a0(%rax)
+    0.00 :	  2eda:       movzwl -0x1a0(%rbp),%eax
+    0.00 :	  2ee1:       xor    %esi,%esi
+    0.00 :	  2ee3:       mov    %r14,%rdi
+    0.00 :	  2ee6:       mov    %ax,0x2b0(%r14)
+    0.00 :	  2eee:       mov    0x0(%r13),%rax
+    0.00 :	  2ef2:       mov    %rax,0x2a8(%r14)
+    0.00 :	  2ef9:       callq  c000 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x2470>
+    0.00 :	  2efe:       cmp    %r14,0x22515b(%rip)        # 228060 <_rtld_global@@GLIBC_PRIVATE>
+    0.00 :	  2f05:       jne    5457 <free@plt+0x4557>
+    0.00 :	  2f0b:       xor    %r13d,%r13d
+    0.00 :	  2f0e:       mov    -0x1a0(%rbp),%edx
+    0.00 :	  2f14:       addl   $0x1,0x310(%r14)
+    0.00 :	  2f1c:       movq   $0x0,0x348(%r14)
+    0.00 :	  2f27:       movq   $0x0,0x350(%r14)
+    0.00 :	  2f32:       movq   $0xffffffffffffffff,0x340(%r14)
+    0.00 :	  2f3d:       lea    0x0(,%rdx,8),%rax
+    0.00 :	  2f45:       sub    %rdx,%rax
+    0.00 :	  2f48:       lea    (%rbx,%rax,8),%r9
+    0.00 :	  2f4c:       cmp    %rbx,%r9
+    0.00 :	  2f4f:       jbe    543f <free@plt+0x453f>
+    0.00 :	  2f55:       mov    0x22481c(%rip),%rsi        # 227778 <_rtld_global_ro@@GLIBC_PRIVATE+0x18>
+    0.00 :	  2f5c:       mov    %rbx,%rax
+    0.00 :	  2f5f:       xor    %r12d,%r12d
+    0.00 :	  2f62:       lea    0x2260c7(%rip),%r8        # 229030 <_rtld_global@@GLIBC_PRIVATE+0xfd0>
+    0.00 :	  2f69:       lea    0x2260a0(%rip),%rdi        # 229010 <_rtld_global@@GLIBC_PRIVATE+0xfb0>
+    0.00 :	  2f70:       neg    %rsi
+    0.00 :	  2f73:       jmp    2f9d <free@plt+0x209d>
+    0.00 :	  2f75:       cmp    $0x2,%edx
+    0.00 :	  2f78:       je     38c6 <free@plt+0x29c6>
+    0.00 :	  2f7e:       cmp    $0x3,%edx
+    0.00 :	  2f81:       je     389c <free@plt+0x299c>
+    0.00 :	  2f87:       cmp    $0x1,%edx
+    0.00 :	  2f8a:       je     3950 <free@plt+0x2a50>
+  100.00 :	  2f90:       add    $0x38,%rax
+    0.00 :	  2f94:       cmp    %rax,%r9
+    0.00 :	  2f97:       jbe    3034 <free@plt+0x2134>
+    0.00 :	  2f9d:       mov    (%rax),%edx
+    0.00 :	  2f9f:       cmp    $0x6,%edx
+    0.00 :	  2fa2:       je     3900 <free@plt+0x2a00>
+    0.00 :	  2fa8:       jbe    2f75 <free@plt+0x2075>
+    0.00 :	  2faa:       cmp    $0x6474e551,%edx
+    0.00 :	  2fb0:       je     39cb <free@plt+0x2acb>
+    0.00 :	  2fb6:       cmp    $0x6474e552,%edx
+    0.00 :	  2fbc:       je     39b0 <free@plt+0x2ab0>
+    0.00 :	  2fc2:       cmp    $0x7,%edx
+    0.00 :	  2fc5:       jne    2f90 <free@plt+0x2090>
+    0.00 :	  2fc7:       mov    0x28(%rax),%rdx
+    0.00 :	  2fcb:       test   %rdx,%rdx
+    0.00 :	  2fce:       je     2f90 <free@plt+0x2090>
+    0.00 :	  2fd0:       mov    %rdx,0x428(%r14)
+    0.00 :	  2fd7:       mov    0x30(%rax),%rdx
+    0.00 :	  2fdb:       xor    %r10d,%r10d
+    0.00 :	  2fde:       test   %rdx,%rdx
+    0.00 :	  2fe1:       mov    %rdx,0x430(%r14)
+    0.00 :	  2fe8:       mov    0x10(%rax),%rcx
+    0.00 :	  2fec:       je     2ff8 <free@plt+0x20f8>
+    0.00 :	  2fee:       sub    $0x1,%rdx
+    0.00 :	  2ff2:       and    %rcx,%rdx
+    0.00 :	  2ff5:       mov    %rdx,%r10
+    0.00 :	  2ff8:       mov    %r10,0x438(%r14)
+    0.00 :	  2fff:       mov    0x20(%rax),%rdx
+    0.00 :	  3003:       add    $0x38,%rax
+    0.00 :	  3007:       cmp    %rax,%r9
+    0.00 :	  300a:       mov    %rcx,0x418(%r14)
+    0.00 :	  3011:       movq   $0x1,0x448(%r14)
+    0.00 :	  301c:       mov    %rdx,0x420(%r14)
+    0.00 :	  3023:       movq   $0x1,0x225f52(%rip)        # 228f80 <_rtld_global@@GLIBC_PRIVATE+0xf20>
+    0.00 :	  302e:       ja     2f9d <free@plt+0x209d>
+    0.00 :	  3034:       mov    0x418(%r14),%rax
+    0.00 :	  303b:       test   %rax,%rax
+    0.00 :	  303e:       je     304a <free@plt+0x214a>
+    0.00 :	  3040:       add    (%r14),%rax
+    0.00 :	  3043:       mov    %rax,0x418(%r14)
+    0.00 :	  304a:       cmpq   $0x0,0x348(%r14)
+    0.00 :	  3052:       jne    305f <free@plt+0x215f>
+    0.00 :	  3054:       movq   $0xffffffffffffffff,0x348(%r14)
+    0.00 :	  305f:       cmpq   $0x0,0x350(%r14)
+    0.00 :	  3067:       jne    3074 <free@plt+0x2174>
+    0.00 :	  3069:       movq   $0xffffffffffffffff,0x350(%r14)
+    0.00 :	  3074:       mov    0x2259ad(%rip),%rbx        # 228a28 <_rtld_global@@GLIBC_PRIVATE+0x9c8>
+    0.00 :	  307b:       test   %rbx,%rbx
+    0.00 :	  307e:       je     38d6 <free@plt+0x29d6>
+    0.00 :	  3084:       mov    0x225a15(%rip),%rax        # 228aa0 <_rtld_global@@GLIBC_PRIVATE+0xa40>
+    0.00 :	  308b:       test   %rax,%rax
+    0.00 :	  308e:       je     30ee <free@plt+0x21ee>
+    0.00 :	  3090:       mov    0x8(%rax),%rdx
+    0.00 :	  3094:       mov    0x2259bd(%rip),%rax        # 228a58 <_rtld_global@@GLIBC_PRIVATE+0x9f8>
+    0.00 :	  309b:       mov    (%rbx),%rdi
+    0.00 :	  309e:       add    0x8(%rax),%rdx
+    0.00 :	  30a2:       mov    %rdx,%rsi
+    0.00 :	  30a5:       mov    %rdx,-0x1a0(%rbp)
+    0.00 :	  30ac:       callq  1d360 <_dl_catch_error@@GLIBC_PRIVATE+0x16a0>
+    0.00 :	  30b1:       test   %eax,%eax
+    0.00 :	  30b3:       je     30ee <free@plt+0x21ee>
+    0.00 :	  30b5:       movq   $0x0,0x225f28(%rip)        # 228fe8 <_rtld_global@@GLIBC_PRIVATE+0xf88>
+    0.00 :	  30c0:       cmpq   $0x0,0x8(%rbx)
+    0.00 :	  30c5:       mov    -0x1a0(%rbp),%rdx
+    0.00 :	  30cc:       movl   $0x1,0x225f1a(%rip)        # 228ff0 <_rtld_global@@GLIBC_PRIVATE+0xf90>
+    0.00 :	  30d6:       mov    %rdx,0x225f03(%rip)        # 228fe0 <_rtld_global@@GLIBC_PRIVATE+0xf80>
+    0.00 :	  30dd:       jne    5705 <free@plt+0x4805>
+    0.00 :	  30e3:       lea    0x225ef6(%rip),%rax        # 228fe0 <_rtld_global@@GLIBC_PRIVATE+0xf80>
+    0.00 :	  30ea:       mov    %rax,0x8(%rbx)
+    0.00 :	  30ee:       testb  $0x4,0x225c0f(%rip)        # 228d04 <_rtld_global@@GLIBC_PRIVATE+0xca4>
+    0.00 :	  30f5:       je     56e6 <free@plt+0x47e6>
+    0.00 :	  30fb:       test   %r13b,%r13b
+    0.00 :	  30fe:       jne    32b6 <free@plt+0x23b6>
+    0.00 :	  3104:       mov    0x10(%r14),%rdx
+    0.00 :	  3108:       test   %rdx,%rdx
+    0.00 :	  310b:       je     32ae <free@plt+0x23ae>
+    0.00 :	  3111:       mov    (%rdx),%rax
+    0.00 :	  3114:       lea    0x40(%r14),%rcx
+    0.00 :	  3118:       test   %rax,%rax
+    0.00 :	  311b:       je     317c <free@plt+0x227c>
+    0.00 :	  311d:       mov    $0x6fffffff,%r11d
+    0.00 :	  3123:       mov    $0x6ffffdff,%r10d
+    0.00 :	  3129:       mov    $0x6ffffeff,%ebx
+    0.00 :	  312e:       movabs $0x37ffffa00,%r9
+    0.00 :	  3138:       movabs $0x37ffff1a0,%r8
+    0.00 :	  3142:       mov    $0x31,%edi
+    0.00 :	  3147:       mov    $0x70000021,%r13d
+    0.00 :	  314d:       cmp    $0x21,%rax
+    0.00 :	  3151:       jbe    316c <free@plt+0x226c>
+    0.00 :	  3153:       mov    %r11,%rsi
+    0.00 :	  3156:       sub    %rax,%rsi
+    0.00 :	  3159:       cmp    $0xf,%rsi
+    0.00 :	  315d:       ja     390f <free@plt+0x2a0f>
+    0.00 :	  3163:       mov    %r13,%rsi
+    0.00 :	  3166:       sub    %rax,%rsi
+    0.00 :	  3169:       mov    %rsi,%rax
+    0.00 :	  316c:       mov    %rdx,(%rcx,%rax,8)
+    0.00 :	  3170:       add    $0x10,%rdx
+    0.00 :	  3174:       mov    (%rdx),%rax
+    0.00 :	  3177:       test   %rax,%rax
+    0.00 :	  317a:       jne    314d <free@plt+0x224d>
+    0.00 :	  317c:       mov    (%r14),%rax
+    0.00 :	  317f:       test   %rax,%rax
+    0.00 :	  3182:       je     31f5 <free@plt+0x22f5>
+    0.00 :	  3184:       mov    0x60(%r14),%rdx
+    0.00 :	  3188:       test   %rdx,%rdx
+    0.00 :	  318b:       je     3191 <free@plt+0x2291>
+    0.00 :	  318d:       add    %rax,0x8(%rdx)
+    0.00 :	  3191:       mov    0x58(%r14),%rdx
+    0.00 :	  3195:       test   %rdx,%rdx
+    0.00 :	  3198:       je     319e <free@plt+0x229e>
+    0.00 :	  319a:       add    %rax,0x8(%rdx)
+    0.00 :	  319e:       mov    0x68(%r14),%rdx
+    0.00 :	  31a2:       test   %rdx,%rdx
+    0.00 :	  31a5:       je     31ab <free@plt+0x22ab>
+    0.00 :	  31a7:       add    %rax,0x8(%rdx)
+    0.00 :	  31ab:       mov    0x70(%r14),%rdx
+    0.00 :	  31af:       test   %rdx,%rdx
+    0.00 :	  31b2:       je     31b8 <free@plt+0x22b8>
+    0.00 :	  31b4:       add    %rax,0x8(%rdx)
+    0.00 :	  31b8:       mov    0x78(%r14),%rdx
+    0.00 :	  31bc:       test   %rdx,%rdx
+    0.00 :	  31bf:       je     31c5 <free@plt+0x22c5>
+    0.00 :	  31c1:       add    %rax,0x8(%rdx)
+    0.00 :	  31c5:       mov    0xf8(%r14),%rdx
+    0.00 :	  31cc:       test   %rdx,%rdx
+    0.00 :	  31cf:       je     31d5 <free@plt+0x22d5>
+    0.00 :	  31d1:       add    %rax,0x8(%rdx)
+    0.00 :	  31d5:       mov    0x1c8(%r14),%rdx
+    0.00 :	  31dc:       test   %rdx,%rdx
+    0.00 :	  31df:       je     31e5 <free@plt+0x22e5>
+    0.00 :	  31e1:       add    %rax,0x8(%rdx)
+    0.00 :	  31e5:       mov    0x298(%r14),%rdx
+    0.00 :	  31ec:       test   %rdx,%rdx
+    0.00 :	  31ef:       je     31f5 <free@plt+0x22f5>
+    0.00 :	  31f1:       add    %rax,0x8(%rdx)
+    0.00 :	  31f5:       mov    0xe0(%r14),%rax
+    0.00 :	  31fc:       test   %rax,%rax
+    0.00 :	  31ff:       je     320c <free@plt+0x230c>
+    0.00 :	  3201:       cmpq   $0x7,0x8(%rax)
+    0.00 :	  3206:       jne    5762 <free@plt+0x4862>
+    0.00 :	  320c:       cmpq   $0x0,0x78(%r14)
+    0.00 :	  3211:       je     3225 <free@plt+0x2325>
+    0.00 :	  3213:       mov    0x88(%r14),%rax
+    0.00 :	  321a:       cmpq   $0x18,0x8(%rax)
+    0.00 :	  321f:       jne    5743 <free@plt+0x4843>
+    0.00 :	  3225:       mov    0x130(%r14),%rax
+    0.00 :	  322c:       test   %rax,%rax
+    0.00 :	  322f:       je     3260 <free@plt+0x2360>
+    0.00 :	  3231:       mov    0x8(%rax),%rdx
+    0.00 :	  3235:       test   $0x2,%dl
+    0.00 :	  3238:       mov    %edx,0x3d8(%r14)
+    0.00 :	  323f:       je     3248 <free@plt+0x2348>
+    0.00 :	  3241:       mov    %rax,0xc0(%r14)
+    0.00 :	  3248:       test   $0x4,%dl
+    0.00 :	  324b:       je     3254 <free@plt+0x2354>
+    0.00 :	  324d:       mov    %rax,0xf0(%r14)
+    0.00 :	  3254:       and    $0x8,%edx
+    0.00 :	  3257:       je     3260 <free@plt+0x2360>
+    0.00 :	  3259:       mov    %rax,0x100(%r14)
+    0.00 :	  3260:       mov    0x170(%r14),%rax
+    0.00 :	  3267:       test   %rax,%rax
+    0.00 :	  326a:       je     3299 <free@plt+0x2399>
+    0.00 :	  326c:       testb  $0x40,0x2244ed(%rip)        # 227760 <_rtld_global_ro@@GLIBC_PRIVATE>
+    0.00 :	  3273:       mov    0x8(%rax),%rax
+    0.00 :	  3277:       mov    %eax,%edx
+    0.00 :	  3279:       mov    %eax,0x3d4(%r14)
+    0.00 :	  3280:       jne    3b6e <free@plt+0x2c6e>
+    0.00 :	  3286:       and    $0x1,%edx
+    0.00 :	  3289:       je     3299 <free@plt+0x2399>
+    0.00 :	  328b:       mov    0x170(%r14),%rax
+    0.00 :	  3292:       mov    %rax,0x100(%r14)
+    0.00 :	  3299:       cmpq   $0x0,0x128(%r14)
+    0.00 :	  32a1:       je     32ae <free@plt+0x23ae>
+    0.00 :	  32a3:       movq   $0x0,0xb8(%r14)
+    0.00 :	  32ae:       mov    %r14,%rdi
+    0.00 :	  32b1:       callq  bf50 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x23c0>
+    0.00 :	  32b6:       cmpl   $0x2,-0x198(%rbp)
+    0.00 :	  32bd:       je     56c2 <free@plt+0x47c2>
+    0.00 :	  32c3:       cmpq   $0x0,0x2245e5(%rip)        # 2278b0 <_rtld_global_ro@@GLIBC_PRIVATE+0x150>
+    0.00 :	  32cb:       je     37f3 <free@plt+0x28f3>
+    0.00 :	  32d1:       lea    0x1d947(%rip),%rsi        # 20c1f <_dl_catch_error@@GLIBC_PRIVATE+0x4f5f>
+    0.00 :	  32d8:       xor    %r9d,%r9d
+    0.00 :	  32db:       xor    %r8d,%r8d
+    0.00 :	  32de:       xor    %ecx,%ecx
+    0.00 :	  32e0:       mov    $0x1,%edx
+    0.00 :	  32e5:       mov    %rsi,%rdi
+    0.00 :	  32e8:       callq  c090 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x2500>
+    0.00 :	  32ed:       test   %rax,%rax
+    0.00 :	  32f0:       mov    %rax,%rbx
+    0.00 :	  32f3:       je     37f3 <free@plt+0x28f3>
+    0.00 :	  32f9:       mov    0x2245b0(%rip),%rax        # 2278b0 <_rtld_global_ro@@GLIBC_PRIVATE+0x150>
+    0.00 :	  3300:       movzwl 0x38(%rax),%esi
+    0.00 :	  3304:       mov    0x20(%rax),%rdx
+    0.00 :	  3308:       add    %rax,%rdx
+    0.00 :	  330b:       test   %rsi,%rsi
+    0.00 :	  330e:       mov    %rdx,0x2a0(%rbx)
+    0.00 :	  3315:       mov    %si,0x2b0(%rbx)
+    0.00 :	  331c:       je     3372 <free@plt+0x2472>
+    0.00 :	  331e:       xor    %edi,%edi
+    0.00 :	  3320:       jmp    3347 <free@plt+0x2447>
+    0.00 :	  3322:       nopw   0x0(%rax,%rax,1)
+    0.00 :	  3328:       cmp    $0x1,%ecx
+    0.00 :	  332b:       je     3450 <free@plt+0x2550>
+    0.00 :	  3331:       cmp    $0x7,%ecx
+    0.00 :	  3334:       je     56a3 <free@plt+0x47a3>
+    0.00 :	  333a:       add    $0x1,%rdi
+    0.00 :	  333e:       add    $0x38,%rdx
+    0.00 :	  3342:       cmp    %rsi,%rdi
+    0.00 :	  3345:       je     3372 <free@plt+0x2472>
+    0.00 :	  3347:       mov    (%rdx),%ecx
+    0.00 :	  3349:       cmp    $0x2,%ecx
+    0.00 :	  334c:       jne    3328 <free@plt+0x2428>
+    0.00 :	  334e:       mov    0x10(%rdx),%rcx
+    0.00 :	  3352:       add    $0x1,%rdi
+    0.00 :	  3356:       add    $0x38,%rdx
+    0.00 :	  335a:       mov    %rcx,0x10(%rbx)
+    0.00 :	  335e:       mov    -0x10(%rdx),%rcx
+    0.00 :	  3362:       shr    $0x4,%rcx
+    0.00 :	  3366:       cmp    %rsi,%rdi
+    0.00 :	  3369:       mov    %cx,0x2b2(%rbx)
+    0.00 :	  3370:       jne    3347 <free@plt+0x2447>
+    0.00 :	  3372:       mov    %rax,0x340(%rbx)
+    0.00 :	  3379:       sub    (%rbx),%rax
+    0.00 :	  337c:       mov    0x10(%rbx),%rcx
+    0.00 :	  3380:       add    %rax,0x348(%rbx)
+    0.00 :	  3387:       add    %rax,0x350(%rbx)
+    0.00 :	  338e:       add    %rax,%rcx
+    0.00 :	  3391:       mov    %rax,(%rbx)
+    0.00 :	  3394:       test   %rcx,%rcx
+    0.00 :	  3397:       mov    %rcx,0x10(%rbx)
+    0.00 :	  339b:       je     36b7 <free@plt+0x27b7>
+    0.00 :	  33a1:       mov    (%rcx),%rdx
+    0.00 :	  33a4:       lea    0x40(%rbx),%rsi
+    0.00 :	  33a8:       test   %rdx,%rdx
+    0.00 :	  33ab:       je     340a <free@plt+0x250a>
+    0.00 :	  33ad:       mov    $0x6fffffff,%r11d
+    0.00 :	  33b3:       mov    $0x6ffffdff,%r12d
+    0.00 :	  33b9:       mov    $0x6ffffeff,%r13d
+    0.00 :	  33bf:       movabs $0x37ffffa00,%r10
+    0.00 :	  33c9:       movabs $0x37ffff1a0,%r9
+    0.00 :	  33d3:       mov    $0x31,%r8d
+    0.00 :	  33d9:       cmp    $0x21,%rdx
+    0.00 :	  33dd:       jbe    33fa <free@plt+0x24fa>
+    0.00 :	  33df:       mov    %r11,%rdi
+    0.00 :	  33e2:       sub    %rdx,%rdi
+    0.00 :	  33e5:       cmp    $0xf,%rdi
+    0.00 :	  33e9:       ja     3811 <free@plt+0x2911>
+    0.00 :	  33ef:       mov    $0x70000021,%edi
+    0.00 :	  33f4:       sub    %rdx,%rdi
+    0.00 :	  33f7:       mov    %rdi,%rdx
+    0.00 :	  33fa:       mov    %rcx,(%rsi,%rdx,8)
+    0.00 :	  33fe:       add    $0x10,%rcx
+    0.00 :	  3402:       mov    (%rcx),%rdx
+    0.00 :	  3405:       test   %rdx,%rdx
+    0.00 :	  3408:       jne    33d9 <free@plt+0x24d9>
+    0.00 :	  340a:       test   %rax,%rax
+    0.00 :	  340d:       je     3600 <free@plt+0x2700>
+    0.00 :	  3413:       mov    0x60(%rbx),%rdx
+    0.00 :	  3417:       test   %rdx,%rdx
+    0.00 :	  341a:       je     3494 <free@plt+0x2594>
+    0.00 :	  341c:       mov    (%rdx),%rcx
+    0.00 :	  341f:       mov    %rcx,0x22427a(%rip)        # 2276a0 <_dl_catch_error@@GLIBC_PRIVATE+0x20b9e0>
+    0.00 :	  3426:       mov    0x8(%rdx),%rcx
+    0.00 :	  342a:       mov    $0x1,%edx
+    0.00 :	  342f:       add    %rax,%rcx
+    0.00 :	  3432:       mov    %rcx,0x22426f(%rip)        # 2276a8 <_dl_catch_error@@GLIBC_PRIVATE+0x20b9e8>
+    0.00 :	  3439:       lea    0x224260(%rip),%rcx        # 2276a0 <_dl_catch_error@@GLIBC_PRIVATE+0x20b9e0>
+    0.00 :	  3440:       mov    %rcx,0x60(%rbx)
+    0.00 :	  3444:       jmp    3496 <free@plt+0x2596>
+    0.00 :	  3446:       nopw   %cs:0x0(%rax,%rax,1)
+    0.00 :	  3450:       cmpq   $0x0,(%rbx)
+    0.00 :	  3454:       mov    0x10(%rdx),%rcx
+    0.00 :	  3458:       jne    345d <free@plt+0x255d>
+    0.00 :	  345a:       mov    %rcx,(%rbx)
+    0.00 :	  345d:       add    0x28(%rdx),%rcx
+    0.00 :	  3461:       cmp    0x348(%rbx),%rcx
+    0.00 :	  3468:       jb     3471 <free@plt+0x2571>
+    0.00 :	  346a:       mov    %rcx,0x348(%rbx)
+    0.00 :	  3471:       testb  $0x1,0x4(%rdx)
+    0.00 :	  3475:       je     333a <free@plt+0x243a>
+    0.00 :	  347b:       cmp    0x350(%rbx),%rcx
+    0.00 :	  3482:       jb     333a <free@plt+0x243a>
+    0.00 :	  3488:       mov    %rcx,0x350(%rbx)
+    0.00 :	  348f:       jmpq   333a <free@plt+0x243a>
+    0.00 :	  3494:       xor    %edx,%edx
+    0.00 :	  3496:       mov    0x58(%rbx),%rsi
+    0.00 :	  349a:       test   %rsi,%rsi
+    0.00 :	  349d:       je     34c8 <free@plt+0x25c8>
+    0.00 :	  349f:       movslq %edx,%rcx
+    0.00 :	  34a2:       lea    0x2241f7(%rip),%rdi        # 2276a0 <_dl_catch_error@@GLIBC_PRIVATE+0x20b9e0>
+    0.00 :	  34a9:       add    $0x1,%edx
+    0.00 :	  34ac:       shl    $0x4,%rcx
+    0.00 :	  34b0:       add    %rdi,%rcx
+    0.00 :	  34b3:       mov    (%rsi),%rdi
+    0.00 :	  34b6:       mov    %rdi,(%rcx)
+    0.00 :	  34b9:       mov    0x8(%rsi),%rdi
+    0.00 :	  34bd:       add    %rax,%rdi
+    0.00 :	  34c0:       mov    %rdi,0x8(%rcx)
+    0.00 :	  34c4:       mov    %rcx,0x58(%rbx)
+    0.00 :	  34c8:       mov    0x68(%rbx),%rsi
+    0.00 :	  34cc:       test   %rsi,%rsi
+    0.00 :	  34cf:       je     34fa <free@plt+0x25fa>
+    0.00 :	  34d1:       movslq %edx,%rcx
+    0.00 :	  34d4:       lea    0x2241c5(%rip),%rdi        # 2276a0 <_dl_catch_error@@GLIBC_PRIVATE+0x20b9e0>
+    0.00 :	  34db:       add    $0x1,%edx
+    0.00 :	  34de:       shl    $0x4,%rcx
+    0.00 :	  34e2:       add    %rdi,%rcx
+    0.00 :	  34e5:       mov    (%rsi),%rdi
+    0.00 :	  34e8:       mov    %rdi,(%rcx)
+    0.00 :	  34eb:       mov    0x8(%rsi),%rdi
+    0.00 :	  34ef:       add    %rax,%rdi
+    0.00 :	  34f2:       mov    %rdi,0x8(%rcx)
+    0.00 :	  34f6:       mov    %rcx,0x68(%rbx)
+    0.00 :	  34fa:       mov    0x70(%rbx),%rsi
+    0.00 :	  34fe:       test   %rsi,%rsi
+    0.00 :	  3501:       je     352c <free@plt+0x262c>
+    0.00 :	  3503:       movslq %edx,%rcx
+    0.00 :	  3506:       lea    0x224193(%rip),%rdi        # 2276a0 <_dl_catch_error@@GLIBC_PRIVATE+0x20b9e0>
+    0.00 :	  350d:       add    $0x1,%edx
+    0.00 :	  3510:       shl    $0x4,%rcx
+    0.00 :	  3514:       add    %rdi,%rcx
+    0.00 :	  3517:       mov    (%rsi),%rdi
+    0.00 :	  351a:       mov    %rdi,(%rcx)
+    0.00 :	  351d:       mov    0x8(%rsi),%rdi
+    0.00 :	  3521:       add    %rax,%rdi
+    0.00 :	  3524:       mov    %rdi,0x8(%rcx)
+    0.00 :	  3528:       mov    %rcx,0x70(%rbx)
+    0.00 :	  352c:       mov    0x78(%rbx),%rsi
+    0.00 :	  3530:       test   %rsi,%rsi
+    0.00 :	  3533:       je     355e <free@plt+0x265e>
+    0.00 :	  3535:       movslq %edx,%rcx
+    0.00 :	  3538:       lea    0x224161(%rip),%rdi        # 2276a0 <_dl_catch_error@@GLIBC_PRIVATE+0x20b9e0>
+    0.00 :	  353f:       add    $0x1,%edx
+    0.00 :	  3542:       shl    $0x4,%rcx
+    0.00 :	  3546:       add    %rdi,%rcx
+    0.00 :	  3549:       mov    (%rsi),%rdi
+    0.00 :	  354c:       mov    %rdi,(%rcx)
+    0.00 :	  354f:       mov    0x8(%rsi),%rdi
+    0.00 :	  3553:       add    %rax,%rdi
+    0.00 :	  3556:       mov    %rdi,0x8(%rcx)
+    0.00 :	  355a:       mov    %rcx,0x78(%rbx)
+    0.00 :	  355e:       mov    0xf8(%rbx),%rsi
+    0.00 :	  3565:       test   %rsi,%rsi
+    0.00 :	  3568:       je     3596 <free@plt+0x2696>
+    0.00 :	  356a:       movslq %edx,%rcx
+    0.00 :	  356d:       lea    0x22412c(%rip),%rdi        # 2276a0 <_dl_catch_error@@GLIBC_PRIVATE+0x20b9e0>
+    0.00 :	  3574:       add    $0x1,%edx
+    0.00 :	  3577:       shl    $0x4,%rcx
+    0.00 :	  357b:       add    %rdi,%rcx
+    0.00 :	  357e:       mov    (%rsi),%rdi
+    0.00 :	  3581:       mov    %rdi,(%rcx)
+    0.00 :	  3584:       mov    0x8(%rsi),%rdi
+    0.00 :	  3588:       add    %rax,%rdi
+    0.00 :	  358b:       mov    %rdi,0x8(%rcx)
+    0.00 :	  358f:       mov    %rcx,0xf8(%rbx)
+    0.00 :	  3596:       mov    0x1c8(%rbx),%rsi
+    0.00 :	  359d:       test   %rsi,%rsi
+    0.00 :	  35a0:       je     35ce <free@plt+0x26ce>
+    0.00 :	  35a2:       movslq %edx,%rcx
+    0.00 :	  35a5:       lea    0x2240f4(%rip),%rdi        # 2276a0 <_dl_catch_error@@GLIBC_PRIVATE+0x20b9e0>
+    0.00 :	  35ac:       add    $0x1,%edx
+    0.00 :	  35af:       shl    $0x4,%rcx
+    0.00 :	  35b3:       add    %rdi,%rcx
+    0.00 :	  35b6:       mov    (%rsi),%rdi
+    0.00 :	  35b9:       mov    %rdi,(%rcx)
+    0.00 :	  35bc:       mov    0x8(%rsi),%rdi
+    0.00 :	  35c0:       add    %rax,%rdi
+    0.00 :	  35c3:       mov    %rdi,0x8(%rcx)
+    0.00 :	  35c7:       mov    %rcx,0x1c8(%rbx)
+    0.00 :	  35ce:       mov    0x298(%rbx),%rcx
+    0.00 :	  35d5:       test   %rcx,%rcx
+    0.00 :	  35d8:       je     3600 <free@plt+0x2700>
+    0.00 :	  35da:       lea    0x2240bf(%rip),%rsi        # 2276a0 <_dl_catch_error@@GLIBC_PRIVATE+0x20b9e0>
+    0.00 :	  35e1:       movslq %edx,%rdx
+    0.00 :	  35e4:       add    0x8(%rcx),%rax
+    0.00 :	  35e8:       shl    $0x4,%rdx
+    0.00 :	  35ec:       add    %rsi,%rdx
+    0.00 :	  35ef:       mov    (%rcx),%rsi
+    0.00 :	  35f2:       mov    %rax,0x8(%rdx)
+    0.00 :	  35f6:       mov    %rsi,(%rdx)
+    0.00 :	  35f9:       mov    %rdx,0x298(%rbx)
+    0.00 :	  3600:       mov    0xe0(%rbx),%rax
+    0.00 :	  3607:       test   %rax,%rax
+    0.00 :	  360a:       je     3617 <free@plt+0x2717>
+    0.00 :	  360c:       cmpq   $0x7,0x8(%rax)
+    0.00 :	  3611:       jne    5762 <free@plt+0x4862>
+    0.00 :	  3617:       cmpq   $0x0,0x78(%rbx)
+    0.00 :	  361c:       je     3630 <free@plt+0x2730>
+    0.00 :	  361e:       mov    0x88(%rbx),%rax
+    0.00 :	  3625:       cmpq   $0x18,0x8(%rax)
+    0.00 :	  362a:       jne    5743 <free@plt+0x4843>
+    0.00 :	  3630:       mov    0x130(%rbx),%rax
+    0.00 :	  3637:       test   %rax,%rax
+    0.00 :	  363a:       je     366a <free@plt+0x276a>
+    0.00 :	  363c:       mov    0x8(%rax),%rdx
+    0.00 :	  3640:       test   $0x2,%dl
+    0.00 :	  3643:       mov    %edx,0x3d8(%rbx)
+    0.00 :	  3649:       je     3652 <free@plt+0x2752>
+    0.00 :	  364b:       mov    %rax,0xc0(%rbx)
+    0.00 :	  3652:       test   $0x4,%dl
+    0.00 :	  3655:       je     365e <free@plt+0x275e>
+    0.00 :	  3657:       mov    %rax,0xf0(%rbx)
+    0.00 :	  365e:       and    $0x8,%edx
+    0.00 :	  3661:       je     366a <free@plt+0x276a>
+    0.00 :	  3663:       mov    %rax,0x100(%rbx)
+    0.00 :	  366a:       mov    0x170(%rbx),%rax
+    0.00 :	  3671:       test   %rax,%rax
+    0.00 :	  3674:       je     36a2 <free@plt+0x27a2>
+    0.00 :	  3676:       testb  $0x40,0x2240e3(%rip)        # 227760 <_rtld_global_ro@@GLIBC_PRIVATE>
+    0.00 :	  367d:       mov    0x8(%rax),%rax
+    0.00 :	  3681:       mov    %eax,%edx
+    0.00 :	  3683:       mov    %eax,0x3d4(%rbx)
+    0.00 :	  3689:       jne    3bf3 <free@plt+0x2cf3>
+    0.00 :	  368f:       and    $0x1,%edx
+    0.00 :	  3692:       je     36a2 <free@plt+0x27a2>
+    0.00 :	  3694:       mov    0x170(%rbx),%rax
+    0.00 :	  369b:       mov    %rax,0x100(%rbx)
+    0.00 :	  36a2:       cmpq   $0x0,0x128(%rbx)
+    0.00 :	  36aa:       je     36b7 <free@plt+0x27b7>
+    0.00 :	  36ac:       movq   $0x0,0xb8(%rbx)
+    0.00 :	  36b7:       mov    %rbx,%rdi
+    0.00 :	  36ba:       callq  bf50 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x23c0>
+    0.00 :	  36bf:       mov    0x388(%rbx),%rax
+    0.00 :	  36c6:       lea    0x28(%rbx),%rdx
+    0.00 :	  36ca:       orb    $0x4,0x314(%rbx)
+    0.00 :	  36d1:       movl   $0x1,0x3cc(%rbx)
+    0.00 :	  36db:       movl   $0x1,0x8(%rax)
+    0.00 :	  36e2:       mov    %rdx,(%rax)
+    0.00 :	  36e5:       mov    0xb0(%rbx),%rax
+    0.00 :	  36ec:       test   %rax,%rax
+    0.00 :	  36ef:       je     3733 <free@plt+0x2833>
+    0.00 :	  36f1:       mov    0x68(%rbx),%rdx
+    0.00 :	  36f5:       mov    0x8(%rax),%r12
+    0.00 :	  36f9:       add    0x8(%rdx),%r12
+    0.00 :	  36fd:       mov    %r12,%rdi
+    0.00 :	  3700:       callq  1f2f0 <_dl_catch_error@@GLIBC_PRIVATE+0x3630>
+    0.00 :	  3705:       lea    0x1(%rax),%r13
+    0.00 :	  3709:       mov    %r13,%rdi
+    0.00 :	  370c:       callq  ea0 <malloc@plt>
+    0.00 :	  3711:       test   %rax,%rax
+    0.00 :	  3714:       je     5781 <free@plt+0x4881>
+    0.00 :	  371a:       mov    %r13,%rdx
+    0.00 :	  371d:       mov    %r12,%rsi
+    0.00 :	  3720:       mov    %rax,%rdi
+    0.00 :	  3723:       callq  1f840 <_dl_catch_error@@GLIBC_PRIVATE+0x3b80>
+    0.00 :	  3728:       mov    0x38(%rbx),%rdx
+    0.00 :	  372c:       mov    %rax,0x8(%rbx)
+    0.00 :	  3730:       mov    %rax,(%rdx)
+    0.00 :	  3733:       xor    %esi,%esi
+    0.00 :	  3735:       mov    %rbx,%rdi
+    0.00 :	  3738:       callq  c000 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x2470>
+    0.00 :	  373d:       cmpq   $0x0,0x18(%rbx)
+    0.00 :	  3742:       jne    5724 <free@plt+0x4824>
+    0.00 :	  3748:       cmp    0x20(%rbx),%r14
+    0.00 :	  374c:       jne    3d27 <free@plt+0x2e27>
+    0.00 :	  3752:       lea    0x225297(%rip),%rax        # 2289f0 <_rtld_global@@GLIBC_PRIVATE+0x990>
+    0.00 :	  3759:       mov    %rbx,0x2252a8(%rip)        # 228a08 <_rtld_global@@GLIBC_PRIVATE+0x9a8>
+    0.00 :	  3760:       mov    %rax,-0x1a0(%rbp)
+    0.00 :	  3767:       mov    %rax,0x20(%rbx)
+    0.00 :	  376b:       lea    0x18(%rbx),%rax
+    0.00 :	  376f:       mov    %rbx,0x224142(%rip)        # 2278b8 <_rtld_global_ro@@GLIBC_PRIVATE+0x158>
+    0.00 :	  3776:       mov    %rax,-0x1c8(%rbp)
+    0.00 :	  377d:       callq  1b210 <__get_cpu_features@@GLIBC_PRIVATE+0x17e0>
+    0.00 :	  3782:       test   %eax,%eax
+    0.00 :	  3784:       lea    0x1ed1d(%rip),%rbx        # 224a8 <_dl_catch_error@@GLIBC_PRIVATE+0x67e8>
+    0.00 :	  378b:       js     37d8 <free@plt+0x28d8>
+    0.00 :	  378d:       mov    0x223fd1(%rip),%edx        # 227764 <_rtld_global_ro@@GLIBC_PRIVATE+0x4>
+    0.00 :	  3793:       test   %edx,%edx
+    0.00 :	  3795:       jne    3d1a <free@plt+0x2e1a>
+    0.00 :	  379b:       mov    %eax,0x223fc3(%rip)        # 227764 <_rtld_global_ro@@GLIBC_PRIVATE+0x4>
+    0.00 :	  37a1:       cmp    $0x301ff,%eax
+    0.00 :	  37a6:       jg     3c1a <free@plt+0x2d1a>
+    0.00 :	  37ac:       lea    0x1d41a(%rip),%rbx        # 20bcd <_dl_catch_error@@GLIBC_PRIVATE+0x4f0d>
+    0.00 :	  37b3:       nopl   0x0(%rax,%rax,1)
+    0.00 :	  37b8:       mov    %rbx,%rsi
+    0.00 :	  37bb:       mov    $0x2,%edi
+    0.00 :	  37c0:       xor    %eax,%eax
+    0.00 :	  37c2:       callq  11660 <_dl_debug_state@@GLIBC_PRIVATE+0x8c0>
+    0.00 :	  37c7:       mov    $0x7f,%edi
+    0.00 :	  37cc:       callq  1d030 <_dl_catch_error@@GLIBC_PRIVATE+0x1370>
+    0.00 :	  37d1:       jmp    37b8 <free@plt+0x28b8>
+    0.00 :	  37d3:       nopl   0x0(%rax,%rax,1)
+    0.00 :	  37d8:       mov    %rbx,%rsi
+    0.00 :	  37db:       mov    $0x2,%edi
+    0.00 :	  37e0:       xor    %eax,%eax
+    0.00 :	  37e2:       callq  11660 <_dl_debug_state@@GLIBC_PRIVATE+0x8c0>
+    0.00 :	  37e7:       mov    $0x7f,%edi
+    0.00 :	  37ec:       callq  1d030 <_dl_catch_error@@GLIBC_PRIVATE+0x1370>
+    0.00 :	  37f1:       jmp    37d8 <free@plt+0x28d8>
+    0.00 :	  37f3:       lea    0x22520e(%rip),%rax        # 228a08 <_rtld_global@@GLIBC_PRIVATE+0x9a8>
+    0.00 :	  37fa:       mov    %rax,-0x1c8(%rbp)
+    0.00 :	  3801:       sub    $0x18,%rax
+    0.00 :	  3805:       mov    %rax,-0x1a0(%rbp)
+    0.00 :	  380c:       jmpq   377d <free@plt+0x287d>
+    0.00 :	  3811:       lea    (%rdx,%rdx,1),%edi
+    0.00 :	  3814:       sar    %edi
+    0.00 :	  3816:       cmp    $0xfffffffc,%edi
+    0.00 :	  3819:       jbe    3a66 <free@plt+0x2b66>
+    0.00 :	  381f:       mov    %r8d,%edx
+    0.00 :	  3822:       sub    %edi,%edx
+    0.00 :	  3824:       mov    %rcx,(%rsi,%rdx,8)
+    0.00 :	  3828:       jmpq   33fe <free@plt+0x24fe>
+    0.00 :	  382d:       movabs $0x554f5f4755424544,%rax
+    0.00 :	  3837:       cmp    %rax,(%r15)
+    0.00 :	  383a:       jne    2702 <free@plt+0x1802>
+    0.00 :	  3840:       cmpl   $0x54555054,0x8(%r15)
+    0.00 :	  3848:       jne    2702 <free@plt+0x1802>
+    0.00 :	  384e:       lea    0xd(%r15),%r14
+    0.00 :	  3852:       jmpq   2702 <free@plt+0x1802>
+    0.00 :	  3857:       nopw   0x0(%rax,%rax,1)
+    0.00 :	  3860:       mov    0x10(%rdx),%rcx
+    0.00 :	  3864:       mov    %rcx,0x223e25(%rip)        # 227690 <_dl_catch_error@@GLIBC_PRIVATE+0x20b9d0>
+    0.00 :	  386b:       jmpq   2e8b <free@plt+0x1f8b>
+    0.00 :	  3870:       mov    0x0(%r13),%rax
+    0.00 :	  3874:       mov    %rax,0x8(%r12)
+    0.00 :	  3879:       jmpq   2e68 <free@plt+0x1f68>
+    0.00 :	  387e:       cmp    $0x3,%rax
+    0.00 :	  3882:       jne    2e68 <free@plt+0x1f68>
+    0.00 :	  3888:       mov    %rbx,0x8(%r12)
+    0.00 :	  388d:       jmpq   2e68 <free@plt+0x1f68>
+    0.00 :	  3892:       mov    %rdx,0x8(%r12)
+    0.00 :	  3897:       jmpq   2e68 <free@plt+0x1f68>
+    0.00 :	  389c:       mov    (%r14),%rdx
+    0.00 :	  389f:       add    0x10(%rax),%rdx
+    0.00 :	  38a3:       cmpq   $0x0,0x225155(%rip)        # 228a00 <_rtld_global@@GLIBC_PRIVATE+0x9a0>
+    0.00 :	  38ab:       mov    %r8,0x225176(%rip)        # 228a28 <_rtld_global@@GLIBC_PRIVATE+0x9c8>
+    0.00 :	  38b2:       mov    %rdx,(%r8)
+    0.00 :	  38b5:       je     3bb5 <free@plt+0x2cb5>
+    0.00 :	  38bb:       mov    $0x1,%r12d
+    0.00 :	  38c1:       jmpq   2f90 <free@plt+0x2090>
+    0.00 :	  38c6:       mov    (%r14),%rdx
+    0.00 :	  38c9:       add    0x10(%rax),%rdx
+    0.00 :	  38cd:       mov    %rdx,0x10(%r14)
+    0.00 :	  38d1:       jmpq   2f90 <free@plt+0x2090>
+    0.00 :	  38d6:       mov    0x22511b(%rip),%rax        # 2289f8 <_rtld_global@@GLIBC_PRIVATE+0x998>
+    0.00 :	  38dd:       test   %rax,%rax
+    0.00 :	  38e0:       je     3b96 <free@plt+0x2c96>
+    0.00 :	  38e6:       lea    0x225743(%rip),%rbx        # 229030 <_rtld_global@@GLIBC_PRIVATE+0xfd0>
+    0.00 :	  38ed:       mov    %rax,0x22573c(%rip)        # 229030 <_rtld_global@@GLIBC_PRIVATE+0xfd0>
+    0.00 :	  38f4:       mov    %rbx,0x22512d(%rip)        # 228a28 <_rtld_global@@GLIBC_PRIVATE+0x9c8>
+    0.00 :	  38fb:       jmpq   3084 <free@plt+0x2184>
+    0.00 :	  3900:       mov    %rbx,%rdx
+    0.00 :	  3903:       sub    0x10(%rax),%rdx
+    0.00 :	  3907:       mov    %rdx,(%r14)
+    0.00 :	  390a:       jmpq   2f90 <free@plt+0x2090>
+    0.00 :	  390f:       lea    (%rax,%rax,1),%esi
+    0.00 :	  3912:       sar    %esi
+    0.00 :	  3914:       cmp    $0xfffffffc,%esi
+    0.00 :	  3917:       jbe    3926 <free@plt+0x2a26>
+    0.00 :	  3919:       mov    %edi,%eax
+    0.00 :	  391b:       sub    %esi,%eax
+    0.00 :	  391d:       mov    %rdx,(%rcx,%rax,8)
+    0.00 :	  3921:       jmpq   3170 <free@plt+0x2270>
+    0.00 :	  3926:       mov    %r10,%rsi
+    0.00 :	  3929:       sub    %rax,%rsi
+    0.00 :	  392c:       cmp    $0xb,%rsi
+    0.00 :	  3930:       ja     3b4e <free@plt+0x2c4e>
+    0.00 :	  3936:       imul   $0xfffffffffffffff8,%rax,%rax
+    0.00 :	  393a:       add    %rcx,%rax
+    0.00 :	  393d:       mov    %rdx,(%rax,%r8,1)
+    0.00 :	  3941:       jmpq   3170 <free@plt+0x2270>
+    0.00 :	  3946:       nopw   %cs:0x0(%rax,%rax,1)
+    0.00 :	  3950:       mov    0x10(%rax),%rdx
+    0.00 :	  3954:       mov    (%r14),%r10
+    0.00 :	  3957:       mov    %rdx,%rcx
+    0.00 :	  395a:       and    %rsi,%rcx
+    0.00 :	  395d:       add    %r10,%rcx
+    0.00 :	  3960:       cmp    %rcx,0x340(%r14)
+    0.00 :	  3967:       jbe    3970 <free@plt+0x2a70>
+    0.00 :	  3969:       mov    %rcx,0x340(%r14)
+    0.00 :	  3970:       add    0x28(%rax),%rdx
+    0.00 :	  3974:       add    %r10,%rdx
+    0.00 :	  3977:       cmp    %rdx,0x348(%r14)
+    0.00 :	  397e:       jae    3987 <free@plt+0x2a87>
+    0.00 :	  3980:       mov    %rdx,0x348(%r14)
+    0.00 :	  3987:       testb  $0x1,0x4(%rax)
+    0.00 :	  398b:       je     2f90 <free@plt+0x2090>
+    0.00 :	  3991:       cmp    %rdx,0x350(%r14)
+    0.00 :	  3998:       jae    2f90 <free@plt+0x2090>
+    0.00 :	  399e:       mov    %rdx,0x350(%r14)
+    0.00 :	  39a5:       jmpq   2f90 <free@plt+0x2090>
+    0.00 :	  39aa:       nopw   0x0(%rax,%rax,1)
+    0.00 :	  39b0:       mov    0x10(%rax),%rdx
+    0.00 :	  39b4:       mov    %rdx,0x458(%r14)
+    0.00 :	  39bb:       mov    0x28(%rax),%rdx
+    0.00 :	  39bf:       mov    %rdx,0x460(%r14)
+    0.00 :	  39c6:       jmpq   2f90 <free@plt+0x2090>
+    0.00 :	  39cb:       mov    0x4(%rax),%edx
+    0.00 :	  39ce:       mov    %edx,0x2255a4(%rip)        # 228f78 <_rtld_global@@GLIBC_PRIVATE+0xf18>
+    0.00 :	  39d4:       jmpq   2f90 <free@plt+0x2090>
+    0.00 :	  39d9:       mov    %r14,%rdi
+    0.00 :	  39dc:       mov    %rsp,-0x1b0(%rbp)
+    0.00 :	  39e3:       callq  1f2f0 <_dl_catch_error@@GLIBC_PRIVATE+0x3630>
+    0.00 :	  39e8:       mov    %rax,%r8
+    0.00 :	  39eb:       lea    0x1b(%rax),%rax
+    0.00 :	  39ef:       mov    %r8,-0x1c0(%rbp)
+    0.00 :	  39f6:       and    $0xfffffffffffffff0,%rax
+    0.00 :	  39fa:       sub    %rax,%rsp
+    0.00 :	  39fd:       lea    0xb(%rsp,%r8,1),%rsi
+    0.00 :	  3a02:       movb   $0x0,0xb(%rsp,%r8,1)
+    0.00 :	  3a08:       mov    %rsi,-0x1b8(%rbp)
+    0.00 :	  3a0f:       callq  1d080 <_dl_catch_error@@GLIBC_PRIVATE+0x13c0>
+    0.00 :	  3a14:       mov    -0x1b8(%rbp),%rsi
+    0.00 :	  3a1b:       mov    -0x1c0(%rbp),%r8
+    0.00 :	  3a22:       lea    0x1ce17(%rip),%r10        # 20840 <_dl_catch_error@@GLIBC_PRIVATE+0x4b80>
+    0.00 :	  3a29:       movslq %eax,%rcx
+    0.00 :	  3a2c:       movabs $0xcccccccccccccccd,%r9
+    0.00 :	  3a36:       mov    %rcx,%rax
+    0.00 :	  3a39:       lea    -0x1(%rsi),%rdi
+    0.00 :	  3a3d:       mul    %r9
+    0.00 :	  3a40:       mov    %rdx,%rax
+    0.00 :	  3a43:       shr    $0x3,%rax
+    0.00 :	  3a47:       lea    (%rax,%rax,4),%rdx
+    0.00 :	  3a4b:       add    %rdx,%rdx
+    0.00 :	  3a4e:       sub    %rdx,%rcx
+    0.00 :	  3a51:       test   %rax,%rax
+    0.00 :	  3a54:       movzbl (%r10,%rcx,1),%edx
+    0.00 :	  3a59:       mov    %rax,%rcx
+    0.00 :	  3a5c:       mov    %dl,-0x1(%rsi)
+    0.00 :	  3a5f:       je     3a88 <free@plt+0x2b88>
+    0.00 :	  3a61:       mov    %rdi,%rsi
+    0.00 :	  3a64:       jmp    3a36 <free@plt+0x2b36>
+    0.00 :	  3a66:       mov    %r12,%rdi
+    0.00 :	  3a69:       sub    %rdx,%rdi
+    0.00 :	  3a6c:       cmp    $0xb,%rdi
+    0.00 :	  3a70:       ja     3acf <free@plt+0x2bcf>
+    0.00 :	  3a72:       imul   $0xfffffffffffffff8,%rdx,%rdx
+    0.00 :	  3a76:       add    %rsi,%rdx
+    0.00 :	  3a79:       mov    %rcx,(%rdx,%r9,1)
+    0.00 :	  3a7d:       jmpq   33fe <free@plt+0x24fe>
+    0.00 :	  3a82:       nopw   0x0(%rax,%rax,1)
+    0.00 :	  3a88:       sub    %r8,%rsi
+    0.00 :	  3a8b:       movb   $0x2e,-0x1(%rdi)
+    0.00 :	  3a8f:       mov    %r8,%rdx
+    0.00 :	  3a92:       lea    -0x2(%rsi),%rdi
+    0.00 :	  3a96:       mov    %r14,%rsi
+    0.00 :	  3a99:       callq  1f840 <_dl_catch_error@@GLIBC_PRIVATE+0x3b80>
+    0.00 :	  3a9e:       mov    $0x1b6,%edx
+    0.00 :	  3aa3:       mov    %rax,%rdi
+    0.00 :	  3aa6:       mov    $0x20441,%esi
+    0.00 :	  3aab:       xor    %eax,%eax
+    0.00 :	  3aad:       callq  1ccb0 <_dl_catch_error@@GLIBC_PRIVATE+0xff0>
+    0.00 :	  3ab2:       mov    $0x1,%edx
+    0.00 :	  3ab7:       cmp    $0xffffffff,%eax
+    0.00 :	  3aba:       cmove  %edx,%eax
+    0.00 :	  3abd:       mov    %eax,0x223cdd(%rip)        # 2277a0 <_rtld_global_ro@@GLIBC_PRIVATE+0x40>
+    0.00 :	  3ac3:       mov    -0x1b0(%rbp),%rsp
+    0.00 :	  3aca:       jmpq   2ad9 <free@plt+0x1bd9>
+    0.00 :	  3acf:       mov    %r13,%rdi
+    0.00 :	  3ad2:       sub    %rdx,%rdi
+    0.00 :	  3ad5:       cmp    $0xa,%rdi
+    0.00 :	  3ad9:       ja     33fe <free@plt+0x24fe>
+    0.00 :	  3adf:       imul   $0xfffffffffffffff8,%rdx,%rdx
+    0.00 :	  3ae3:       add    %rsi,%rdx
+    0.00 :	  3ae6:       mov    %rcx,(%rdx,%r10,1)
+    0.00 :	  3aea:       jmpq   33fe <free@plt+0x24fe>
+    0.00 :	  3aef:       movabs $0x544f4e5f444e4942,%rax
+    0.00 :	  3af9:       cmp    %rax,(%r15)
+    0.00 :	  3afc:       jne    2702 <free@plt+0x1802>
+    0.00 :	  3b02:       xor    %eax,%eax
+    0.00 :	  3b04:       cmpb   $0x0,0x9(%r15)
+    0.00 :	  3b09:       setne  %al
+    0.00 :	  3b0c:       mov    %eax,0x223c96(%rip)        # 2277a8 <_rtld_global_ro@@GLIBC_PRIVATE+0x48>
+    0.00 :	  3b12:       jmpq   2702 <free@plt+0x1802>
+    0.00 :	  3b17:       lea    0x1cefe(%rip),%rsi        # 20a1c <_dl_catch_error@@GLIBC_PRIVATE+0x4d5c>
+    0.00 :	  3b1e:       mov    $0x7,%edx
+    0.00 :	  3b23:       mov    %r15,%rdi
+    0.00 :	  3b26:       callq  1ecd0 <_dl_catch_error@@GLIBC_PRIVATE+0x3010>
+    0.00 :	  3b2b:       test   %eax,%eax
+    0.00 :	  3b2d:       jne    2702 <free@plt+0x1802>
+    0.00 :	  3b33:       cmpb   $0x0,0x8(%r15)
+    0.00 :	  3b38:       je     2702 <free@plt+0x1802>
+    0.00 :	  3b3e:       add    $0x8,%r15
+    0.00 :	  3b42:       mov    %r15,0x223d3f(%rip)        # 227888 <_rtld_global_ro@@GLIBC_PRIVATE+0x128>
+    0.00 :	  3b49:       jmpq   2702 <free@plt+0x1802>
+    0.00 :	  3b4e:       mov    %rbx,%rsi
+    0.00 :	  3b51:       sub    %rax,%rsi
+    0.00 :	  3b54:       cmp    $0xa,%rsi
+    0.00 :	  3b58:       ja     3170 <free@plt+0x2270>
+    0.00 :	  3b5e:       imul   $0xfffffffffffffff8,%rax,%rax
+    0.00 :	  3b62:       add    %rcx,%rax
+    0.00 :	  3b65:       mov    %rdx,(%rax,%r9,1)
+    0.00 :	  3b69:       jmpq   3170 <free@plt+0x2270>
+    0.00 :	  3b6e:       mov    %eax,%esi
+    0.00 :	  3b70:       and    $0xfffff716,%esi
+    0.00 :	  3b76:       je     3286 <free@plt+0x2386>
+    0.00 :	  3b7c:       lea    0x1e8e5(%rip),%rdi        # 22468 <_dl_catch_error@@GLIBC_PRIVATE+0x67a8>
+    0.00 :	  3b83:       xor    %eax,%eax
+    0.00 :	  3b85:       callq  11500 <_dl_debug_state@@GLIBC_PRIVATE+0x760>
+    0.00 :	  3b8a:       mov    0x3d4(%r14),%edx
+    0.00 :	  3b91:       jmpq   3286 <free@plt+0x2386>
+    0.00 :	  3b96:       lea    0x1eb9b(%rip),%rcx        # 22738 <_dl_catch_error@@GLIBC_PRIVATE+0x6a78>
+    0.00 :	  3b9d:       lea    0x1cdce(%rip),%rsi        # 20972 <_dl_catch_error@@GLIBC_PRIVATE+0x4cb2>
+    0.00 :	  3ba4:       lea    0x1cf93(%rip),%rdi        # 20b3e <_dl_catch_error@@GLIBC_PRIVATE+0x4e7e>
+    0.00 :	  3bab:       mov    $0x4f2,%edx
+    0.00 :	  3bb0:       callq  1b790 <free@@GLIBC_2.2.5+0x170>
+    0.00 :	  3bb5:       xor    %ecx,%ecx
+    0.00 :	  3bb7:       jmp    3bcc <free@plt+0x2ccc>
+    0.00 :	  3bb9:       nopl   0x0(%rax)
+    0.00 :	  3bc0:       add    $0x1,%rdx
+    0.00 :	  3bc4:       cmp    $0x2f,%r10b
+    0.00 :	  3bc8:       cmove  %rdx,%rcx
+    0.00 :	  3bcc:       movzbl (%rdx),%r10d
+    0.00 :	  3bd0:       test   %r10b,%r10b
+    0.00 :	  3bd3:       jne    3bc0 <free@plt+0x2cc0>
+    0.00 :	  3bd5:       test   %rcx,%rcx
+    0.00 :	  3bd8:       je     38bb <free@plt+0x29bb>
+    0.00 :	  3bde:       mov    %rcx,(%rdi)
+    0.00 :	  3be1:       mov    %rdi,0x225450(%rip)        # 229038 <_rtld_global@@GLIBC_PRIVATE+0xfd8>
+    0.00 :	  3be8:       mov    $0x1,%r12d
+    0.00 :	  3bee:       jmpq   2f90 <free@plt+0x2090>
+    0.00 :	  3bf3:       mov    %eax,%esi
+    0.00 :	  3bf5:       and    $0xfffff716,%esi
+    0.00 :	  3bfb:       je     368f <free@plt+0x278f>
+    0.00 :	  3c01:       lea    0x1e860(%rip),%rdi        # 22468 <_dl_catch_error@@GLIBC_PRIVATE+0x67a8>
+    0.00 :	  3c08:       xor    %eax,%eax
+    0.00 :	  3c0a:       callq  11500 <_dl_debug_state@@GLIBC_PRIVATE+0x760>
+    0.00 :	  3c0f:       mov    0x3d4(%rbx),%edx
+    0.00 :	  3c15:       jmpq   368f <free@plt+0x278f>
+    0.00 :	  3c1a:       mov    0x223a6f(%rip),%rdi        # 227690 <_dl_catch_error@@GLIBC_PRIVATE+0x20b9d0>
+    0.00 :	  3c21:       callq  8a40 <free@plt+0x7b40>
+    0.00 :	  3c26:       mov    0x224dc3(%rip),%rdi        # 2289f0 <_rtld_global@@GLIBC_PRIVATE+0x990>
+    0.00 :	  3c2d:       xor    %esi,%esi
+    0.00 :	  3c2f:       callq  10db0 <_dl_debug_state@@GLIBC_PRIVATE+0x10>
+    0.00 :	  3c34:       cmpq   $0x0,0x224dbc(%rip)        # 2289f8 <_rtld_global@@GLIBC_PRIVATE+0x998>
+    0.00 :	  3c3c:       mov    %rax,-0x1c0(%rbp)
+    0.00 :	  3c43:       movl   $0x0,0x18(%rax)
+    0.00 :	  3c4a:       jne    3c5d <free@plt+0x2d5d>
+    0.00 :	  3c4c:       mov    0x224dd5(%rip),%rax        # 228a28 <_rtld_global@@GLIBC_PRIVATE+0x9c8>
+    0.00 :	  3c53:       mov    (%rax),%rax
+    0.00 :	  3c56:       mov    %rax,0x224d9b(%rip)        # 2289f8 <_rtld_global@@GLIBC_PRIVATE+0x998>
+    0.00 :	  3c5d:       movzbl 0x2250a0(%rip),%eax        # 228d04 <_rtld_global@@GLIBC_PRIVATE+0xca4>
+    0.00 :	  3c64:       addl   $0x1,0x2243fd(%rip)        # 228068 <_rtld_global@@GLIBC_PRIVATE+0x8>
+    0.00 :	  3c6b:       and    $0xfffffffc,%eax
+    0.00 :	  3c6e:       or     $0x1,%eax
+    0.00 :	  3c71:       mov    %al,0x22508d(%rip)        # 228d04 <_rtld_global@@GLIBC_PRIVATE+0xca4>
+    0.00 :	  3c77:       mov    -0x1a0(%rbp),%rax
+    0.00 :	  3c7e:       mov    %rax,0x18(%r14)
+    0.00 :	  3c82:       addq   $0x1,0x224d2e(%rip)        # 2289b8 <_rtld_global@@GLIBC_PRIVATE+0x958>
+    0.00 :	  3c8a:       cmpq   $0xfffffffffffffffe,0x223bee(%rip)        # 227880 <_rtld_global_ro@@GLIBC_PRIVATE+0x120>
+    0.00 :	  3c92:       mov    %r14,0x224d77(%rip)        # 228a10 <_rtld_global@@GLIBC_PRIVATE+0x9b0>
+    0.00 :	  3c99:       jne    3cae <free@plt+0x2dae>
+    0.00 :	  3c9b:       xor    %eax,%eax
+    0.00 :	  3c9d:       cmpq   $0x0,(%r14)
+    0.00 :	  3ca1:       sete   %al
+    0.00 :	  3ca4:       neg    %rax
+    0.00 :	  3ca7:       mov    %rax,0x223bd2(%rip)        # 227880 <_rtld_global_ro@@GLIBC_PRIVATE+0x120>
+    0.00 :	  3cae:       cmpw   $0x40,-0x3c82(%rip)        # 34 <GLIBC_2.2.5@@GLIBC_2.2.5+0x34>
+    0.00 :	  3cb6:       jne    53e2 <free@plt+0x44e2>
+    0.00 :	  3cbc:       cmpw   $0x38,-0x3c8e(%rip)        # 36 <GLIBC_2.2.5@@GLIBC_2.2.5+0x36>
+    0.00 :	  3cc4:       jne    53c3 <free@plt+0x44c3>
+    0.00 :	  3cca:       movzwl -0x3c99(%rip),%eax        # 38 <GLIBC_2.2.5@@GLIBC_2.2.5+0x38>
+    0.00 :	  3cd1:       lea    -0x3cd8(%rip),%rdx        # 0 <GLIBC_2.2.5@@GLIBC_2.2.5>
+    0.00 :	  3cd8:       add    -0x3cbf(%rip),%rdx        # 20 <GLIBC_2.2.5@@GLIBC_2.2.5+0x20>
+    0.00 :	  3cdf:       imul   $0x38,%rax,%rcx
+    0.00 :	  3ce3:       mov    %rdx,0x224fa6(%rip)        # 228c90 <_rtld_global@@GLIBC_PRIVATE+0xc30>
+    0.00 :	  3cea:       mov    %ax,0x224faf(%rip)        # 228ca0 <_rtld_global@@GLIBC_PRIVATE+0xc40>
+    0.00 :	  3cf1:       lea    -0x38(%rdx,%rcx,1),%rsi
+    0.00 :	  3cf6:       xor    %ecx,%ecx
+    0.00 :	  3cf8:       jmp    3d13 <free@plt+0x2e13>
+    0.00 :	  3cfa:       nopw   0x0(%rax,%rax,1)
+    0.00 :	  3d00:       mov    %rsi,%rdx
+    0.00 :	  3d03:       add    $0x1,%rcx
+    0.00 :	  3d07:       sub    $0x38,%rsi
+    0.00 :	  3d0b:       cmpl   $0x6474e552,(%rdx)
+    0.00 :	  3d11:       je     3d46 <free@plt+0x2e46>
+    0.00 :	  3d13:       cmp    %rcx,%rax
+    0.00 :	  3d16:       jne    3d00 <free@plt+0x2e00>
+    0.00 :	  3d18:       jmp    3d5c <free@plt+0x2e5c>
+    0.00 :	  3d1a:       cmp    %eax,%edx
+    0.00 :	  3d1c:       jbe    37a1 <free@plt+0x28a1>
+    0.00 :	  3d22:       jmpq   379b <free@plt+0x289b>
+    0.00 :	  3d27:       lea    0x1e9fa(%rip),%rcx        # 22728 <_dl_catch_error@@GLIBC_PRIVATE+0x6a68>
+    0.00 :	  3d2e:       lea    0x1ce3f(%rip),%rsi        # 20b74 <_dl_catch_error@@GLIBC_PRIVATE+0x4eb4>
+    0.00 :	  3d35:       lea    0x1ce7b(%rip),%rdi        # 20bb7 <_dl_catch_error@@GLIBC_PRIVATE+0x4ef7>
+    0.00 :	  3d3c:       mov    $0x69,%edx
+    0.00 :	  3d41:       callq  1b790 <free@@GLIBC_2.2.5+0x170>
+    0.00 :	  3d46:       mov    0x10(%rdx),%rax
+    0.00 :	  3d4a:       mov    %rax,0x2250f7(%rip)        # 228e48 <_rtld_global@@GLIBC_PRIVATE+0xde8>
+    0.00 :	  3d51:       mov    0x28(%rdx),%rax
+    0.00 :	  3d55:       mov    %rax,0x2250f4(%rip)        # 228e50 <_rtld_global@@GLIBC_PRIVATE+0xdf0>
+    0.00 :	  3d5c:       cmpq   $0x0,0x2250b4(%rip)        # 228e18 <_rtld_global@@GLIBC_PRIVATE+0xdb8>
+    0.00 :	  3d64:       je     3d72 <free@plt+0x2e72>
+    0.00 :	  3d66:       callq  12d40 <_dl_mcount@@GLIBC_2.2.5+0x470>
+    0.00 :	  3d6b:       mov    %rax,0x2250c6(%rip)        # 228e38 <_rtld_global@@GLIBC_PRIVATE+0xdd8>
+    0.00 :	  3d72:       cmpq   $0x0,0x2252ce(%rip)        # 229048 <_rtld_global@@GLIBC_PRIVATE+0xfe8>
+    0.00 :	  3d7a:       lea    0x2253e7(%rip),%rax        # 229168 <_r_debug@@GLIBC_2.2.5+0x28>
+    0.00 :	  3d81:       mov    (%rax),%rax
+    0.00 :	  3d84:       jne    4fd9 <free@plt+0x40d9>
+    0.00 :	  3d8a:       test   %rax,%rax
+    0.00 :	  3d8d:       movb   $0x1,-0x1d0(%rbp)
+    0.00 :	  3d94:       movq   $0x0,-0x1b0(%rbp)
+    0.00 :	  3d9f:       jne    4fd9 <free@plt+0x40d9>
+    0.00 :	  3da5:       callq  12e40 <_dl_mcount@@GLIBC_2.2.5+0x570>
+    0.00 :	  3daa:       mov    %rax,-0x1d8(%rbp)
+    0.00 :	  3db1:       mov    0xe8(%r14),%rax
+    0.00 :	  3db8:       test   %rax,%rax
+    0.00 :	  3dbb:       je     3dc8 <free@plt+0x2ec8>
+    0.00 :	  3dbd:       mov    -0x1c0(%rbp),%rcx
+    0.00 :	  3dc4:       mov    %rcx,0x8(%rax)
+    0.00 :	  3dc8:       mov    0x224d09(%rip),%rax        # 228ad8 <_rtld_global@@GLIBC_PRIVATE+0xa78>
+    0.00 :	  3dcf:       test   %rax,%rax
+    0.00 :	  3dd2:       je     3ddf <free@plt+0x2edf>
+    0.00 :	  3dd4:       mov    -0x1c0(%rbp),%rcx
+    0.00 :	  3ddb:       mov    %rcx,0x8(%rax)
+    0.00 :	  3ddf:       mov    -0x1c0(%rbp),%rbx
+    0.00 :	  3de6:       movl   $0x1,0x18(%rbx)
+    0.00 :	  3ded:       callq  10da0 <_dl_debug_state@@GLIBC_PRIVATE>
+    0.00 :	  3df2:       nop
+    0.00 :	  3df3:       cmpl   $0x0,0x223b16(%rip)        # 227910 <_rtld_global_ro@@GLIBC_PRIVATE+0x1b0>
+    0.00 :	  3dfa:       jne    4f9d <free@plt+0x409d>
+    0.00 :	  3e00:       mov    -0x1c8(%rbp),%rax
+    0.00 :	  3e07:       cmpq   $0x0,(%rax)
+    0.00 :	  3e0b:       jne    3f5e <free@plt+0x305e>
+    0.00 :	  3e11:       mov    0x223870(%rip),%rdi        # 227688 <_dl_catch_error@@GLIBC_PRIVATE+0x20b9c8>
+    0.00 :	  3e18:       xor    %ebx,%ebx
+    0.00 :	  3e1a:       test   %rdi,%rdi
+    0.00 :	  3e1d:       je     3e4c <free@plt+0x2f4c>
+    0.00 :	  3e1f:       rdtsc
+    0.00 :	  3e21:       shl    $0x20,%rdx
+    0.00 :	  3e25:       mov    %eax,%eax
+    0.00 :	  3e27:       mov    %r14,%rsi
+    0.00 :	  3e2a:       or     %rax,%rdx
+    0.00 :	  3e2d:       mov    %rdx,%r12
+    0.00 :	  3e30:       callq  24a0 <free@plt+0x15a0>
+    0.00 :	  3e35:       mov    %eax,%ebx
+    0.00 :	  3e37:       rdtsc
+    0.00 :	  3e39:       shl    $0x20,%rdx
+    0.00 :	  3e3d:       mov    %eax,%eax
+    0.00 :	  3e3f:       or     %rdx,%rax
+    0.00 :	  3e42:       sub    %r12,%rax
+    0.00 :	  3e45:       add    %rax,0x2238dc(%rip)        # 227728 <_dl_catch_error@@GLIBC_PRIVATE+0x20ba68>
+    0.00 :	  3e4c:       lea    0x1ff7d(%rip),%rdi        # 23dd0 <_dl_catch_error@@GLIBC_PRIVATE+0x8110>
+    0.00 :	  3e53:       mov    $0x4,%esi
+    0.00 :	  3e58:       callq  1ce20 <_dl_catch_error@@GLIBC_PRIVATE+0x1160>
+    0.00 :	  3e5d:       test   %eax,%eax
+    0.00 :	  3e5f:       je     4bb7 <free@plt+0x3cb7>
+    0.00 :	  3e65:       mov    -0x1c8(%rbp),%rax
+    0.00 :	  3e6c:       xor    %esi,%esi
+    0.00 :	  3e6e:       mov    (%rax),%rdx
+    0.00 :	  3e71:       test   %rdx,%rdx
+    0.00 :	  3e74:       jne    4b5b <free@plt+0x3c5b>
+    0.00 :	  3e7a:       rdtsc
+    0.00 :	  3e7c:       mov    %eax,%eax
+    0.00 :	  3e7e:       shl    $0x20,%rdx
+    0.00 :	  3e82:       xor    %r13d,%r13d
+    0.00 :	  3e85:       or     %rax,%rdx
+    0.00 :	  3e88:       cmpl   $0x3,-0x198(%rbp)
+    0.00 :	  3e8f:       mov    %r14,%rdi
+    0.00 :	  3e92:       mov    %rdx,%r12
+    0.00 :	  3e95:       mov    %ebx,%edx
+    0.00 :	  3e97:       sete   %r13b
+    0.00 :	  3e9b:       xor    %r8d,%r8d
+    0.00 :	  3e9e:       mov    %r13d,%ecx
+    0.00 :	  3ea1:       callq  e410 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x4880>
+    0.00 :	  3ea6:       rdtsc
+    0.00 :	  3ea8:       shl    $0x20,%rdx
+    0.00 :	  3eac:       mov    %eax,%eax
+    0.00 :	  3eae:       or     %rdx,%rax
+    0.00 :	  3eb1:       mov    0x2c0(%r14),%edx
+    0.00 :	  3eb8:       sub    %r12,%rax
+    0.00 :	  3ebb:       add    %rax,0x223866(%rip)        # 227728 <_dl_catch_error@@GLIBC_PRIVATE+0x20ba68>
+    0.00 :	  3ec2:       test   %edx,%edx
+    0.00 :	  3ec4:       je     3f7d <free@plt+0x307d>
+    0.00 :	  3eca:       mov    0x2b8(%r14),%rax
+    0.00 :	  3ed1:       lea    -0x1(%rdx),%ecx
+    0.00 :	  3ed4:       lea    (%rax,%rcx,8),%rcx
+    0.00 :	  3ed8:       sub    $0x8,%rax
+    0.00 :	  3edc:       mov    (%rcx),%rsi
+    0.00 :	  3edf:       sub    $0x8,%rcx
+    0.00 :	  3ee3:       orb    $0x10,0x314(%rsi)
+    0.00 :	  3eea:       cmp    %rcx,%rax
+    0.00 :	  3eed:       jne    3edc <free@plt+0x2fdc>
+    0.00 :	  3eef:       mov    0x224b12(%rip),%rax        # 228a08 <_rtld_global@@GLIBC_PRIVATE+0x9a8>
+    0.00 :	  3ef6:       mov    0x224b13(%rip),%rcx        # 228a10 <_rtld_global@@GLIBC_PRIVATE+0x9b0>
+    0.00 :	  3efd:       mov    %rax,0x18(%rcx)
+    0.00 :	  3f01:       mov    0x224b00(%rip),%rax        # 228a08 <_rtld_global@@GLIBC_PRIVATE+0x9a8>
+    0.00 :	  3f08:       test   %rax,%rax
+    0.00 :	  3f0b:       je     3f11 <free@plt+0x3011>
+    0.00 :	  3f0d:       mov    %rcx,0x20(%rax)
+    0.00 :	  3f11:       cmp    $0x1,%edx
+    0.00 :	  3f14:       jbe    3f9f <free@plt+0x309f>
+    0.00 :	  3f1a:       mov    0x2b8(%r14),%rdi
+    0.00 :	  3f21:       mov    -0x1a0(%rbp),%rax
+    0.00 :	  3f28:       cmp    %rax,0x8(%rdi)
+    0.00 :	  3f2c:       je     4aa8 <free@plt+0x3ba8>
+    0.00 :	  3f32:       lea    0x10(%rdi),%rcx
+    0.00 :	  3f36:       mov    $0x1,%eax
+    0.00 :	  3f3b:       jmp    3f55 <free@plt+0x3055>
+    0.00 :	  3f3d:       nopl   (%rax)
+    0.00 :	  3f40:       add    $0x8,%rcx
+    0.00 :	  3f44:       mov    -0x1a0(%rbp),%rbx
+    0.00 :	  3f4b:       cmp    %rbx,-0x8(%rcx)
+    0.00 :	  3f4f:       je     4aad <free@plt+0x3bad>
+    0.00 :	  3f55:       add    $0x1,%eax
+    0.00 :	  3f58:       cmp    %eax,%edx
+    0.00 :	  3f5a:       jne    3f40 <free@plt+0x3040>
+    0.00 :	  3f5c:       jmp    3f9f <free@plt+0x309f>
+    0.00 :	  3f5e:       lea    0x1e7d3(%rip),%rcx        # 22738 <_dl_catch_error@@GLIBC_PRIVATE+0x6a78>
+    0.00 :	  3f65:       lea    0x1ca06(%rip),%rsi        # 20972 <_dl_catch_error@@GLIBC_PRIVATE+0x4cb2>
+    0.00 :	  3f6c:       lea    0x1cc91(%rip),%rdi        # 20c04 <_dl_catch_error@@GLIBC_PRIVATE+0x4f44>
+    0.00 :	  3f73:       mov    $0x64b,%edx
+    0.00 :	  3f78:       callq  1b790 <free@@GLIBC_2.2.5+0x170>
+    0.00 :	  3f7d:       mov    0x224a84(%rip),%rax        # 228a08 <_rtld_global@@GLIBC_PRIVATE+0x9a8>
+    0.00 :	  3f84:       mov    0x224a85(%rip),%rcx        # 228a10 <_rtld_global@@GLIBC_PRIVATE+0x9b0>
+    0.00 :	  3f8b:       mov    %rax,0x18(%rcx)
+    0.00 :	  3f8f:       mov    0x224a72(%rip),%rax        # 228a08 <_rtld_global@@GLIBC_PRIVATE+0x9a8>
+    0.00 :	  3f96:       test   %rax,%rax
+    0.00 :	  3f99:       jne    3f0d <free@plt+0x300d>
+    0.00 :	  3f9f:       movb   $0x0,-0x1b8(%rbp)
+    0.00 :	  3fa6:       xor    %eax,%eax
+    0.00 :	  3fa8:       cmpl   $0x0,-0x198(%rbp)
+    0.00 :	  3faf:       lea    -0x2156(%rip),%rsi        # 1e60 <free@plt+0xf60>
+    0.00 :	  3fb6:       lea    -0x2dcd(%rip),%rdi        # 11f0 <free@plt+0x2f0>
+    0.00 :	  3fbd:       mov    %r13d,-0x13c(%rbp)
+    0.00 :	  3fc4:       sete   %al
+    0.00 :	  3fc7:       mov    %eax,-0x140(%rbp)
+    0.00 :	  3fcd:       lea    -0x140(%rbp),%rax
+    0.00 :	  3fd4:       mov    %rax,%rdx
+    0.00 :	  3fd7:       mov    %rax,-0x1a8(%rbp)
+    0.00 :	  3fde:       callq  1bd10 <_dl_catch_error@@GLIBC_PRIVATE+0x50>
+    0.00 :	  3fe3:       movzbl 0x22500e(%rip),%eax        # 228ff8 <_rtld_global@@GLIBC_PRIVATE+0xf98>
+    0.00 :	  3fea:       cmpq   $0x0,-0x1b0(%rbp)
+    0.00 :	  3ff2:       mov    %al,-0x1c0(%rbp)
+    0.00 :	  3ff8:       jne    4006 <free@plt+0x3106>
+    0.00 :	  3ffa:       callq  f10 <free@plt+0x10>
+    0.00 :	  3fff:       mov    %rax,-0x1b0(%rbp)
+    0.00 :	  4006:       cmpb   $0x0,-0x1d0(%rbp)
+    0.00 :	  400d:       je     4043 <free@plt+0x3143>
+    0.00 :	  400f:       mov    0x223e3a(%rip),%rdx        # 227e50 <_rtld_global_ro@@GLIBC_PRIVATE+0x6f0>
+    0.00 :	  4016:       mov    (%rdx),%rax
+    0.00 :	  4019:       xor    %al,%al
+    0.00 :	  401b:       mov    %rax,%fs:0x28
+    0.00 :	  4024:       mov    0x8(%rdx),%rax
+    0.00 :	  4028:       mov    %rax,%fs:0x30
+    0.00 :	  4031:       movq   $0x0,0x223e14(%rip)        # 227e50 <_rtld_global_ro@@GLIBC_PRIVATE+0x6f0>
+    0.00 :	  403c:       mov    %rax,0x2236ed(%rip)        # 227730 <_dl_catch_error@@GLIBC_PRIVATE+0x20ba70>
+    0.00 :	  4043:       cmpl   $0x0,-0x198(%rbp)
+    0.00 :	  404a:       jne    462e <free@plt+0x372e>
+    0.00 :	  4050:       mov    0x278(%r14),%rdx
+    0.00 :	  4057:       test   %rdx,%rdx
+    0.00 :	  405a:       je     45f0 <free@plt+0x36f0>
+    0.00 :	  4060:       cmpq   $0x0,0x223820(%rip)        # 227888 <_rtld_global_ro@@GLIBC_PRIVATE+0x128>
+    0.00 :	  4068:       jne    45f0 <free@plt+0x36f0>
+    0.00 :	  406e:       cmpl   $0x0,0x223737(%rip)        # 2277ac <_rtld_global_ro@@GLIBC_PRIVATE+0x4c>
+    0.00 :	  4075:       jne    45f0 <free@plt+0x36f0>
+    0.00 :	  407b:       mov    0x68(%r14),%rax
+    0.00 :	  407f:       mov    0x8(%rax),%rbx
+    0.00 :	  4083:       mov    0x228(%r14),%rax
+    0.00 :	  408a:       test   %rax,%rax
+    0.00 :	  408d:       je     45d1 <free@plt+0x36d1>
+    0.00 :	  4093:       mov    0x8(%rax),%rcx
+    0.00 :	  4097:       mov    0x2c0(%r14),%eax
+    0.00 :	  409e:       mov    0x2b8(%r14),%r13
+    0.00 :	  40a5:       mov    0x8(%rdx),%r12
+    0.00 :	  40a9:       lea    0x0(%r13,%rax,8),%r15
+    0.00 :	  40ae:       add    %r12,%rcx
+    0.00 :	  40b1:       cmp    %r15,%r13
+    0.00 :	  40b4:       jb     4128 <free@plt+0x3228>
+    0.00 :	  40b6:       jmp    412d <free@plt+0x322d>
+    0.00 :	  40b8:       nopl   0x0(%rax,%rax,1)
+    0.00 :	  40c0:       mov    0x0(%r13),%rsi
+    0.00 :	  40c4:       cmp    %rsi,%r14
+    0.00 :	  40c7:       je     411f <free@plt+0x321f>
+    0.00 :	  40c9:       cmpq   $0x0,(%rsi)
+    0.00 :	  40cd:       jne    412d <free@plt+0x322d>
+    0.00 :	  40cf:       mov    0x220(%rsi),%rax
+    0.00 :	  40d6:       test   %rax,%rax
+    0.00 :	  40d9:       je     412d <free@plt+0x322d>
+    0.00 :	  40db:       mov    0x8(%r12),%edx
+    0.00 :	  40e0:       cmp    %rdx,0x8(%rax)
+    0.00 :	  40e4:       jne    412d <free@plt+0x322d>
+    0.00 :	  40e6:       mov    0x238(%rsi),%rax
+    0.00 :	  40ed:       test   %rax,%rax
+    0.00 :	  40f0:       je     412d <free@plt+0x322d>
+    0.00 :	  40f2:       mov    0x4(%r12),%edx
+    0.00 :	  40f7:       cmp    %rdx,0x8(%rax)
+    0.00 :	  40fb:       jne    412d <free@plt+0x322d>
+    0.00 :	  40fd:       mov    (%r12),%edi
+    0.00 :	  4101:       mov    %rcx,-0x198(%rbp)
+    0.00 :	  4108:       add    %rbx,%rdi
+    0.00 :	  410b:       callq  11700 <_dl_debug_state@@GLIBC_PRIVATE+0x960>
+    0.00 :	  4110:       test   %eax,%eax
+    0.00 :	  4112:       mov    -0x198(%rbp),%rcx
+    0.00 :	  4119:       je     412d <free@plt+0x322d>
+    0.00 :	  411b:       add    $0x14,%r12
+    0.00 :	  411f:       add    $0x8,%r13
+    0.00 :	  4123:       cmp    %r13,%r15
+    0.00 :	  4126:       jbe    412d <free@plt+0x322d>
+    0.00 :	  4128:       cmp    %rcx,%r12
+    0.00 :	  412b:       jb     40c0 <free@plt+0x31c0>
+    0.00 :	  412d:       mov    0x22362d(%rip),%eax        # 227760 <_rtld_global_ro@@GLIBC_PRIVATE>
+    0.00 :	  4133:       cmp    %r15,%r13
+    0.00 :	  4136:       sete   %bl
+    0.00 :	  4139:       cmp    %rcx,%r12
+    0.00 :	  413c:       lea    0x2b8(%r14),%r12
+    0.00 :	  4143:       sete   %cl
+    0.00 :	  4146:       mov    %eax,%edx
+    0.00 :	  4148:       and    $0x1,%edx
+    0.00 :	  414b:       and    %cl,%bl
+    0.00 :	  414d:       je     421f <free@plt+0x331f>
+    0.00 :	  4153:       test   %edx,%edx
+    0.00 :	  4155:       jne    4324 <free@plt+0x3424>
+    0.00 :	  415b:       mov    0x224886(%rip),%rdx        # 2289e8 <_rtld_global@@GLIBC_PRIVATE+0x988>
+    0.00 :	  4162:       test   $0x2,%ah
+    0.00 :	  4165:       mov    %r12,0x223f04(%rip)        # 228070 <_rtld_global@@GLIBC_PRIVATE+0x10>
+    0.00 :	  416c:       movdqu 0x2b8(%r14),%xmm0
+    0.00 :	  4175:       mov    %rdx,0x22372c(%rip)        # 2278a8 <_rtld_global_ro@@GLIBC_PRIVATE+0x148>
+    0.00 :	  417c:       movups %xmm0,0x223605(%rip)        # 227788 <_rtld_global_ro@@GLIBC_PRIVATE+0x28>
+    0.00 :	  4183:       jne    4253 <free@plt+0x3353>
+    0.00 :	  4189:       mov    0x280(%r14),%rcx
+    0.00 :	  4190:       test   %rcx,%rcx
+    0.00 :	  4193:       je     41db <free@plt+0x32db>
+    0.00 :	  4195:       rdtsc
+    0.00 :	  4197:       shl    $0x20,%rdx
+    0.00 :	  419b:       mov    %eax,%eax
+    0.00 :	  419d:       or     %rax,%rdx
+    0.00 :	  41a0:       mov    0x230(%r14),%rax
+    0.00 :	  41a7:       mov    %rdx,%rbx
+    0.00 :	  41aa:       test   %rax,%rax
+    0.00 :	  41ad:       je     4566 <free@plt+0x3666>
+    0.00 :	  41b3:       mov    0x8(%rcx),%rsi
+    0.00 :	  41b7:       mov    0x8(%rax),%rdx
+    0.00 :	  41bb:       mov    %r14,%rdi
+    0.00 :	  41be:       add    %rsi,%rdx
+    0.00 :	  41c1:       callq  1bd50 <_dl_catch_error@@GLIBC_PRIVATE+0x90>
+    0.00 :	  41c6:       rdtsc
+    0.00 :	  41c8:       shl    $0x20,%rdx
+    0.00 :	  41cc:       mov    %eax,%eax
+    0.00 :	  41ce:       or     %rdx,%rax
+    0.00 :	  41d1:       sub    %rbx,%rax
+    0.00 :	  41d4:       mov    %rax,0x224e25(%rip)        # 229000 <_rtld_global@@GLIBC_PRIVATE+0xfa0>
+    0.00 :	  41db:       mov    %r14,%rbx
+    0.00 :	  41de:       jmp    4204 <free@plt+0x3304>
+    0.00 :	  41e0:       cmpq   $0x0,0x428(%rbx)
+    0.00 :	  41e8:       je     41f7 <free@plt+0x32f7>
+    0.00 :	  41ea:       cmpb   $0x0,0x224e07(%rip)        # 228ff8 <_rtld_global@@GLIBC_PRIVATE+0xf98>
+    0.00 :	  41f1:       jne    4386 <free@plt+0x3486>
+    0.00 :	  41f7:       mov    0x18(%rbx),%rbx
+    0.00 :	  41fb:       test   %rbx,%rbx
+    0.00 :	  41fe:       je     4393 <free@plt+0x3493>
+    0.00 :	  4204:       orb    $0x4,0x314(%rbx)
+    0.00 :	  420b:       cmpq   $0x0,0x460(%rbx)
+    0.00 :	  4213:       je     41e0 <free@plt+0x32e0>
+    0.00 :	  4215:       mov    %rbx,%rdi
+    0.00 :	  4218:       callq  c610 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x2a80>
+    0.00 :	  421d:       jmp    41e0 <free@plt+0x32e0>
+    0.00 :	  421f:       test   %edx,%edx
+    0.00 :	  4221:       jne    4585 <free@plt+0x3685>
+    0.00 :	  4227:       mov    0x2247ba(%rip),%rdx        # 2289e8 <_rtld_global@@GLIBC_PRIVATE+0x988>
+    0.00 :	  422e:       test   $0x2,%ah
+    0.00 :	  4231:       mov    %r12,0x223e38(%rip)        # 228070 <_rtld_global@@GLIBC_PRIVATE+0x10>
+    0.00 :	  4238:       movdqu 0x2b8(%r14),%xmm0
+    0.00 :	  4241:       mov    %rdx,0x223660(%rip)        # 2278a8 <_rtld_global_ro@@GLIBC_PRIVATE+0x148>
+    0.00 :	  4248:       movups %xmm0,0x223539(%rip)        # 227788 <_rtld_global_ro@@GLIBC_PRIVATE+0x28>
+    0.00 :	  424f:       je     4280 <free@plt+0x3380>
+    0.00 :	  4251:       xor    %ebx,%ebx
+    0.00 :	  4253:       lea    0x1caad(%rip),%rdi        # 20d07 <_dl_catch_error@@GLIBC_PRIVATE+0x5047>
+    0.00 :	  425a:       xor    %eax,%eax
+    0.00 :	  425c:       mov    %r14,%r12
+    0.00 :	  425f:       callq  11500 <_dl_debug_state@@GLIBC_PRIVATE+0x760>
+    0.00 :	  4264:       xor    %esi,%esi
+    0.00 :	  4266:       mov    %r12,%rdi
+    0.00 :	  4269:       callq  14c90 <_dl_find_dso_for_object@@GLIBC_PRIVATE+0x650>
+    0.00 :	  426e:       mov    0x18(%r12),%r12
+    0.00 :	  4273:       test   %r12,%r12
+    0.00 :	  4276:       jne    4264 <free@plt+0x3364>
+    0.00 :	  4278:       test   %bl,%bl
+    0.00 :	  427a:       jne    4189 <free@plt+0x3289>
+    0.00 :	  4280:       xor    %r12d,%r12d
+    0.00 :	  4283:       cmpq   $0x0,0x2235fd(%rip)        # 227888 <_rtld_global_ro@@GLIBC_PRIVATE+0x128>
+    0.00 :	  428b:       setne  %r12b
+    0.00 :	  428f:       or     %r12d,0x22350e(%rip)        # 2277a4 <_rtld_global_ro@@GLIBC_PRIVATE+0x44>
+    0.00 :	  4296:       rdtsc
+    0.00 :	  4298:       shl    $0x20,%rdx
+    0.00 :	  429c:       mov    %eax,%eax
+    0.00 :	  429e:       mov    0x2c0(%r14),%r15d
+    0.00 :	  42a5:       or     %rax,%rdx
+    0.00 :	  42a8:       mov    %rdx,%rbx
+    0.00 :	  42ab:       test   %r15d,%r15d
+    0.00 :	  42ae:       je     441a <free@plt+0x351a>
+    0.00 :	  42b4:       mov    0x3b8(%r14),%rax
+    0.00 :	  42bb:       lea    -0x1(%r15),%edx
+    0.00 :	  42bf:       mov    %rdx,%r15
+    0.00 :	  42c2:       mov    (%rax,%rdx,8),%r13
+    0.00 :	  42c6:       mov    0x38(%r13),%rax
+    0.00 :	  42ca:       mov    0x8(%rax),%rax
+    0.00 :	  42ce:       test   %rax,%rax
+    0.00 :	  42d1:       jne    4370 <free@plt+0x3470>
+    0.00 :	  42d7:       andb   $0xfe,0x316(%r13)
+    0.00 :	  42df:       cmp    -0x1a0(%rbp),%r13
+    0.00 :	  42e6:       je     4307 <free@plt+0x3407>
+    0.00 :	  42e8:       mov    0x2234b6(%rip),%eax        # 2277a4 <_rtld_global_ro@@GLIBC_PRIVATE+0x44>
+    0.00 :	  42ee:       mov    0x380(%r13),%rsi
+    0.00 :	  42f5:       xor    %edx,%edx
+    0.00 :	  42f7:       mov    %r12d,%ecx
+    0.00 :	  42fa:       mov    %r13,%rdi
+    0.00 :	  42fd:       test   %eax,%eax
+    0.00 :	  42ff:       setne  %dl
+    0.00 :	  4302:       callq  c750 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x2bc0>
+    0.00 :	  4307:       cmpq   $0x0,0x428(%r13)
+    0.00 :	  430f:       je     42ab <free@plt+0x33ab>
+    0.00 :	  4311:       cmpb   $0x0,0x224ce0(%rip)        # 228ff8 <_rtld_global@@GLIBC_PRIVATE+0xf98>
+    0.00 :	  4318:       je     42ab <free@plt+0x33ab>
+    0.00 :	  431a:       mov    %r13,%rdi
+    0.00 :	  431d:       callq  13970 <_dl_deallocate_tls@@GLIBC_PRIVATE+0x480>
+    0.00 :	  4322:       jmp    42ab <free@plt+0x33ab>
+    0.00 :	  4324:       lea    0x1c9f4(%rip),%rsi        # 20d1f <_dl_catch_error@@GLIBC_PRIVATE+0x505f>
+    0.00 :	  432b:       lea    0x1c9f0(%rip),%rdi        # 20d22 <_dl_catch_error@@GLIBC_PRIVATE+0x5062>
+    0.00 :	  4332:       xor    %eax,%eax
+    0.00 :	  4334:       callq  11500 <_dl_debug_state@@GLIBC_PRIVATE+0x760>
+    0.00 :	  4339:       testb  $0x2,0x223421(%rip)        # 227761 <_rtld_global_ro@@GLIBC_PRIVATE+0x1>
+    0.00 :	  4340:       mov    0x2246a1(%rip),%rax        # 2289e8 <_rtld_global@@GLIBC_PRIVATE+0x988>
+    0.00 :	  4347:       movdqu 0x2b8(%r14),%xmm0
+    0.00 :	  4350:       mov    %r12,0x223d19(%rip)        # 228070 <_rtld_global@@GLIBC_PRIVATE+0x10>
+    0.00 :	  4357:       movups %xmm0,0x22342a(%rip)        # 227788 <_rtld_global_ro@@GLIBC_PRIVATE+0x28>
+    0.00 :	  435e:       mov    %rax,0x223543(%rip)        # 2278a8 <_rtld_global_ro@@GLIBC_PRIVATE+0x148>
+    0.00 :	  4365:       je     4189 <free@plt+0x3289>
+    0.00 :	  436b:       jmpq   4253 <free@plt+0x3353>
+    0.00 :	  4370:       movl   $0x1,0x10(%rax)
+    0.00 :	  4377:       mov    0x8(%rax),%rax
+    0.00 :	  437b:       test   %rax,%rax
+    0.00 :	  437e:       je     42d7 <free@plt+0x33d7>
+    0.00 :	  4384:       jmp    4370 <free@plt+0x3470>
+    0.00 :	  4386:       mov    %rbx,%rdi
+    0.00 :	  4389:       callq  13970 <_dl_deallocate_tls@@GLIBC_PRIVATE+0x480>
+    0.00 :	  438e:       jmpq   41f7 <free@plt+0x32f7>
+    0.00 :	  4393:       mov    $0x1,%ebx
+    0.00 :	  4398:       cmpb   $0x0,-0x1c0(%rbp)
+    0.00 :	  439f:       jne    4505 <free@plt+0x3605>
+    0.00 :	  43a5:       cmpq   $0x0,0x224bd3(%rip)        # 228f80 <_rtld_global@@GLIBC_PRIVATE+0xf20>
+    0.00 :	  43ad:       je     4505 <free@plt+0x3605>
+    0.00 :	  43b3:       addq   $0x1,0x224bfd(%rip)        # 228fb8 <_rtld_global@@GLIBC_PRIVATE+0xf58>
+    0.00 :	  43bb:       mov    -0x1b0(%rbp),%r15
+    0.00 :	  43c2:       mov    %r15,%rdi
+    0.00 :	  43c5:       callq  13160 <_dl_allocate_tls_init@@GLIBC_PRIVATE>
+    0.00 :	  43ca:       cmpb   $0x0,0x224c27(%rip)        # 228ff8 <_rtld_global@@GLIBC_PRIVATE+0xf98>
+    0.00 :	  43d1:       jne    4449 <free@plt+0x3549>
+    0.00 :	  43d3:       mov    %r15,%rsi
+    0.00 :	  43d6:       mov    $0x9e,%eax
+    0.00 :	  43db:       mov    $0x1002,%edi
+    0.00 :	  43e0:       mov    %r15,(%rsi)
+    0.00 :	  43e3:       mov    %r15,0x10(%rsi)
+    0.00 :	  43e7:       syscall
+    0.00 :	  43e9:       test   %eax,%eax
+    0.00 :	  43eb:       je     4449 <free@plt+0x3549>
+    0.00 :	  43ed:       lea    0x1d8bc(%rip),%rbx        # 21cb0 <_dl_catch_error@@GLIBC_PRIVATE+0x5ff0>
+    0.00 :	  43f4:       nopl   0x0(%rax)
+    0.00 :	  43f8:       lea    0x1d8e9(%rip),%rsi        # 21ce8 <_dl_catch_error@@GLIBC_PRIVATE+0x6028>
+    0.00 :	  43ff:       mov    %rbx,%rdx
+    0.00 :	  4402:       mov    $0x2,%edi
+    0.00 :	  4407:       xor    %eax,%eax
+    0.00 :	  4409:       callq  11660 <_dl_debug_state@@GLIBC_PRIVATE+0x8c0>
+    0.00 :	  440e:       mov    $0x7f,%edi
+    0.00 :	  4413:       callq  1d030 <_dl_catch_error@@GLIBC_PRIVATE+0x1370>
+    0.00 :	  4418:       jmp    43f8 <free@plt+0x34f8>
+    0.00 :	  441a:       rdtsc
+    0.00 :	  441c:       shl    $0x20,%rdx
+    0.00 :	  4420:       mov    %eax,%eax
+    0.00 :	  4422:       or     %rdx,%rax
+    0.00 :	  4425:       sub    %rbx,%rax
+    0.00 :	  4428:       xor    %ebx,%ebx
+    0.00 :	  442a:       cmpq   $0x0,0x22459e(%rip)        # 2289d0 <_rtld_global@@GLIBC_PRIVATE+0x970>
+    0.00 :	  4432:       mov    %rax,0x224bc7(%rip)        # 229000 <_rtld_global@@GLIBC_PRIVATE+0xfa0>
+    0.00 :	  4439:       je     4398 <free@plt+0x3498>
+    0.00 :	  443f:       callq  12140 <_dl_debug_state@@GLIBC_PRIVATE+0x13a0>
+    0.00 :	  4444:       jmpq   4398 <free@plt+0x3498>
+    0.00 :	  4449:       mov    0x224598(%rip),%rax        # 2289e8 <_rtld_global@@GLIBC_PRIVATE+0x988>
+    0.00 :	  4450:       cmp    %rax,0x223451(%rip)        # 2278a8 <_rtld_global_ro@@GLIBC_PRIVATE+0x148>
+    0.00 :	  4457:       jne    44e6 <free@plt+0x35e6>
+    0.00 :	  445d:       test   %bl,%bl
+    0.00 :	  445f:       jne    44ab <free@plt+0x35ab>
+    0.00 :	  4461:       cmpb   $0x0,-0x1b8(%rbp)
+    0.00 :	  4468:       je     44ab <free@plt+0x35ab>
+    0.00 :	  446a:       rdtsc
+    0.00 :	  446c:       andb   $0xfb,0x224891(%rip)        # 228d04 <_rtld_global@@GLIBC_PRIVATE+0xca4>
+    0.00 :	  4473:       mov    %eax,%eax
+    0.00 :	  4475:       shl    $0x20,%rdx
+    0.00 :	  4479:       mov    0x380(%r14),%rsi
+    0.00 :	  4480:       or     %rax,%rdx
+    0.00 :	  4483:       lea    0x224566(%rip),%rdi        # 2289f0 <_rtld_global@@GLIBC_PRIVATE+0x990>
+    0.00 :	  448a:       mov    %rdx,%rbx
+    0.00 :	  448d:       xor    %ecx,%ecx
+    0.00 :	  448f:       xor    %edx,%edx
+    0.00 :	  4491:       callq  c750 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x2bc0>
+    0.00 :	  4496:       rdtsc
+    0.00 :	  4498:       shl    $0x20,%rdx
+    0.00 :	  449c:       mov    %eax,%eax
+    0.00 :	  449e:       or     %rdx,%rax
+    0.00 :	  44a1:       sub    %rbx,%rax
+    0.00 :	  44a4:       add    %rax,0x224b55(%rip)        # 229000 <_rtld_global@@GLIBC_PRIVATE+0xfa0>
+    0.00 :	  44ab:       callq  1b080 <__get_cpu_features@@GLIBC_PRIVATE+0x1650>
+    0.00 :	  44b0:       cmpl   $0x0,0x223459(%rip)        # 227910 <_rtld_global_ro@@GLIBC_PRIVATE+0x1b0>
+    0.00 :	  44b7:       jne    451c <free@plt+0x361c>
+    0.00 :	  44b9:       xor    %esi,%esi
+    0.00 :	  44bb:       xor    %edi,%edi
+    0.00 :	  44bd:       callq  10db0 <_dl_debug_state@@GLIBC_PRIVATE+0x10>
+    0.00 :	  44c2:       movl   $0x0,0x18(%rax)
+    0.00 :	  44c9:       mov    %rax,%rbx
+    0.00 :	  44cc:       callq  10da0 <_dl_debug_state@@GLIBC_PRIVATE>
+    0.00 :	  44d1:       nop
+    0.00 :	  44d2:       callq  18b90 <_dl_exception_free@@GLIBC_PRIVATE+0xf40>
+    0.00 :	  44d7:       lea    -0x28(%rbp),%rsp
+    0.00 :	  44db:       pop    %rbx
+    0.00 :	  44dc:       pop    %r12
+    0.00 :	  44de:       pop    %r13
+    0.00 :	  44e0:       pop    %r14
+    0.00 :	  44e2:       pop    %r15
+    0.00 :	  44e4:       pop    %rbp
+    0.00 :	  44e5:       retq
+    0.00 :	  44e6:       lea    0x1e24b(%rip),%rcx        # 22738 <_dl_catch_error@@GLIBC_PRIVATE+0x6a78>
+    0.00 :	  44ed:       lea    0x1c47e(%rip),%rsi        # 20972 <_dl_catch_error@@GLIBC_PRIVATE+0x4cb2>
+    0.00 :	  44f4:       lea    0x1e1ed(%rip),%rdi        # 226e8 <_dl_catch_error@@GLIBC_PRIVATE+0x6a28>
+    0.00 :	  44fb:       mov    $0x8b7,%edx
+    0.00 :	  4500:       callq  1b790 <free@@GLIBC_2.2.5+0x170>
+    0.00 :	  4505:       callq  12e40 <_dl_mcount@@GLIBC_2.2.5+0x570>
+    0.00 :	  450a:       cmp    -0x1d8(%rbp),%rax
+    0.00 :	  4511:       jne    43b3 <free@plt+0x34b3>
+    0.00 :	  4517:       jmpq   43bb <free@plt+0x34bb>
+    0.00 :	  451c:       mov    0x223b3d(%rip),%r13        # 228060 <_rtld_global@@GLIBC_PRIVATE>
+    0.00 :	  4523:       testb  $0x8,0x315(%r13)
+    0.00 :	  452b:       jne    44b9 <free@plt+0x35b9>
+    0.00 :	  452d:       mov    0x2233d4(%rip),%r12        # 227908 <_rtld_global_ro@@GLIBC_PRIVATE+0x1a8>
+    0.00 :	  4534:       xor    %ebx,%ebx
+    0.00 :	  4536:       cmp    %ebx,0x2233d4(%rip)        # 227910 <_rtld_global_ro@@GLIBC_PRIVATE+0x1b0>
+    0.00 :	  453c:       jbe    44b9 <free@plt+0x35b9>
+    0.00 :	  4542:       mov    (%r12),%rax
+    0.00 :	  4546:       test   %rax,%rax
+    0.00 :	  4549:       je     455c <free@plt+0x365c>
+    0.00 :	  454b:       mov    %ebx,%edi
+    0.00 :	  454d:       xor    %esi,%esi
+    0.00 :	  454f:       add    $0x47,%rdi
+    0.00 :	  4553:       shl    $0x4,%rdi
+    0.00 :	  4557:       add    %r13,%rdi
+    0.00 :	  455a:       callq  *%rax
+    0.00 :	  455c:       mov    0x40(%r12),%r12
+    0.00 :	  4561:       add    $0x1,%ebx
+    0.00 :	  4564:       jmp    4536 <free@plt+0x3636>
+    0.00 :	  4566:       lea    0x1e1cb(%rip),%rcx        # 22738 <_dl_catch_error@@GLIBC_PRIVATE+0x6a78>
+    0.00 :	  456d:       lea    0x1c3fe(%rip),%rsi        # 20972 <_dl_catch_error@@GLIBC_PRIVATE+0x4cb2>
+    0.00 :	  4574:       lea    0x1e135(%rip),%rdi        # 226b0 <_dl_catch_error@@GLIBC_PRIVATE+0x69f0>
+    0.00 :	  457b:       mov    $0x84e,%edx
+    0.00 :	  4580:       callq  1b790 <free@@GLIBC_2.2.5+0x170>
+    0.00 :	  4585:       lea    0x1c7ad(%rip),%rsi        # 20d39 <_dl_catch_error@@GLIBC_PRIVATE+0x5079>
+    0.00 :	  458c:       lea    0x1c78f(%rip),%rdi        # 20d22 <_dl_catch_error@@GLIBC_PRIVATE+0x5062>
+    0.00 :	  4593:       xor    %eax,%eax
+    0.00 :	  4595:       callq  11500 <_dl_debug_state@@GLIBC_PRIVATE+0x760>
+    0.00 :	  459a:       testb  $0x2,0x2231c0(%rip)        # 227761 <_rtld_global_ro@@GLIBC_PRIVATE+0x1>
+    0.00 :	  45a1:       mov    0x224440(%rip),%rax        # 2289e8 <_rtld_global@@GLIBC_PRIVATE+0x988>
+    0.00 :	  45a8:       movdqu 0x2b8(%r14),%xmm0
+    0.00 :	  45b1:       mov    %r12,0x223ab8(%rip)        # 228070 <_rtld_global@@GLIBC_PRIVATE+0x10>
+    0.00 :	  45b8:       movups %xmm0,0x2231c9(%rip)        # 227788 <_rtld_global_ro@@GLIBC_PRIVATE+0x28>
+    0.00 :	  45bf:       mov    %rax,0x2232e2(%rip)        # 2278a8 <_rtld_global_ro@@GLIBC_PRIVATE+0x148>
+    0.00 :	  45c6:       je     4280 <free@plt+0x3380>
+    0.00 :	  45cc:       jmpq   4253 <free@plt+0x3353>
+    0.00 :	  45d1:       lea    0x1e160(%rip),%rcx        # 22738 <_dl_catch_error@@GLIBC_PRIVATE+0x6a78>
+    0.00 :	  45d8:       lea    0x1c393(%rip),%rsi        # 20972 <_dl_catch_error@@GLIBC_PRIVATE+0x4cb2>
+    0.00 :	  45df:       lea    0x1e092(%rip),%rdi        # 22678 <_dl_catch_error@@GLIBC_PRIVATE+0x69b8>
+    0.00 :	  45e6:       mov    $0x7fe,%edx
+    0.00 :	  45eb:       callq  1b790 <free@@GLIBC_2.2.5+0x170>
+    0.00 :	  45f0:       lea    0x2b8(%r14),%rax
+    0.00 :	  45f7:       testb  $0x2,0x223163(%rip)        # 227761 <_rtld_global_ro@@GLIBC_PRIVATE+0x1>
+    0.00 :	  45fe:       movdqu 0x2b8(%r14),%xmm0
+    0.00 :	  4607:       mov    %rax,0x223a62(%rip)        # 228070 <_rtld_global@@GLIBC_PRIVATE+0x10>
+    0.00 :	  460e:       mov    0x2243d3(%rip),%rax        # 2289e8 <_rtld_global@@GLIBC_PRIVATE+0x988>
+    0.00 :	  4615:       movups %xmm0,0x22316c(%rip)        # 227788 <_rtld_global_ro@@GLIBC_PRIVATE+0x28>
+    0.00 :	  461c:       mov    %rax,0x223285(%rip)        # 2278a8 <_rtld_global_ro@@GLIBC_PRIVATE+0x148>
+    0.00 :	  4623:       je     4280 <free@plt+0x3380>
+    0.00 :	  4629:       jmpq   4251 <free@plt+0x3351>
+    0.00 :	  462e:       mov    0x22312c(%rip),%eax        # 227760 <_rtld_global_ro@@GLIBC_PRIVATE>
+    0.00 :	  4634:       test   $0x8,%ah
+    0.00 :	  4637:       je     4a3b <free@plt+0x3b3b>
+    0.00 :	  463d:       lea    0x1c3ab(%rip),%r12        # 209ef <_dl_catch_error@@GLIBC_PRIVATE+0x4d2f>
+    0.00 :	  4644:       xor    %ebx,%ebx
+    0.00 :	  4646:       cmp    %ebx,0x2c0(%r14)
+    0.00 :	  464d:       jbe    4748 <free@plt+0x3848>
+    0.00 :	  4653:       mov    0x2b8(%r14),%rdx
+    0.00 :	  465a:       mov    %ebx,%eax
+    0.00 :	  465c:       mov    (%rdx,%rax,8),%r13
+    0.00 :	  4660:       testb  $0x2,0x315(%r13)
+    0.00 :	  4668:       jne    4721 <free@plt+0x3821>
+    0.00 :	  466e:       mov    0x223223(%rip),%rdi        # 227898 <_rtld_global_ro@@GLIBC_PRIVATE+0x138>
+    0.00 :	  4675:       mov    %r13,%rsi
+    0.00 :	  4678:       callq  11700 <_dl_debug_state@@GLIBC_PRIVATE+0x960>
+    0.00 :	  467d:       test   %eax,%eax
+    0.00 :	  467f:       je     4688 <free@plt+0x3788>
+    0.00 :	  4681:       mov    %r13,0x223218(%rip)        # 2278a0 <_rtld_global_ro@@GLIBC_PRIVATE+0x140>
+    0.00 :	  4688:       mov    0x8(%r13),%rcx
+    0.00 :	  468c:       mov    0x0(%r13),%rax
+    0.00 :	  4690:       mov    0x340(%r13),%r9
+    0.00 :	  4697:       cmpb   $0x0,(%rcx)
+    0.00 :	  469a:       jne    46ad <free@plt+0x37ad>
+    0.00 :	  469c:       mov    0x22309d(%rip),%rdx        # 227740 <_dl_argv@@GLIBC_PRIVATE>
+    0.00 :	  46a3:       mov    (%rdx),%rcx
+    0.00 :	  46a6:       test   %rcx,%rcx
+    0.00 :	  46a9:       cmove  %r12,%rcx
+    0.00 :	  46ad:       mov    0x38(%r13),%rdx
+    0.00 :	  46b1:       mov    (%rdx),%rdx
+    0.00 :	  46b4:       cmpb   $0x0,(%rdx)
+    0.00 :	  46b7:       jne    46ca <free@plt+0x37ca>
+    0.00 :	  46b9:       mov    0x223080(%rip),%rdx        # 227740 <_dl_argv@@GLIBC_PRIVATE>
+    0.00 :	  46c0:       mov    (%rdx),%rdx
+    0.00 :	  46c3:       test   %rdx,%rdx
+    0.00 :	  46c6:       cmove  %r12,%rdx
+    0.00 :	  46ca:       push   %rax
+    0.00 :	  46cb:       lea    0x1c56f(%rip),%rsi        # 20c41 <_dl_catch_error@@GLIBC_PRIVATE+0x4f81>
+    0.00 :	  46d2:       pushq  $0x10
+    0.00 :	  46d4:       mov    $0x10,%r8d
+    0.00 :	  46da:       xor    %eax,%eax
+    0.00 :	  46dc:       mov    $0x1,%edi
+    0.00 :	  46e1:       callq  11660 <_dl_debug_state@@GLIBC_PRIVATE+0x8c0>
+    0.00 :	  46e6:       mov    0x448(%r13),%rdx
+    0.00 :	  46ed:       pop    %r8
+    0.00 :	  46ef:       pop    %r9
+    0.00 :	  46f1:       test   %rdx,%rdx
+    0.00 :	  46f4:       je     47d7 <free@plt+0x38d7>
+    0.00 :	  46fa:       mov    0x440(%r13),%r8
+    0.00 :	  4701:       lea    0x1c556(%rip),%rsi        # 20c5e <_dl_catch_error@@GLIBC_PRIVATE+0x4f9e>
+    0.00 :	  4708:       mov    $0x10,%ecx
+    0.00 :	  470d:       mov    $0x1,%edi
+    0.00 :	  4712:       xor    %eax,%eax
+    0.00 :	  4714:       callq  11660 <_dl_debug_state@@GLIBC_PRIVATE+0x8c0>
+    0.00 :	  4719:       add    $0x1,%ebx
+    0.00 :	  471c:       jmpq   4646 <free@plt+0x3746>
+    0.00 :	  4721:       mov    0x38(%r13),%rax
+    0.00 :	  4725:       lea    0x1c503(%rip),%rsi        # 20c2f <_dl_catch_error@@GLIBC_PRIVATE+0x4f6f>
+    0.00 :	  472c:       mov    $0x1,%edi
+    0.00 :	  4731:       mov    (%rax),%rdx
+    0.00 :	  4734:       xor    %eax,%eax
+    0.00 :	  4736:       callq  11660 <_dl_debug_state@@GLIBC_PRIVATE+0x8c0>
+    0.00 :	  473b:       jmp    4719 <free@plt+0x3819>
+    0.00 :	  473d:       xor    $0x1,%eax
+    0.00 :	  4740:       movzbl %al,%edi
+    0.00 :	  4743:       callq  1d030 <_dl_catch_error@@GLIBC_PRIVATE+0x1370>
+    0.00 :	  4748:       cmpl   $0x3,-0x198(%rbp)
+    0.00 :	  474f:       jne    4cd3 <free@plt+0x3dd3>
+    0.00 :	  4755:       mov    0x223049(%rip),%eax        # 2277a4 <_rtld_global_ro@@GLIBC_PRIVATE+0x44>
+    0.00 :	  475b:       test   %eax,%eax
+    0.00 :	  475d:       js     4822 <free@plt+0x3922>
+    0.00 :	  4763:       cmpl   $0x0,0x223032(%rip)        # 22779c <_rtld_global_ro@@GLIBC_PRIVATE+0x3c>
+    0.00 :	  476a:       je     4822 <free@plt+0x3922>
+    0.00 :	  4770:       cmp    $0x1,%eax
+    0.00 :	  4773:       mov    0x2c0(%r14),%r12d
+    0.00 :	  477a:       lea    -0x2d81(%rip),%rbx        # 1a00 <free@plt+0xb00>
+    0.00 :	  4781:       sbb    %eax,%eax
+    0.00 :	  4783:       add    $0x2000001,%eax
+    0.00 :	  4788:       mov    %eax,-0x138(%rbp)
+    0.00 :	  478e:       sub    $0x1,%r12d
+    0.00 :	  4792:       cmp    $0xffffffff,%r12d
+    0.00 :	  4796:       je     47ef <free@plt+0x38ef>
+    0.00 :	  4798:       mov    0x3b8(%r14),%rdx
+    0.00 :	  479f:       mov    %r12d,%eax
+    0.00 :	  47a2:       mov    (%rdx,%rax,8),%rax
+    0.00 :	  47a6:       cmp    -0x1a0(%rbp),%rax
+    0.00 :	  47ad:       je     478e <free@plt+0x388e>
+    0.00 :	  47af:       testb  $0x2,0x315(%rax)
+    0.00 :	  47b6:       jne    478e <free@plt+0x388e>
+    0.00 :	  47b8:       mov    -0x1a8(%rbp),%rdx
+    0.00 :	  47bf:       lea    -0x3616(%rip),%rdi        # 11b0 <free@plt+0x2b0>
+    0.00 :	  47c6:       mov    %rbx,%rsi
+    0.00 :	  47c9:       mov    %rax,-0x140(%rbp)
+    0.00 :	  47d0:       callq  1bd10 <_dl_catch_error@@GLIBC_PRIVATE+0x50>
+    0.00 :	  47d5:       jmp    478e <free@plt+0x388e>
+    0.00 :	  47d7:       lea    0x1c440(%rip),%rsi        # 20c1e <_dl_catch_error@@GLIBC_PRIVATE+0x4f5e>
+    0.00 :	  47de:       mov    $0x1,%edi
+    0.00 :	  47e3:       xor    %eax,%eax
+    0.00 :	  47e5:       callq  11660 <_dl_debug_state@@GLIBC_PRIVATE+0x8c0>
+    0.00 :	  47ea:       jmpq   4719 <free@plt+0x3819>
+    0.00 :	  47ef:       testb  $0x8,0x222f6b(%rip)        # 227761 <_rtld_global_ro@@GLIBC_PRIVATE+0x1>
+    0.00 :	  47f6:       je     4822 <free@plt+0x3922>
+    0.00 :	  47f8:       cmpb   $0x0,-0x1b8(%rbp)
+    0.00 :	  47ff:       je     4822 <free@plt+0x3922>
+    0.00 :	  4801:       andb   $0xfb,0x2244fc(%rip)        # 228d04 <_rtld_global@@GLIBC_PRIVATE+0xca4>
+    0.00 :	  4808:       lea    0x2241e1(%rip),%rdi        # 2289f0 <_rtld_global@@GLIBC_PRIVATE+0x990>
+    0.00 :	  480f:       xor    %ecx,%ecx
+    0.00 :	  4811:       mov    0x380(%r14),%rsi
+    0.00 :	  4818:       mov    $0x2000000,%edx
+    0.00 :	  481d:       callq  c750 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x2bc0>
+    0.00 :	  4822:       cmpl   $0x0,0x222e5b(%rip)        # 227684 <_dl_catch_error@@GLIBC_PRIVATE+0x20b9c4>
+    0.00 :	  4829:       je     4928 <free@plt+0x3a28>
+    0.00 :	  482f:       mov    %r14,%r15
+    0.00 :	  4832:       mov    $0x1,%eax
+    0.00 :	  4837:       mov    %r14,-0x1a8(%rbp)
+    0.00 :	  483e:       mov    0x158(%r15),%rdx
+    0.00 :	  4845:       test   %rdx,%rdx
+    0.00 :	  4848:       je     4914 <free@plt+0x3a14>
+    0.00 :	  484e:       mov    0x68(%r15),%rcx
+    0.00 :	  4852:       mov    0x8(%rdx),%rbx
+    0.00 :	  4856:       add    (%r15),%rbx
+    0.00 :	  4859:       test   %eax,%eax
+    0.00 :	  485b:       mov    0x8(%rcx),%r12
+    0.00 :	  485f:       je     4874 <free@plt+0x3974>
+    0.00 :	  4861:       lea    0x1c466(%rip),%rsi        # 20cce <_dl_catch_error@@GLIBC_PRIVATE+0x500e>
+    0.00 :	  4868:       mov    $0x1,%edi
+    0.00 :	  486d:       xor    %eax,%eax
+    0.00 :	  486f:       callq  11660 <_dl_debug_state@@GLIBC_PRIVATE+0x8c0>
+    0.00 :	  4874:       mov    0x8(%r15),%rdx
+    0.00 :	  4878:       cmpb   $0x0,(%rdx)
+    0.00 :	  487b:       jne    4895 <free@plt+0x3995>
+    0.00 :	  487d:       mov    0x222ebc(%rip),%rax        # 227740 <_dl_argv@@GLIBC_PRIVATE>
+    0.00 :	  4884:       mov    (%rax),%rdx
+    0.00 :	  4887:       lea    0x1c161(%rip),%rax        # 209ef <_dl_catch_error@@GLIBC_PRIVATE+0x4d2f>
+    0.00 :	  488e:       test   %rdx,%rdx
+    0.00 :	  4891:       cmove  %rax,%rdx
+    0.00 :	  4895:       lea    0x1c44a(%rip),%rsi        # 20ce6 <_dl_catch_error@@GLIBC_PRIVATE+0x5026>
+    0.00 :	  489c:       mov    $0x1,%edi
+    0.00 :	  48a1:       xor    %eax,%eax
+    0.00 :	  48a3:       callq  11660 <_dl_debug_state@@GLIBC_PRIVATE+0x8c0>
+    0.00 :	  48a8:       lea    0x2237b1(%rip),%rax        # 228060 <_rtld_global@@GLIBC_PRIVATE>
+    0.00 :	  48af:       mov    0x4(%rbx),%r14d
+    0.00 :	  48b3:       mov    (%rax),%rdx
+    0.00 :	  48b6:       add    %r12,%r14
+    0.00 :	  48b9:       mov    0x2c0(%rdx),%eax
+    0.00 :	  48bf:       lea    -0x1(%rax),%r13d
+    0.00 :	  48c3:       jmp    4907 <free@plt+0x3a07>
+    0.00 :	  48c5:       mov    0x2b8(%rdx),%rsi
+    0.00 :	  48cc:       mov    %r13d,%eax
+    0.00 :	  48cf:       mov    %r14,%rdi
+    0.00 :	  48d2:       lea    0x0(,%rax,8),%rcx
+    0.00 :	  48da:       mov    %rdx,-0x198(%rbp)
+    0.00 :	  48e1:       sub    $0x1,%r13d
+    0.00 :	  48e5:       mov    (%rsi,%rax,8),%rsi
+    0.00 :	  48e9:       mov    %rcx,-0x1c8(%rbp)
+    0.00 :	  48f0:       callq  11700 <_dl_debug_state@@GLIBC_PRIVATE+0x960>
+    0.00 :	  48f5:       test   %eax,%eax
+    0.00 :	  48f7:       mov    -0x198(%rbp),%rdx
+    0.00 :	  48fe:       mov    -0x1c8(%rbp),%rcx
+    0.00 :	  4905:       jne    4934 <free@plt+0x3a34>
+    0.00 :	  4907:       cmp    $0xffffffff,%r13d
+    0.00 :	  490b:       jne    48c5 <free@plt+0x39c5>
+    0.00 :	  490d:       xor    %r14d,%r14d
+    0.00 :	  4910:       jmp    493f <free@plt+0x3a3f>
+    0.00 :	  4912:       xor    %eax,%eax
+    0.00 :	  4914:       mov    0x18(%r15),%r15
+    0.00 :	  4918:       test   %r15,%r15
+    0.00 :	  491b:       jne    483e <free@plt+0x393e>
+    0.00 :	  4921:       mov    -0x1a8(%rbp),%r14
+    0.00 :	  4928:       xor    %edi,%edi
+    0.00 :	  492a:       callq  1d030 <_dl_catch_error@@GLIBC_PRIVATE+0x1370>
+    0.00 :	  492f:       jmpq   4050 <free@plt+0x3150>
+    0.00 :	  4934:       mov    0x2b8(%rdx),%rax
+    0.00 :	  493b:       mov    (%rax,%rcx,1),%r14
+    0.00 :	  493f:       mov    0x8(%rbx),%r13d
+    0.00 :	  4943:       mov    %r14,%rax
+    0.00 :	  4946:       add    %rbx,%r13
+    0.00 :	  4949:       mov    %r13,%r14
+    0.00 :	  494c:       mov    %rax,%r13
+    0.00 :	  494f:       mov    0x8(%r14),%ecx
+    0.00 :	  4953:       lea    0x1c0a4(%rip),%r9        # 209fe <_dl_catch_error@@GLIBC_PRIVATE+0x4d3e>
+    0.00 :	  495a:       add    %r12,%rcx
+    0.00 :	  495d:       test   %r13,%r13
+    0.00 :	  4960:       je     49dc <free@plt+0x3adc>
+    0.00 :	  4962:       mov    0x68(%r13),%rax
+    0.00 :	  4966:       mov    0x8(%rax),%rax
+    0.00 :	  496a:       mov    %rax,-0x198(%rbp)
+    0.00 :	  4971:       mov    0x168(%r13),%rax
+    0.00 :	  4978:       test   %rax,%rax
+    0.00 :	  497b:       je     49dc <free@plt+0x3adc>
+    0.00 :	  497d:       mov    0x0(%r13),%rdx
+    0.00 :	  4981:       add    0x8(%rax),%rdx
+    0.00 :	  4985:       jmp    499c <free@plt+0x3a9c>
+    0.00 :	  4987:       mov    -0x1d0(%rbp),%rdx
+    0.00 :	  498e:       mov    0x10(%rdx),%eax
+    0.00 :	  4991:       test   %eax,%eax
+    0.00 :	  4993:       je     4a1f <free@plt+0x3b1f>
+    0.00 :	  4999:       add    %rax,%rdx
+    0.00 :	  499c:       mov    0xc(%rdx),%eax
+    0.00 :	  499f:       mov    %rcx,%rdi
+    0.00 :	  49a2:       mov    %rcx,-0x1c8(%rbp)
+    0.00 :	  49a9:       mov    %rdx,-0x1d0(%rbp)
+    0.00 :	  49b0:       mov    (%rdx,%rax,1),%esi
+    0.00 :	  49b3:       add    -0x198(%rbp),%rsi
+    0.00 :	  49ba:       callq  1d360 <_dl_catch_error@@GLIBC_PRIVATE+0x16a0>
+    0.00 :	  49bf:       test   %eax,%eax
+    0.00 :	  49c1:       mov    -0x1c8(%rbp),%rcx
+    0.00 :	  49c8:       jne    4987 <free@plt+0x3a87>
+    0.00 :	  49ca:       mov    0x8(%r13),%r9
+    0.00 :	  49ce:       lea    0x1c029(%rip),%rax        # 209fe <_dl_catch_error@@GLIBC_PRIVATE+0x4d3e>
+    0.00 :	  49d5:       test   %r9,%r9
+    0.00 :	  49d8:       cmove  %rax,%r9
+    0.00 :	  49dc:       testb  $0x2,0x4(%r14)
+    0.00 :	  49e1:       mov    0x4(%rbx),%edx
+    0.00 :	  49e4:       jne    4a13 <free@plt+0x3b13>
+    0.00 :	  49e6:       lea    0x1c232(%rip),%r8        # 20c1f <_dl_catch_error@@GLIBC_PRIVATE+0x4f5f>
+    0.00 :	  49ed:       add    %r12,%rdx
+    0.00 :	  49f0:       lea    0x1c2f5(%rip),%rsi        # 20cec <_dl_catch_error@@GLIBC_PRIVATE+0x502c>
+    0.00 :	  49f7:       xor    %eax,%eax
+    0.00 :	  49f9:       mov    $0x1,%edi
+    0.00 :	  49fe:       callq  11660 <_dl_debug_state@@GLIBC_PRIVATE+0x8c0>
+    0.00 :	  4a03:       mov    0xc(%r14),%eax
+    0.00 :	  4a07:       test   %eax,%eax
+    0.00 :	  4a09:       je     4a28 <free@plt+0x3b28>
+    0.00 :	  4a0b:       add    %rax,%r14
+    0.00 :	  4a0e:       jmpq   494f <free@plt+0x3a4f>
+    0.00 :	  4a13:       add    %r12,%rdx
+    0.00 :	  4a16:       lea    0x1c2e2(%rip),%r8        # 20cff <_dl_catch_error@@GLIBC_PRIVATE+0x503f>
+    0.00 :	  4a1d:       jmp    49f0 <free@plt+0x3af0>
+    0.00 :	  4a1f:       lea    0x1bfd8(%rip),%r9        # 209fe <_dl_catch_error@@GLIBC_PRIVATE+0x4d3e>
+    0.00 :	  4a26:       jmp    49dc <free@plt+0x3adc>
+    0.00 :	  4a28:       mov    0xc(%rbx),%eax
+    0.00 :	  4a2b:       test   %eax,%eax
+    0.00 :	  4a2d:       je     4912 <free@plt+0x3a12>
+    0.00 :	  4a33:       add    %rax,%rbx
+    0.00 :	  4a36:       jmpq   48a8 <free@plt+0x39a8>
+    0.00 :	  4a3b:       test   $0x1,%ah
+    0.00 :	  4a3e:       je     4d77 <free@plt+0x3e77>
+    0.00 :	  4a44:       cmpl   $0x1,0x222d59(%rip)        # 2277a4 <_rtld_global_ro@@GLIBC_PRIVATE+0x44>
+    0.00 :	  4a4b:       mov    -0x1a8(%rbp),%rdx
+    0.00 :	  4a52:       lea    -0x3059(%rip),%rsi        # 1a00 <free@plt+0xb00>
+    0.00 :	  4a59:       lea    -0x38b0(%rip),%rdi        # 11b0 <free@plt+0x2b0>
+    0.00 :	  4a60:       mov    %r14,-0x140(%rbp)
+    0.00 :	  4a67:       lea    0x1c223(%rip),%r12        # 20c91 <_dl_catch_error@@GLIBC_PRIVATE+0x4fd1>
+    0.00 :	  4a6e:       mov    %r14,%r13
+    0.00 :	  4a71:       sbb    %eax,%eax
+    0.00 :	  4a73:       add    $0x2000001,%eax
+    0.00 :	  4a78:       mov    %eax,-0x138(%rbp)
+    0.00 :	  4a7e:       callq  1bd10 <_dl_catch_error@@GLIBC_PRIVATE+0x50>
+    0.00 :	  4a83:       mov    0x10(%r14),%rbx
+    0.00 :	  4a87:       mov    $0x1,%eax
+    0.00 :	  4a8c:       mov    (%rbx),%rdx
+    0.00 :	  4a8f:       test   %rdx,%rdx
+    0.00 :	  4a92:       je     473d <free@plt+0x383d>
+    0.00 :	  4a98:       sub    $0x1,%rdx
+    0.00 :	  4a9c:       je     4e8b <free@plt+0x3f8b>
+    0.00 :	  4aa2:       add    $0x10,%rbx
+    0.00 :	  4aa6:       jmp    4a8c <free@plt+0x3b8c>
+    0.00 :	  4aa8:       mov    $0x1,%eax
+    0.00 :	  4aad:       lea    -0x1(%rax),%ecx
+    0.00 :	  4ab0:       cmpl   $0x0,-0x198(%rbp)
+    0.00 :	  4ab7:       mov    (%rdi,%rcx,8),%rcx
+    0.00 :	  4abb:       mov    %rcx,0x223f4e(%rip)        # 228a10 <_rtld_global@@GLIBC_PRIVATE+0x9b0>
+    0.00 :	  4ac2:       jne    4b4e <free@plt+0x3c4e>
+    0.00 :	  4ac8:       add    $0x1,%eax
+    0.00 :	  4acb:       xor    %esi,%esi
+    0.00 :	  4acd:       cmp    %edx,%eax
+    0.00 :	  4acf:       jae    4ad5 <free@plt+0x3bd5>
+    0.00 :	  4ad1:       mov    (%rdi,%rax,8),%rsi
+    0.00 :	  4ad5:       mov    0x222ddc(%rip),%rax        # 2278b8 <_rtld_global_ro@@GLIBC_PRIVATE+0x158>
+    0.00 :	  4adc:       mov    %rsi,0x223f25(%rip)        # 228a08 <_rtld_global@@GLIBC_PRIVATE+0x9a8>
+    0.00 :	  4ae3:       test   %rax,%rax
+    0.00 :	  4ae6:       je     4afa <free@plt+0x3bfa>
+    0.00 :	  4ae8:       cmp    %rax,0x18(%rcx)
+    0.00 :	  4aec:       jne    4afa <free@plt+0x3bfa>
+    0.00 :	  4aee:       cmp    %rsi,%rax
+    0.00 :	  4af1:       je     4afa <free@plt+0x3bfa>
+    0.00 :	  4af3:       mov    %rax,0x223f16(%rip)        # 228a10 <_rtld_global@@GLIBC_PRIVATE+0x9b0>
+    0.00 :	  4afa:       mov    0x223f0f(%rip),%rdx        # 228a10 <_rtld_global@@GLIBC_PRIVATE+0x9b0>
+    0.00 :	  4b01:       mov    0x223f00(%rip),%rax        # 228a08 <_rtld_global@@GLIBC_PRIVATE+0x9a8>
+    0.00 :	  4b08:       cmp    %rax,0x18(%rdx)
+    0.00 :	  4b0c:       jne    4e6c <free@plt+0x3f6c>
+    0.00 :	  4b12:       mov    -0x1a0(%rbp),%rax
+    0.00 :	  4b19:       mov    %rax,0x18(%rdx)
+    0.00 :	  4b1d:       mov    0x223ee4(%rip),%rax        # 228a08 <_rtld_global@@GLIBC_PRIVATE+0x9a8>
+    0.00 :	  4b24:       test   %rax,%rax
+    0.00 :	  4b27:       je     4e60 <free@plt+0x3f60>
+    0.00 :	  4b2d:       cmp    0x20(%rax),%rdx
+    0.00 :	  4b31:       jne    4e41 <free@plt+0x3f41>
+    0.00 :	  4b37:       mov    -0x1a0(%rbp),%rcx
+    0.00 :	  4b3e:       movb   $0x1,-0x1b8(%rbp)
+    0.00 :	  4b45:       mov    %rcx,0x20(%rax)
+    0.00 :	  4b49:       jmpq   3fa6 <free@plt+0x30a6>
+    0.00 :	  4b4e:       mov    0x18(%rcx),%rax
+    0.00 :	  4b52:       mov    %rax,0x223eaf(%rip)        # 228a08 <_rtld_global@@GLIBC_PRIVATE+0x9a8>
+    0.00 :	  4b59:       jmp    4afa <free@plt+0x3bfa>
+    0.00 :	  4b5b:       mov    %ebx,%eax
+    0.00 :	  4b5d:       lea    0x1e(,%rax,8),%rax
+    0.00 :	  4b65:       shr    $0x4,%rax
+    0.00 :	  4b69:       shl    $0x4,%rax
+    0.00 :	  4b6d:       sub    %rax,%rsp
+    0.00 :	  4b70:       xor    %eax,%eax
+    0.00 :	  4b72:       lea    0xf(%rsp),%rcx
+    0.00 :	  4b77:       and    $0xfffffffffffffff0,%rcx
+    0.00 :	  4b7b:       mov    %rcx,%rsi
+    0.00 :	  4b7e:       mov    %eax,%edi
+    0.00 :	  4b80:       add    $0x1,%eax
+    0.00 :	  4b83:       mov    %rdx,(%rcx,%rdi,8)
+    0.00 :	  4b87:       mov    0x18(%rdx),%rdx
+    0.00 :	  4b8b:       test   %rdx,%rdx
+    0.00 :	  4b8e:       jne    4b7e <free@plt+0x3c7e>
+    0.00 :	  4b90:       cmp    %eax,%ebx
+    0.00 :	  4b92:       je     3e7a <free@plt+0x2f7a>
+    0.00 :	  4b98:       lea    0x1db99(%rip),%rcx        # 22738 <_dl_catch_error@@GLIBC_PRIVATE+0x6a78>
+    0.00 :	  4b9f:       lea    0x1bdcc(%rip),%rsi        # 20972 <_dl_catch_error@@GLIBC_PRIVATE+0x4cb2>
+    0.00 :	  4ba6:       lea    0x1c073(%rip),%rdi        # 20c20 <_dl_catch_error@@GLIBC_PRIVATE+0x4f60>
+    0.00 :	  4bad:       mov    $0x6b7,%edx
+    0.00 :	  4bb2:       callq  1b790 <free@@GLIBC_2.2.5+0x170>
+    0.00 :	  4bb7:       mov    -0x1a8(%rbp),%rsi
+    0.00 :	  4bbe:       lea    0x1f20b(%rip),%rdi        # 23dd0 <_dl_catch_error@@GLIBC_PRIVATE+0x8110>
+    0.00 :	  4bc5:       mov    $0x3,%edx
+    0.00 :	  4bca:       callq  11470 <_dl_debug_state@@GLIBC_PRIVATE+0x6d0>
+    0.00 :	  4bcf:       cmp    $0xffffffffffffffff,%rax
+    0.00 :	  4bd3:       je     3e65 <free@plt+0x2f65>
+    0.00 :	  4bd9:       mov    -0x160(%rbp),%r12
+    0.00 :	  4be0:       mov    %rax,-0x140(%rbp)
+    0.00 :	  4be7:       mov    %ebx,%r13d
+    0.00 :	  4bea:       mov    %rax,-0x1a8(%rbp)
+    0.00 :	  4bf1:       test   %r12,%r12
+    0.00 :	  4bf4:       je     4c2f <free@plt+0x3d2f>
+    0.00 :	  4bf6:       mov    -0x140(%rbp),%rbx
+    0.00 :	  4bfd:       mov    %r12,%rdx
+    0.00 :	  4c00:       mov    $0x23,%esi
+    0.00 :	  4c05:       mov    %rbx,%rdi
+    0.00 :	  4c08:       callq  1e7a0 <_dl_catch_error@@GLIBC_PRIVATE+0x2ae0>
+    0.00 :	  4c0d:       test   %rax,%rax
+    0.00 :	  4c10:       je     4c2f <free@plt+0x3d2f>
+    0.00 :	  4c12:       mov    %rax,%rdx
+    0.00 :	  4c15:       sub    %rbx,%rdx
+    0.00 :	  4c18:       sub    %rdx,%r12
+    0.00 :	  4c1b:       sub    $0x1,%r12
+    0.00 :	  4c1f:       movb   $0x20,(%rax)
+    0.00 :	  4c22:       je     4c2f <free@plt+0x3d2f>
+    0.00 :	  4c24:       add    $0x1,%rax
+    0.00 :	  4c28:       cmpb   $0xa,(%rax)
+    0.00 :	  4c2b:       jne    4c1b <free@plt+0x3d1b>
+    0.00 :	  4c2d:       jmp    4bf1 <free@plt+0x3cf1>
+    0.00 :	  4c2f:       mov    %r13d,%ebx
+    0.00 :	  4c32:       mov    -0x160(%rbp),%rdx
+    0.00 :	  4c39:       mov    -0x1a8(%rbp),%r13
+    0.00 :	  4c40:       lea    -0x1(%r13,%rdx,1),%rax
+    0.00 :	  4c45:       movzbl (%rax),%esi
+    0.00 :	  4c48:       cmp    $0x3a,%sil
+    0.00 :	  4c4c:       ja     4f66 <free@plt+0x4066>
+    0.00 :	  4c52:       movabs $0x400000100000600,%rdi
+    0.00 :	  4c5c:       bt     %rsi,%rdi
+    0.00 :	  4c60:       jae    4f66 <free@plt+0x4066>
+    0.00 :	  4c66:       movb   $0x0,(%rax)
+    0.00 :	  4c69:       rdtsc
+    0.00 :	  4c6b:       shl    $0x20,%rdx
+    0.00 :	  4c6f:       mov    %eax,%eax
+    0.00 :	  4c71:       or     %rax,%rdx
+    0.00 :	  4c74:       cmp    %r13,%r15
+    0.00 :	  4c77:       mov    %rdx,-0x1b8(%rbp)
+    0.00 :	  4c7e:       je     4edb <free@plt+0x3fdb>
+    0.00 :	  4c84:       lea    -0x140(%rbp),%rax
+    0.00 :	  4c8b:       lea    0x1bf89(%rip),%r12        # 20c1b <_dl_catch_error@@GLIBC_PRIVATE+0x4f5b>
+    0.00 :	  4c92:       mov    %r13,-0x140(%rbp)
+    0.00 :	  4c99:       mov    %rax,-0x1a8(%rbp)
+    0.00 :	  4ca0:       mov    -0x1a8(%rbp),%rdi
+    0.00 :	  4ca7:       mov    %r12,%rsi
+    0.00 :	  4caa:       callq  1b930 <realloc@@GLIBC_2.2.5+0x150>
+    0.00 :	  4caf:       test   %rax,%rax
+    0.00 :	  4cb2:       je     4edb <free@plt+0x3fdb>
+    0.00 :	  4cb8:       cmpb   $0x0,(%rax)
+    0.00 :	  4cbb:       je     4ca0 <free@plt+0x3da0>
+    0.00 :	  4cbd:       lea    0x1f10c(%rip),%rdx        # 23dd0 <_dl_catch_error@@GLIBC_PRIVATE+0x8110>
+    0.00 :	  4cc4:       mov    %r14,%rsi
+    0.00 :	  4cc7:       mov    %rax,%rdi
+    0.00 :	  4cca:       callq  1230 <free@plt+0x330>
+    0.00 :	  4ccf:       add    %eax,%ebx
+    0.00 :	  4cd1:       jmp    4ca0 <free@plt+0x3da0>
+    0.00 :	  4cd3:       lea    0x1d96e(%rip),%rbx        # 22648 <_dl_catch_error@@GLIBC_PRIVATE+0x6988>
+    0.00 :	  4cda:       mov    $0x1,%r12d
+    0.00 :	  4ce0:       cmp    %r12d,0x222a61(%rip)        # 227748 <_dl_argv@@GLIBC_PRIVATE+0x8>
+    0.00 :	  4ce7:       jbe    4928 <free@plt+0x3a28>
+    0.00 :	  4ced:       mov    0x222a4c(%rip),%rax        # 227740 <_dl_argv@@GLIBC_PRIVATE>
+    0.00 :	  4cf4:       mov    %r12d,%r13d
+    0.00 :	  4cf7:       mov    0x380(%r14),%rcx
+    0.00 :	  4cfe:       mov    -0x1a8(%rbp),%rdx
+    0.00 :	  4d05:       movq   $0x0,-0x140(%rbp)
+    0.00 :	  4d10:       xor    %r8d,%r8d
+    0.00 :	  4d13:       mov    %r14,%rsi
+    0.00 :	  4d16:       mov    $0x1,%r9d
+    0.00 :	  4d1c:       mov    (%rax,%r13,8),%rdi
+    0.00 :	  4d20:       pushq  $0x0
+    0.00 :	  4d22:       pushq  $0x1
+    0.00 :	  4d24:       callq  b0b0 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1520>
+    0.00 :	  4d29:       test   %rax,%rax
+    0.00 :	  4d2c:       pop    %rsi
+    0.00 :	  4d2d:       pop    %rdi
+    0.00 :	  4d2e:       je     4df0 <free@plt+0x3ef0>
+    0.00 :	  4d34:       mov    (%rax),%rax
+    0.00 :	  4d37:       mov    -0x140(%rbp),%rcx
+    0.00 :	  4d3e:       mov    0x2229fb(%rip),%rdx        # 227740 <_dl_argv@@GLIBC_PRIVATE>
+    0.00 :	  4d45:       sub    $0x8,%rsp
+    0.00 :	  4d49:       mov    $0x10,%r9d
+    0.00 :	  4d4f:       mov    %rbx,%rsi
+    0.00 :	  4d52:       mov    $0x1,%edi
+    0.00 :	  4d57:       add    $0x1,%r12d
+    0.00 :	  4d5b:       mov    (%rdx,%r13,8),%rdx
+    0.00 :	  4d5f:       push   %rax
+    0.00 :	  4d60:       xor    %eax,%eax
+    0.00 :	  4d62:       mov    0x8(%rcx),%r8
+    0.00 :	  4d66:       mov    $0x10,%ecx
+    0.00 :	  4d6b:       callq  11660 <_dl_debug_state@@GLIBC_PRIVATE+0x8c0>
+    0.00 :	  4d70:       pop    %rdx
+    0.00 :	  4d71:       pop    %rcx
+    0.00 :	  4d72:       jmpq   4ce0 <free@plt+0x3de0>
+    0.00 :	  4d77:       cmpq   $0x0,0x48(%r14)
+    0.00 :	  4d7c:       je     4e29 <free@plt+0x3f29>
+    0.00 :	  4d82:       mov    0x18(%r14),%r12
+    0.00 :	  4d86:       lea    0x1bf2c(%rip),%rbx        # 20cb9 <_dl_catch_error@@GLIBC_PRIVATE+0x4ff9>
+    0.00 :	  4d8d:       test   %r12,%r12
+    0.00 :	  4d90:       je     4748 <free@plt+0x3848>
+    0.00 :	  4d96:       testb  $0x2,0x315(%r12)
+    0.00 :	  4d9f:       mov    0x38(%r12),%rax
+    0.00 :	  4da4:       mov    (%rax),%rdx
+    0.00 :	  4da7:       jne    4e14 <free@plt+0x3f14>
+    0.00 :	  4da9:       mov    0x8(%r12),%r13
+    0.00 :	  4dae:       mov    %rdx,%rdi
+    0.00 :	  4db1:       mov    %rdx,-0x1c8(%rbp)
+    0.00 :	  4db8:       mov    %r13,%rsi
+    0.00 :	  4dbb:       callq  1d360 <_dl_catch_error@@GLIBC_PRIVATE+0x16a0>
+    0.00 :	  4dc0:       test   %eax,%eax
+    0.00 :	  4dc2:       mov    0x340(%r12),%r8
+    0.00 :	  4dca:       mov    -0x1c8(%rbp),%rdx
+    0.00 :	  4dd1:       jne    4df7 <free@plt+0x3ef7>
+    0.00 :	  4dd3:       lea    0x1bed0(%rip),%rsi        # 20caa <_dl_catch_error@@GLIBC_PRIVATE+0x4fea>
+    0.00 :	  4dda:       mov    $0x10,%ecx
+    0.00 :	  4ddf:       mov    $0x1,%edi
+    0.00 :	  4de4:       callq  11660 <_dl_debug_state@@GLIBC_PRIVATE+0x8c0>
+    0.00 :	  4de9:       mov    0x18(%r12),%r12
+    0.00 :	  4dee:       jmp    4d8d <free@plt+0x3e8d>
+    0.00 :	  4df0:       xor    %eax,%eax
+    0.00 :	  4df2:       jmpq   4d37 <free@plt+0x3e37>
+    0.00 :	  4df7:       mov    %r8,%r9
+    0.00 :	  4dfa:       mov    %r13,%rcx
+    0.00 :	  4dfd:       mov    $0x10,%r8d
+    0.00 :	  4e03:       mov    %rbx,%rsi
+    0.00 :	  4e06:       mov    $0x1,%edi
+    0.00 :	  4e0b:       xor    %eax,%eax
+    0.00 :	  4e0d:       callq  11660 <_dl_debug_state@@GLIBC_PRIVATE+0x8c0>
+    0.00 :	  4e12:       jmp    4de9 <free@plt+0x3ee9>
+    0.00 :	  4e14:       lea    0x1be14(%rip),%rsi        # 20c2f <_dl_catch_error@@GLIBC_PRIVATE+0x4f6f>
+    0.00 :	  4e1b:       mov    $0x1,%edi
+    0.00 :	  4e20:       xor    %eax,%eax
+    0.00 :	  4e22:       callq  11660 <_dl_debug_state@@GLIBC_PRIVATE+0x8c0>
+    0.00 :	  4e27:       jmp    4de9 <free@plt+0x3ee9>
+    0.00 :	  4e29:       lea    0x1be66(%rip),%rsi        # 20c96 <_dl_catch_error@@GLIBC_PRIVATE+0x4fd6>
+    0.00 :	  4e30:       mov    $0x1,%edi
+    0.00 :	  4e35:       xor    %eax,%eax
+    0.00 :	  4e37:       callq  11660 <_dl_debug_state@@GLIBC_PRIVATE+0x8c0>
+    0.00 :	  4e3c:       jmpq   4748 <free@plt+0x3848>
+    0.00 :	  4e41:       lea    0x1d8f0(%rip),%rcx        # 22738 <_dl_catch_error@@GLIBC_PRIVATE+0x6a78>
+    0.00 :	  4e48:       lea    0x1bb23(%rip),%rsi        # 20972 <_dl_catch_error@@GLIBC_PRIVATE+0x4cb2>
+    0.00 :	  4e4f:       lea    0x1d7b2(%rip),%rdi        # 22608 <_dl_catch_error@@GLIBC_PRIVATE+0x6948>
+    0.00 :	  4e56:       mov    $0x6f2,%edx
+    0.00 :	  4e5b:       callq  1b790 <free@@GLIBC_2.2.5+0x170>
+    0.00 :	  4e60:       movb   $0x1,-0x1b8(%rbp)
+    0.00 :	  4e67:       jmpq   3fa6 <free@plt+0x30a6>
+    0.00 :	  4e6c:       lea    0x1d8c5(%rip),%rcx        # 22738 <_dl_catch_error@@GLIBC_PRIVATE+0x6a78>
+    0.00 :	  4e73:       lea    0x1baf8(%rip),%rsi        # 20972 <_dl_catch_error@@GLIBC_PRIVATE+0x4cb2>
+    0.00 :	  4e7a:       lea    0x1d747(%rip),%rdi        # 225c8 <_dl_catch_error@@GLIBC_PRIVATE+0x6908>
+    0.00 :	  4e81:       mov    $0x6ee,%edx
+    0.00 :	  4e86:       callq  1b790 <free@@GLIBC_2.2.5+0x170>
+    0.00 :	  4e8b:       mov    0x18(%r13),%r13
+    0.00 :	  4e8f:       cmp    %r13,0x222a22(%rip)        # 2278b8 <_rtld_global_ro@@GLIBC_PRIVATE+0x158>
+    0.00 :	  4e96:       jne    4e9c <free@plt+0x3f9c>
+    0.00 :	  4e98:       mov    0x18(%r13),%r13
+    0.00 :	  4e9c:       cmpl   $0x0,0x3cc(%r13)
+    0.00 :	  4ea4:       jne    4aa2 <free@plt+0x3ba2>
+    0.00 :	  4eaa:       test   %al,%al
+    0.00 :	  4eac:       je     4ec1 <free@plt+0x3fc1>
+    0.00 :	  4eae:       lea    0x1bdbf(%rip),%rsi        # 20c74 <_dl_catch_error@@GLIBC_PRIVATE+0x4fb4>
+    0.00 :	  4eb5:       mov    $0x1,%edi
+    0.00 :	  4eba:       xor    %eax,%eax
+    0.00 :	  4ebc:       callq  11660 <_dl_debug_state@@GLIBC_PRIVATE+0x8c0>
+    0.00 :	  4ec1:       mov    0x8(%r13),%rdx
+    0.00 :	  4ec5:       xor    %eax,%eax
+    0.00 :	  4ec7:       mov    %r12,%rsi
+    0.00 :	  4eca:       mov    $0x1,%edi
+    0.00 :	  4ecf:       callq  11660 <_dl_debug_state@@GLIBC_PRIVATE+0x8c0>
+    0.00 :	  4ed4:       xor    %eax,%eax
+    0.00 :	  4ed6:       jmpq   4aa2 <free@plt+0x3ba2>
+    0.00 :	  4edb:       test   %r15,%r15
+    0.00 :	  4ede:       mov    -0x160(%rbp),%rsi
+    0.00 :	  4ee5:       je     4f36 <free@plt+0x4036>
+    0.00 :	  4ee7:       mov    %r15,%rax
+    0.00 :	  4eea:       mov    %r15,%rdi
+    0.00 :	  4eed:       sub    %r13,%rax
+    0.00 :	  4ef0:       sub    %rax,%rsi
+    0.00 :	  4ef3:       callq  1f490 <_dl_catch_error@@GLIBC_PRIVATE+0x37d0>
+    0.00 :	  4ef8:       lea    0x1f(%rax),%rdx
+    0.00 :	  4efc:       mov    %r15,%rsi
+    0.00 :	  4eff:       and    $0xfffffffffffffff0,%rdx
+    0.00 :	  4f03:       sub    %rdx,%rsp
+    0.00 :	  4f06:       mov    %rax,%rdx
+    0.00 :	  4f09:       lea    0xf(%rsp),%rdi
+    0.00 :	  4f0e:       and    $0xfffffffffffffff0,%rdi
+    0.00 :	  4f12:       movb   $0x0,(%rdi,%rax,1)
+    0.00 :	  4f16:       callq  1f840 <_dl_catch_error@@GLIBC_PRIVATE+0x3b80>
+    0.00 :	  4f1b:       lea    0x1eeae(%rip),%rdx        # 23dd0 <_dl_catch_error@@GLIBC_PRIVATE+0x8110>
+    0.00 :	  4f22:       mov    %r14,%rsi
+    0.00 :	  4f25:       mov    %rax,%rdi
+    0.00 :	  4f28:       callq  1230 <free@plt+0x330>
+    0.00 :	  4f2d:       mov    -0x160(%rbp),%rsi
+    0.00 :	  4f34:       add    %eax,%ebx
+    0.00 :	  4f36:       rdtsc
+    0.00 :	  4f38:       shl    $0x20,%rdx
+    0.00 :	  4f3c:       mov    %eax,%eax
+    0.00 :	  4f3e:       mov    %r13,%rdi
+    0.00 :	  4f41:       or     %rdx,%rax
+    0.00 :	  4f44:       mov    0x2227dd(%rip),%rdx        # 227728 <_dl_catch_error@@GLIBC_PRIVATE+0x20ba68>
+    0.00 :	  4f4b:       sub    -0x1b8(%rbp),%rdx
+    0.00 :	  4f52:       add    %rdx,%rax
+    0.00 :	  4f55:       mov    %rax,0x2227cc(%rip)        # 227728 <_dl_catch_error@@GLIBC_PRIVATE+0x20ba68>
+    0.00 :	  4f5c:       callq  1cfd0 <_dl_catch_error@@GLIBC_PRIVATE+0x1310>
+    0.00 :	  4f61:       jmpq   3e65 <free@plt+0x2f65>
+    0.00 :	  4f66:       lea    0x0(%r13,%rdx,1),%r15
+    0.00 :	  4f6b:       movabs $0x400000100000600,%rdx
+    0.00 :	  4f75:       cmp    %r13,%r15
+    0.00 :	  4f78:       jbe    4c69 <free@plt+0x3d69>
+    0.00 :	  4f7e:       movzbl -0x1(%r15),%eax
+    0.00 :	  4f83:       cmp    $0x3a,%al
+    0.00 :	  4f85:       ja     4f8d <free@plt+0x408d>
+    0.00 :	  4f87:       bt     %rax,%rdx
+    0.00 :	  4f8b:       jb     4f93 <free@plt+0x4093>
+    0.00 :	  4f8d:       sub    $0x1,%r15
+    0.00 :	  4f91:       jmp    4f75 <free@plt+0x4075>
+    0.00 :	  4f93:       movb   $0x0,-0x1(%r15)
+    0.00 :	  4f98:       jmpq   4c69 <free@plt+0x3d69>
+    0.00 :	  4f9d:       mov    0x222964(%rip),%r12        # 227908 <_rtld_global_ro@@GLIBC_PRIVATE+0x1a8>
+    0.00 :	  4fa4:       xor    %ebx,%ebx
+    0.00 :	  4fa6:       cmp    %ebx,0x222964(%rip)        # 227910 <_rtld_global_ro@@GLIBC_PRIVATE+0x1b0>
+    0.00 :	  4fac:       jbe    3e00 <free@plt+0x2f00>
+    0.00 :	  4fb2:       mov    (%r12),%rax
+    0.00 :	  4fb6:       test   %rax,%rax
+    0.00 :	  4fb9:       je     4fcf <free@plt+0x40cf>
+    0.00 :	  4fbb:       mov    %ebx,%edi
+    0.00 :	  4fbd:       mov    $0x1,%esi
+    0.00 :	  4fc2:       add    $0x47,%rdi
+    0.00 :	  4fc6:       shl    $0x4,%rdi
+    0.00 :	  4fca:       add    %r14,%rdi
+    0.00 :	  4fcd:       callq  *%rax
+    0.00 :	  4fcf:       mov    0x40(%r12),%r12
+    0.00 :	  4fd4:       add    $0x1,%ebx
+    0.00 :	  4fd7:       jmp    4fa6 <free@plt+0x40a6>
+    0.00 :	  4fd9:       mov    %rax,-0x140(%rbp)
+    0.00 :	  4fe0:       movq   $0x0,-0x138(%rbp)
+    0.00 :	  4feb:       callq  f10 <free@plt+0x10>
+    0.00 :	  4ff0:       mov    0x222e59(%rip),%rdx        # 227e50 <_rtld_global_ro@@GLIBC_PRIVATE+0x6f0>
+    0.00 :	  4ff7:       mov    %rax,-0x1b0(%rbp)
+    0.00 :	  4ffe:       mov    (%rdx),%rax
+    0.00 :	  5001:       xor    %al,%al
+    0.00 :	  5003:       mov    %rax,%fs:0x28
+    0.00 :	  500c:       mov    0x8(%rdx),%rax
+    0.00 :	  5010:       mov    %rax,%fs:0x30
+    0.00 :	  5019:       movq   $0x0,0x222e2c(%rip)        # 227e50 <_rtld_global_ro@@GLIBC_PRIVATE+0x6f0>
+    0.00 :	  5024:       mov    %rax,0x222705(%rip)        # 227730 <_dl_catch_error@@GLIBC_PRIVATE+0x20ba70>
+    0.00 :	  502b:       movq   $0x0,-0x1b8(%rbp)
+    0.00 :	  5036:       mov    %r15,-0x1d0(%rbp)
+    0.00 :	  503d:       mov    %r14,-0x1d8(%rbp)
+    0.00 :	  5044:       mov    -0x140(%rbp),%r12
+    0.00 :	  504b:       lea    -0x140(%rbp),%rbx
+    0.00 :	  5052:       test   %r12,%r12
+    0.00 :	  5055:       je     5212 <free@plt+0x4312>
+    0.00 :	  505b:       cmpb   $0x0,(%r12)
+    0.00 :	  5060:       je     5212 <free@plt+0x4312>
+    0.00 :	  5066:       lea    0x1b975(%rip),%rsi        # 209e2 <_dl_catch_error@@GLIBC_PRIVATE+0x4d22>
+    0.00 :	  506d:       mov    %r12,%rdi
+    0.00 :	  5070:       callq  1f790 <_dl_catch_error@@GLIBC_PRIVATE+0x3ad0>
+    0.00 :	  5075:       mov    %rax,%r13
+    0.00 :	  5078:       lea    -0x1(%rax),%rax
+    0.00 :	  507c:       cmp    $0xfd,%rax
+    0.00 :	  5082:       jbe    51f5 <free@plt+0x42f5>
+    0.00 :	  5088:       movb   $0x0,-0x130(%rbp)
+    0.00 :	  508f:       add    %r13,%r12
+    0.00 :	  5092:       mov    %r12,-0x140(%rbp)
+    0.00 :	  5099:       cmpb   $0x3a,(%r12)
+    0.00 :	  509e:       jne    50ab <free@plt+0x41ab>
+    0.00 :	  50a0:       add    $0x1,%r12
+    0.00 :	  50a4:       mov    %r12,-0x140(%rbp)
+    0.00 :	  50ab:       mov    0x222dae(%rip),%r11d        # 227e60 <__libc_enable_secure@@GLIBC_PRIVATE>
+    0.00 :	  50b2:       test   %r11d,%r11d
+    0.00 :	  50b5:       jne    5270 <free@plt+0x4370>
+    0.00 :	  50bb:       cmpb   $0x0,-0x130(%rbp)
+    0.00 :	  50c2:       je     505b <free@plt+0x415b>
+    0.00 :	  50c4:       lea    -0x130(%rbp),%rbx
+    0.00 :	  50cb:       mov    0x223eae(%rip),%rax        # 228f80 <_rtld_global@@GLIBC_PRIVATE+0xf20>
+    0.00 :	  50d2:       lea    -0x189(%rbp),%r15
+    0.00 :	  50d9:       lea    -0x180(%rbp),%r13
+    0.00 :	  50e0:       lea    -0x188(%rbp),%r12
+    0.00 :	  50e7:       lea    -0x170(%rbp),%r8
+    0.00 :	  50ee:       lea    -0x3f95(%rip),%rcx        # 1160 <free@plt+0x260>
+    0.00 :	  50f5:       mov    %r15,%rdx
+    0.00 :	  50f8:       mov    %r13,%rsi
+    0.00 :	  50fb:       mov    %rbx,-0x170(%rbp)
+    0.00 :	  5102:       mov    %r12,%rdi
+    0.00 :	  5105:       mov    %rax,%r14
+    0.00 :	  5108:       movq   $0x0,-0x168(%rbp)
+    0.00 :	  5113:       movq   $0x0,-0x180(%rbp)
+    0.00 :	  511e:       callq  ef0 <_dl_catch_error@plt>
+    0.00 :	  5123:       cmpq   $0x0,-0x180(%rbp)
+    0.00 :	  512b:       jne    51ba <free@plt+0x42ba>
+    0.00 :	  5131:       lea    0x1baac(%rip),%rax        # 20be4 <_dl_catch_error@@GLIBC_PRIVATE+0x4f24>
+    0.00 :	  5138:       mov    -0x1a8(%rbp),%r8
+    0.00 :	  513f:       lea    -0x4046(%rip),%rcx        # 1100 <free@plt+0x200>
+    0.00 :	  5146:       mov    %r15,%rdx
+    0.00 :	  5149:       mov    %r13,%rsi
+    0.00 :	  514c:       mov    %r12,%rdi
+    0.00 :	  514f:       mov    %rax,-0x160(%rbp)
+    0.00 :	  5156:       mov    -0x168(%rbp),%rax
+    0.00 :	  515d:       mov    %rax,-0x158(%rbp)
+    0.00 :	  5164:       callq  ef0 <_dl_catch_error@plt>
+    0.00 :	  5169:       cmpq   $0x0,-0x180(%rbp)
+    0.00 :	  5171:       je     52e0 <free@plt+0x43e0>
+    0.00 :	  5177:       mov    -0x168(%rbp),%rdi
+    0.00 :	  517e:       mov    0x30(%rdi),%r12
+    0.00 :	  5182:       callq  16a20 <_dl_find_dso_for_object@@GLIBC_PRIVATE+0x23e0>
+    0.00 :	  5187:       lea    0x222ed2(%rip),%rcx        # 228060 <_rtld_global@@GLIBC_PRIVATE>
+    0.00 :	  518e:       lea    (%r12,%r12,8),%rax
+    0.00 :	  5192:       shl    $0x4,%rax
+    0.00 :	  5196:       add    %rcx,%rax
+    0.00 :	  5199:       cmpq   $0x0,(%rax)
+    0.00 :	  519d:       jne    5420 <free@plt+0x4520>
+    0.00 :	  51a3:       mov    0x8(%rax),%r10d
+    0.00 :	  51a7:       test   %r10d,%r10d
+    0.00 :	  51aa:       jne    5401 <free@plt+0x4501>
+    0.00 :	  51b0:       movslq %r14d,%rax
+    0.00 :	  51b3:       mov    %rax,0x223dc6(%rip)        # 228f80 <_rtld_global@@GLIBC_PRIVATE+0xf20>
+    0.00 :	  51ba:       mov    -0x180(%rbp),%rcx
+    0.00 :	  51c1:       lea    0x1d368(%rip),%rsi        # 22530 <_dl_catch_error@@GLIBC_PRIVATE+0x6870>
+    0.00 :	  51c8:       xor    %eax,%eax
+    0.00 :	  51ca:       mov    %rbx,%rdx
+    0.00 :	  51cd:       mov    $0x2,%edi
+    0.00 :	  51d2:       callq  11660 <_dl_debug_state@@GLIBC_PRIVATE+0x8c0>
+    0.00 :	  51d7:       cmpb   $0x0,-0x189(%rbp)
+    0.00 :	  51de:       je     5044 <free@plt+0x4144>
+    0.00 :	  51e4:       mov    -0x180(%rbp),%rdi
+    0.00 :	  51eb:       callq  f00 <free@plt>
+    0.00 :	  51f0:       jmpq   5044 <free@plt+0x4144>
+    0.00 :	  51f5:       lea    0x10(%rbx),%rdi
+    0.00 :	  51f9:       mov    %r13,%rdx
+    0.00 :	  51fc:       mov    %r12,%rsi
+    0.00 :	  51ff:       callq  1f840 <_dl_catch_error@@GLIBC_PRIVATE+0x3b80>
+    0.00 :	  5204:       movb   $0x0,-0x130(%rbp,%r13,1)
+    0.00 :	  520d:       jmpq   508f <free@plt+0x418f>
+    0.00 :	  5212:       mov    -0x138(%rbp),%rax
+    0.00 :	  5219:       mov    0x223e28(%rip),%rdx        # 229048 <_rtld_global@@GLIBC_PRIVATE+0xfe8>
+    0.00 :	  5220:       test   %rax,%rax
+    0.00 :	  5223:       je     57ab <free@plt+0x48ab>
+    0.00 :	  5229:       cmp    %rdx,%rax
+    0.00 :	  522c:       je     5245 <free@plt+0x4345>
+    0.00 :	  522e:       mov    0x8(%rax),%rax
+    0.00 :	  5232:       mov    (%rax),%rbx
+    0.00 :	  5235:       mov    %rax,-0x138(%rbp)
+    0.00 :	  523c:       test   %rbx,%rbx
+    0.00 :	  523f:       jne    50cb <free@plt+0x41cb>
+    0.00 :	  5245:       cmpl   $0x0,0x2226c4(%rip)        # 227910 <_rtld_global_ro@@GLIBC_PRIVATE+0x1b0>
+    0.00 :	  524c:       mov    -0x1d0(%rbp),%r15
+    0.00 :	  5253:       mov    -0x1d8(%rbp),%r14
+    0.00 :	  525a:       jne    57c7 <free@plt+0x48c7>
+    0.00 :	  5260:       movb   $0x0,-0x1d0(%rbp)
+    0.00 :	  5267:       jmpq   3da5 <free@plt+0x2ea5>
+    0.00 :	  526c:       nopl   0x0(%rax)
+    0.00 :	  5270:       lea    0x10(%rbx),%rsi
+    0.00 :	  5274:       mov    %rsi,%rdx
+    0.00 :	  5277:       mov    (%rdx),%ecx
+    0.00 :	  5279:       add    $0x4,%rdx
+    0.00 :	  527d:       lea    -0x1010101(%rcx),%eax
+    0.00 :	  5283:       not    %ecx
+    0.00 :	  5285:       and    %ecx,%eax
+    0.00 :	  5287:       and    $0x80808080,%eax
+    0.00 :	  528c:       je     5277 <free@plt+0x4377>
+    0.00 :	  528e:       mov    %eax,%ecx
+    0.00 :	  5290:       shr    $0x10,%ecx
+    0.00 :	  5293:       test   $0x8080,%eax
+    0.00 :	  5298:       cmove  %ecx,%eax
+    0.00 :	  529b:       lea    0x2(%rdx),%rcx
+    0.00 :	  529f:       cmove  %rcx,%rdx
+    0.00 :	  52a3:       mov    %eax,%ecx
+    0.00 :	  52a5:       add    %al,%cl
+    0.00 :	  52a7:       sbb    $0x3,%rdx
+    0.00 :	  52ab:       sub    %rsi,%rdx
+    0.00 :	  52ae:       cmp    $0xfe,%rdx
+    0.00 :	  52b5:       ja     505b <free@plt+0x415b>
+    0.00 :	  52bb:       lea    0x10(%rbx),%rdi
+    0.00 :	  52bf:       mov    $0x2f,%esi
+    0.00 :	  52c4:       callq  1e7a0 <_dl_catch_error@@GLIBC_PRIVATE+0x2ae0>
+    0.00 :	  52c9:       test   %rax,%rax
+    0.00 :	  52cc:       jne    505b <free@plt+0x415b>
+    0.00 :	  52d2:       jmpq   50bb <free@plt+0x41bb>
+    0.00 :	  52d7:       nopw   0x0(%rax,%rax,1)
+    0.00 :	  52e0:       mov    -0x150(%rbp),%rax
+    0.00 :	  52e7:       test   %rax,%rax
+    0.00 :	  52ea:       je     5177 <free@plt+0x4277>
+    0.00 :	  52f0:       mov    $0x1,%edi
+    0.00 :	  52f5:       callq  *%rax
+    0.00 :	  52f7:       cmp    $0x1,%eax
+    0.00 :	  52fa:       jne    5177 <free@plt+0x4277>
+    0.00 :	  5300:       mov    $0x48,%edi
+    0.00 :	  5305:       xor    %r14d,%r14d
+    0.00 :	  5308:       callq  ea0 <malloc@plt>
+    0.00 :	  530d:       lea    0x1ac8c(%rip),%r10        # 1ffa0 <_dl_catch_error@@GLIBC_PRIVATE+0x42e0>
+    0.00 :	  5314:       mov    %rax,%rbx
+    0.00 :	  5317:       mov    -0x1a8(%rbp),%r8
+    0.00 :	  531e:       lea    -0x4225(%rip),%rcx        # 1100 <free@plt+0x200>
+    0.00 :	  5325:       mov    %r15,%rdx
+    0.00 :	  5328:       mov    %r13,%rsi
+    0.00 :	  532b:       mov    %r12,%rdi
+    0.00 :	  532e:       mov    %r10,-0x160(%rbp)
+    0.00 :	  5335:       mov    %r10,-0x1e0(%rbp)
+    0.00 :	  533c:       callq  ef0 <_dl_catch_error@plt>
+    0.00 :	  5341:       xor    %ecx,%ecx
+    0.00 :	  5343:       cmpq   $0x0,-0x180(%rbp)
+    0.00 :	  534b:       mov    %r14d,%edx
+    0.00 :	  534e:       mov    -0x1e0(%rbp),%r10
+    0.00 :	  5355:       je     588f <free@plt+0x498f>
+    0.00 :	  535b:       xor    %esi,%esi
+    0.00 :	  535d:       mov    %r10,%rdi
+    0.00 :	  5360:       mov    %rcx,(%rbx,%rdx,8)
+    0.00 :	  5364:       callq  1ead0 <_dl_catch_error@@GLIBC_PRIVATE+0x2e10>
+    0.00 :	  5369:       add    $0x1,%r14d
+    0.00 :	  536d:       cmpb   $0x0,0x1(%rax)
+    0.00 :	  5371:       lea    0x1(%rax),%r10
+    0.00 :	  5375:       jne    5317 <free@plt+0x4417>
+    0.00 :	  5377:       cmp    $0x8,%r14d
+    0.00 :	  537b:       jne    58d8 <free@plt+0x49d8>
+    0.00 :	  5381:       cmpq   $0x0,-0x1b8(%rbp)
+    0.00 :	  5389:       movq   $0x0,0x40(%rbx)
+    0.00 :	  5391:       je     58cc <free@plt+0x49cc>
+    0.00 :	  5397:       mov    -0x1b8(%rbp),%rax
+    0.00 :	  539e:       mov    %rbx,0x40(%rax)
+    0.00 :	  53a2:       mov    -0x168(%rbp),%rax
+    0.00 :	  53a9:       addl   $0x1,0x222560(%rip)        # 227910 <_rtld_global_ro@@GLIBC_PRIVATE+0x1b0>
+    0.00 :	  53b0:       orb    $0x8,0x315(%rax)
+    0.00 :	  53b7:       mov    %rbx,-0x1b8(%rbp)
+    0.00 :	  53be:       jmpq   5044 <free@plt+0x4144>
+    0.00 :	  53c3:       lea    0x1d36e(%rip),%rcx        # 22738 <_dl_catch_error@@GLIBC_PRIVATE+0x6a78>
+    0.00 :	  53ca:       lea    0x1b5a1(%rip),%rsi        # 20972 <_dl_catch_error@@GLIBC_PRIVATE+0x4cb2>
+    0.00 :	  53d1:       lea    0x1d128(%rip),%rdi        # 22500 <_dl_catch_error@@GLIBC_PRIVATE+0x6840>
+    0.00 :	  53d8:       mov    $0x555,%edx
+    0.00 :	  53dd:       callq  1b790 <free@@GLIBC_2.2.5+0x170>
+    0.00 :	  53e2:       lea    0x1d34f(%rip),%rcx        # 22738 <_dl_catch_error@@GLIBC_PRIVATE+0x6a78>
+    0.00 :	  53e9:       lea    0x1b582(%rip),%rsi        # 20972 <_dl_catch_error@@GLIBC_PRIVATE+0x4cb2>
+    0.00 :	  53f0:       lea    0x1d0d9(%rip),%rdi        # 224d0 <_dl_catch_error@@GLIBC_PRIVATE+0x6810>
+    0.00 :	  53f7:       mov    $0x554,%edx
+    0.00 :	  53fc:       callq  1b790 <free@@GLIBC_2.2.5+0x170>
+    0.00 :	  5401:       lea    0x1d330(%rip),%rcx        # 22738 <_dl_catch_error@@GLIBC_PRIVATE+0x6a78>
+    0.00 :	  5408:       lea    0x1b563(%rip),%rsi        # 20972 <_dl_catch_error@@GLIBC_PRIVATE+0x4cb2>
+    0.00 :	  540f:       lea    0x1d192(%rip),%rdi        # 225a8 <_dl_catch_error@@GLIBC_PRIVATE+0x68e8>
+    0.00 :	  5416:       mov    $0x5fd,%edx
+    0.00 :	  541b:       callq  1b790 <free@@GLIBC_2.2.5+0x170>
+    0.00 :	  5420:       lea    0x1d311(%rip),%rcx        # 22738 <_dl_catch_error@@GLIBC_PRIVATE+0x6a78>
+    0.00 :	  5427:       lea    0x1b544(%rip),%rsi        # 20972 <_dl_catch_error@@GLIBC_PRIVATE+0x4cb2>
+    0.00 :	  542e:       lea    0x1d14b(%rip),%rdi        # 22580 <_dl_catch_error@@GLIBC_PRIVATE+0x68c0>
+    0.00 :	  5435:       mov    $0x5fc,%edx
+    0.00 :	  543a:       callq  1b790 <free@@GLIBC_2.2.5+0x170>
+    0.00 :	  543f:       mov    0x418(%r14),%rax
+    0.00 :	  5446:       xor    %r12d,%r12d
+    0.00 :	  5449:       test   %rax,%rax
+    0.00 :	  544c:       jne    3040 <free@plt+0x2140>
+    0.00 :	  5452:       jmpq   3054 <free@plt+0x2154>
+    0.00 :	  5457:       lea    0x1d2da(%rip),%rcx        # 22738 <_dl_catch_error@@GLIBC_PRIVATE+0x6a78>
+    0.00 :	  545e:       lea    0x1b50d(%rip),%rsi        # 20972 <_dl_catch_error@@GLIBC_PRIVATE+0x4cb2>
+    0.00 :	  5465:       lea    0x1cfa4(%rip),%rdi        # 22410 <_dl_catch_error@@GLIBC_PRIVATE+0x6750>
+    0.00 :	  546c:       mov    $0x45e,%edx
+    0.00 :	  5471:       callq  1b790 <free@@GLIBC_2.2.5+0x170>
+    0.00 :	  5476:       lea    0x1d2bb(%rip),%rcx        # 22738 <_dl_catch_error@@GLIBC_PRIVATE+0x6a78>
+    0.00 :	  547d:       lea    0x1b4ee(%rip),%rsi        # 20972 <_dl_catch_error@@GLIBC_PRIVATE+0x4cb2>
+    0.00 :	  5484:       lea    0x1b6a2(%rip),%rdi        # 20b2d <_dl_catch_error@@GLIBC_PRIVATE+0x4e6d>
+    0.00 :	  548b:       mov    $0x456,%edx
+    0.00 :	  5490:       callq  1b790 <free@@GLIBC_2.2.5+0x170>
+    0.00 :	  5495:       lea    0x1b676(%rip),%rbx        # 20b12 <_dl_catch_error@@GLIBC_PRIVATE+0x4e52>
+    0.00 :	  549c:       nopl   0x0(%rax)
+    0.00 :	  54a0:       mov    %rbx,%rsi
+    0.00 :	  54a3:       mov    $0x2,%edi
+    0.00 :	  54a8:       xor    %eax,%eax
+    0.00 :	  54aa:       callq  11660 <_dl_debug_state@@GLIBC_PRIVATE+0x8c0>
+    0.00 :	  54af:       mov    $0x7f,%edi
+    0.00 :	  54b4:       callq  1d030 <_dl_catch_error@@GLIBC_PRIVATE+0x1370>
+    0.00 :	  54b9:       jmp    54a0 <free@plt+0x45a0>
+    0.00 :	  54bb:       mov    -0x1a8(%rbp),%rsi
+    0.00 :	  54c2:       lea    -0x180(%rbp),%rdx
+    0.00 :	  54c9:       lea    -0x170(%rbp),%rdi
+    0.00 :	  54d0:       lea    -0x140(%rbp),%r8
+    0.00 :	  54d7:       lea    -0x41fe(%rip),%rcx        # 12e0 <free@plt+0x3e0>
+    0.00 :	  54de:       movq   $0x0,-0x160(%rbp)
+    0.00 :	  54e9:       mov    %r10,-0x140(%rbp)
+    0.00 :	  54f0:       movq   $0x0,-0x138(%rbp)
+    0.00 :	  54fb:       movl   $0x20000000,-0x130(%rbp)
+    0.00 :	  5505:       callq  ef0 <_dl_catch_error@plt>
+    0.00 :	  550a:       cmpq   $0x0,-0x160(%rbp)
+    0.00 :	  5512:       je     551e <free@plt+0x461e>
+    0.00 :	  5514:       mov    $0x1,%edi
+    0.00 :	  5519:       callq  1d030 <_dl_catch_error@@GLIBC_PRIVATE+0x1370>
+    0.00 :	  551e:       mov    0x222b3b(%rip),%r14        # 228060 <_rtld_global@@GLIBC_PRIVATE>
+    0.00 :	  5525:       jmpq   2e02 <free@plt+0x1f02>
+    0.00 :	  552a:       lea    0x1a92f(%rip),%r14        # 1fe60 <_dl_catch_error@@GLIBC_PRIVATE+0x41a0>
+    0.00 :	  5531:       mov    %r14,%rdi
+    0.00 :	  5534:       callq  1b440 <__get_cpu_features@@GLIBC_PRIVATE+0x1a10>
+    0.00 :	  5539:       mov    %r14,%rdi
+    0.00 :	  553c:       callq  1f2f0 <_dl_catch_error@@GLIBC_PRIVATE+0x3630>
+    0.00 :	  5541:       add    %r14,%rax
+    0.00 :	  5544:       cmpb   $0x0,0x1(%rax)
+    0.00 :	  5548:       lea    0x1(%rax),%r14
+    0.00 :	  554c:       jne    5531 <free@plt+0x4631>
+    0.00 :	  554e:       lea    0x1b566(%rip),%rdi        # 20abb <_dl_catch_error@@GLIBC_PRIVATE+0x4dfb>
+    0.00 :	  5555:       xor    %esi,%esi
+    0.00 :	  5557:       callq  1ce20 <_dl_catch_error@@GLIBC_PRIVATE+0x1160>
+    0.00 :	  555c:       test   %eax,%eax
+    0.00 :	  555e:       je     556a <free@plt+0x466a>
+    0.00 :	  5560:       movl   $0x0,0x2221f6(%rip)        # 227760 <_rtld_global_ro@@GLIBC_PRIVATE>
+    0.00 :	  556a:       cmpl   $0x0,-0x198(%rbp)
+    0.00 :	  5571:       je     2ad9 <free@plt+0x1bd9>
+    0.00 :	  5577:       mov    $0x5,%edi
+    0.00 :	  557c:       callq  1d030 <_dl_catch_error@@GLIBC_PRIVATE+0x1370>
+    0.00 :	  5581:       jmpq   2ad9 <free@plt+0x1bd9>
+    0.00 :	  5586:       cmpb   $0x47,0x4(%r15)
+    0.00 :	  558b:       jne    2a85 <free@plt+0x1b85>
+    0.00 :	  5591:       lea    0x6(%r15),%rdi
+    0.00 :	  5595:       callq  1a20 <free@plt+0xb20>
+    0.00 :	  559a:       jmpq   2702 <free@plt+0x1802>
+    0.00 :	  559f:       cmpw   $0x534f,0x4(%r15)
+    0.00 :	  55a6:       jne    2a1d <free@plt+0x1b1d>
+    0.00 :	  55ac:       cmpb   $0x45,0x6(%r15)
+    0.00 :	  55b1:       jne    2a1d <free@plt+0x1b1d>
+    0.00 :	  55b7:       xor    %eax,%eax
+    0.00 :	  55b9:       cmpb   $0x0,0x8(%r15)
+    0.00 :	  55be:       setne  %al
+    0.00 :	  55c1:       mov    %eax,0x2220bd(%rip)        # 227684 <_dl_catch_error@@GLIBC_PRIVATE+0x20b9c4>
+    0.00 :	  55c7:       jmpq   2702 <free@plt+0x1802>
+    0.00 :	  55cc:       add    $0xd,%r15
+    0.00 :	  55d0:       mov    %r15,0x2220b9(%rip)        # 227690 <_dl_catch_error@@GLIBC_PRIVATE+0x20b9d0>
+    0.00 :	  55d7:       jmpq   2702 <free@plt+0x1802>
+    0.00 :	  55dc:       cmpl   $0x454e5245,0x8(%r15)
+    0.00 :	  55e4:       jne    28a3 <free@plt+0x19a3>
+    0.00 :	  55ea:       cmpb   $0x4c,0xc(%r15)
+    0.00 :	  55ef:       jne    28a3 <free@plt+0x19a3>
+    0.00 :	  55f5:       lea    -0x140(%rbp),%rax
+    0.00 :	  55fc:       lea    0xe(%r15),%rcx
+    0.00 :	  5600:       mov    $0x2,%r8d
+    0.00 :	  5606:       xor    %r15d,%r15d
+    0.00 :	  5609:       mov    %rax,-0x1b0(%rbp)
+    0.00 :	  5610:       jmp    563c <free@plt+0x473c>
+    0.00 :	  5612:       cmp    $0x2e,%sil
+    0.00 :	  5616:       je     5621 <free@plt+0x4721>
+    0.00 :	  5618:       test   %sil,%sil
+    0.00 :	  561b:       jne    2702 <free@plt+0x1802>
+    0.00 :	  5621:       lea    0x0(,%r8,8),%ecx
+    0.00 :	  5629:       shl    %cl,%rax
+    0.00 :	  562c:       or     %rax,%r15
+    0.00 :	  562f:       test   %sil,%sil
+    0.00 :	  5632:       je     568e <free@plt+0x478e>
+    0.00 :	  5634:       lea    0x1(%rdx),%rcx
+    0.00 :	  5638:       sub    $0x1,%r8
+    0.00 :	  563c:       mov    -0x1b0(%rbp),%rsi
+    0.00 :	  5643:       mov    %rcx,%rdi
+    0.00 :	  5646:       mov    %r8,-0x1c0(%rbp)
+    0.00 :	  564d:       mov    %rcx,-0x1b8(%rbp)
+    0.00 :	  5654:       callq  117f0 <_dl_debug_state@@GLIBC_PRIVATE+0xa50>
+    0.00 :	  5659:       cmp    $0xfe,%rax
+    0.00 :	  565f:       ja     2702 <free@plt+0x1802>
+    0.00 :	  5665:       mov    -0x140(%rbp),%rdx
+    0.00 :	  566c:       mov    -0x1b8(%rbp),%rcx
+    0.00 :	  5673:       cmp    %rcx,%rdx
+    0.00 :	  5676:       je     2702 <free@plt+0x1802>
+    0.00 :	  567c:       mov    -0x1c0(%rbp),%r8
+    0.00 :	  5683:       movzbl (%rdx),%esi
+    0.00 :	  5686:       test   %r8,%r8
+    0.00 :	  5689:       jne    5612 <free@plt+0x4712>
+    0.00 :	  568b:       or     %rax,%r15
+    0.00 :	  568e:       test   %r15,%r15
+    0.00 :	  5691:       je     2702 <free@plt+0x1802>
+    0.00 :	  5697:       mov    %r15d,0x2220c6(%rip)        # 227764 <_rtld_global_ro@@GLIBC_PRIVATE+0x4>
+    0.00 :	  569e:       jmpq   2702 <free@plt+0x1802>
+    0.00 :	  56a3:       lea    0x1d07e(%rip),%rcx        # 22728 <_dl_catch_error@@GLIBC_PRIVATE+0x6a68>
+    0.00 :	  56aa:       lea    0x1b4c3(%rip),%rsi        # 20b74 <_dl_catch_error@@GLIBC_PRIVATE+0x4eb4>
+    0.00 :	  56b1:       lea    0x1b4c9(%rip),%rdi        # 20b81 <_dl_catch_error@@GLIBC_PRIVATE+0x4ec1>
+    0.00 :	  56b8:       mov    $0x3d,%edx
+    0.00 :	  56bd:       callq  1b790 <free@@GLIBC_2.2.5+0x170>
+    0.00 :	  56c2:       cmpq   $0x0,0x10(%r14)
+    0.00 :	  56c7:       jne    56d3 <free@plt+0x47d3>
+    0.00 :	  56c9:       mov    $0x1,%edi
+    0.00 :	  56ce:       callq  1d030 <_dl_catch_error@@GLIBC_PRIVATE+0x1370>
+    0.00 :	  56d3:       cmp    $0x1,%r12b
+    0.00 :	  56d7:       sbb    %edi,%edi
+    0.00 :	  56d9:       and    $0x2,%edi
+    0.00 :	  56dc:       callq  1d030 <_dl_catch_error@@GLIBC_PRIVATE+0x1370>
+    0.00 :	  56e1:       jmpq   32c3 <free@plt+0x23c3>
+    0.00 :	  56e6:       lea    0x1d04b(%rip),%rcx        # 22738 <_dl_catch_error@@GLIBC_PRIVATE+0x6a78>
+    0.00 :	  56ed:       lea    0x1b27e(%rip),%rsi        # 20972 <_dl_catch_error@@GLIBC_PRIVATE+0x4cb2>
+    0.00 :	  56f4:       lea    0x1b45d(%rip),%rdi        # 20b58 <_dl_catch_error@@GLIBC_PRIVATE+0x4e98>
+    0.00 :	  56fb:       mov    $0x506,%edx
+    0.00 :	  5700:       callq  1b790 <free@@GLIBC_2.2.5+0x170>
+    0.00 :	  5705:       lea    0x1d02c(%rip),%rcx        # 22738 <_dl_catch_error@@GLIBC_PRIVATE+0x6a78>
+    0.00 :	  570c:       lea    0x1b25f(%rip),%rsi        # 20972 <_dl_catch_error@@GLIBC_PRIVATE+0x4cb2>
+    0.00 :	  5713:       lea    0x1cd26(%rip),%rdi        # 22440 <_dl_catch_error@@GLIBC_PRIVATE+0x6780>
+    0.00 :	  571a:       mov    $0x501,%edx
+    0.00 :	  571f:       callq  1b790 <free@@GLIBC_2.2.5+0x170>
+    0.00 :	  5724:       lea    0x1cffd(%rip),%rcx        # 22728 <_dl_catch_error@@GLIBC_PRIVATE+0x6a68>
+    0.00 :	  572b:       lea    0x1b442(%rip),%rsi        # 20b74 <_dl_catch_error@@GLIBC_PRIVATE+0x4eb4>
+    0.00 :	  5732:       lea    0x1b46c(%rip),%rdi        # 20ba5 <_dl_catch_error@@GLIBC_PRIVATE+0x4ee5>
+    0.00 :	  5739:       mov    $0x68,%edx
+    0.00 :	  573e:       callq  1b790 <free@@GLIBC_2.2.5+0x170>
+    0.00 :	  5743:       lea    0x1e666(%rip),%rcx        # 23db0 <_dl_catch_error@@GLIBC_PRIVATE+0x80f0>
+    0.00 :	  574a:       lea    0x1b244(%rip),%rsi        # 20995 <_dl_catch_error@@GLIBC_PRIVATE+0x4cd5>
+    0.00 :	  5751:       lea    0x1c5e0(%rip),%rdi        # 21d38 <_dl_catch_error@@GLIBC_PRIVATE+0x6078>
+    0.00 :	  5758:       mov    $0x84,%edx
+    0.00 :	  575d:       callq  1b790 <free@@GLIBC_2.2.5+0x170>
+    0.00 :	  5762:       lea    0x1e647(%rip),%rcx        # 23db0 <_dl_catch_error@@GLIBC_PRIVATE+0x80f0>
+    0.00 :	  5769:       lea    0x1b225(%rip),%rsi        # 20995 <_dl_catch_error@@GLIBC_PRIVATE+0x4cd5>
+    0.00 :	  5770:       lea    0x1c599(%rip),%rdi        # 21d10 <_dl_catch_error@@GLIBC_PRIVATE+0x6050>
+    0.00 :	  5777:       mov    $0x7c,%edx
+    0.00 :	  577c:       callq  1b790 <free@@GLIBC_2.2.5+0x170>
+    0.00 :	  5781:       lea    0x1b40e(%rip),%rbx        # 20b96 <_dl_catch_error@@GLIBC_PRIVATE+0x4ed6>
+    0.00 :	  5788:       nopl   0x0(%rax,%rax,1)
+    0.00 :	  5790:       mov    %rbx,%rsi
+    0.00 :	  5793:       mov    $0x2,%edi
+    0.00 :	  5798:       xor    %eax,%eax
+    0.00 :	  579a:       callq  11660 <_dl_debug_state@@GLIBC_PRIVATE+0x8c0>
+    0.00 :	  579f:       mov    $0x7f,%edi
+    0.00 :	  57a4:       callq  1d030 <_dl_catch_error@@GLIBC_PRIVATE+0x1370>
+    0.00 :	  57a9:       jmp    5790 <free@plt+0x4890>
+    0.00 :	  57ab:       test   %rdx,%rdx
+    0.00 :	  57ae:       je     5245 <free@plt+0x4345>
+    0.00 :	  57b4:       mov    0x8(%rdx),%rax
+    0.00 :	  57b8:       mov    %rax,-0x138(%rbp)
+    0.00 :	  57bf:       mov    (%rax),%rbx
+    0.00 :	  57c2:       jmpq   523c <free@plt+0x433c>
+    0.00 :	  57c7:       mov    -0x1a0(%rbp),%rax
+    0.00 :	  57ce:       xor    %r13d,%r13d
+    0.00 :	  57d1:       mov    %r14,-0x160(%rbp)
+    0.00 :	  57d8:       mov    %r14,%rcx
+    0.00 :	  57db:       mov    %r13,%r14
+    0.00 :	  57de:       mov    %rax,-0x158(%rbp)
+    0.00 :	  57e5:       mov    0x22211c(%rip),%r13        # 227908 <_rtld_global_ro@@GLIBC_PRIVATE+0x1a8>
+    0.00 :	  57ec:       xor    %ebx,%ebx
+    0.00 :	  57ee:       mov    %r15,-0x1b8(%rbp)
+    0.00 :	  57f5:       mov    %r14,%r15
+    0.00 :	  57f8:       mov    %r13,%r14
+    0.00 :	  57fb:       mov    %ebx,%r13d
+    0.00 :	  57fe:       cmp    %r13d,0x22210b(%rip)        # 227910 <_rtld_global_ro@@GLIBC_PRIVATE+0x1b0>
+    0.00 :	  5805:       jbe    5874 <free@plt+0x4974>
+    0.00 :	  5807:       mov    0x10(%r14),%rax
+    0.00 :	  580b:       test   %rax,%rax
+    0.00 :	  580e:       je     586a <free@plt+0x496a>
+    0.00 :	  5810:       mov    %rcx,-0x1d0(%rbp)
+    0.00 :	  5817:       mov    -0x1a8(%rbp),%rcx
+    0.00 :	  581e:       mov    %r13d,%r12d
+    0.00 :	  5821:       add    $0x47,%r12
+    0.00 :	  5825:       xor    %esi,%esi
+    0.00 :	  5827:       shl    $0x4,%r12
+    0.00 :	  582b:       mov    (%rcx,%r15,8),%rbx
+    0.00 :	  582f:       add    %rbx,%r12
+    0.00 :	  5832:       mov    %rbx,%rdi
+    0.00 :	  5835:       mov    %r12,%rdx
+    0.00 :	  5838:       callq  *%rax
+    0.00 :	  583a:       mov    %eax,0x8(%r12)
+    0.00 :	  583f:       movzbl 0x315(%rbx),%esi
+    0.00 :	  5846:       mov    %esi,%edx
+    0.00 :	  5848:       shr    $0x4,%dl
+    0.00 :	  584b:       and    $0x1,%edx
+    0.00 :	  584e:       test   %eax,%eax
+    0.00 :	  5850:       setne  %al
+    0.00 :	  5853:       and    $0xffffffef,%esi
+    0.00 :	  5856:       or     %edx,%eax
+    0.00 :	  5858:       shl    $0x4,%eax
+    0.00 :	  585b:       or     %esi,%eax
+    0.00 :	  585d:       mov    %al,0x315(%rbx)
+    0.00 :	  5863:       mov    -0x1d0(%rbp),%rcx
+    0.00 :	  586a:       mov    0x40(%r14),%r14
+    0.00 :	  586e:       add    $0x1,%r13d
+    0.00 :	  5872:       jmp    57fe <free@plt+0x48fe>
+    0.00 :	  5874:       mov    %r15,%r14
+    0.00 :	  5877:       mov    -0x1b8(%rbp),%r15
+    0.00 :	  587e:       sub    $0x1,%r14
+    0.00 :	  5882:       je     58c4 <free@plt+0x49c4>
+    0.00 :	  5884:       mov    $0x1,%r14d
+    0.00 :	  588a:       jmpq   57e5 <free@plt+0x48e5>
+    0.00 :	  588f:       mov    -0x150(%rbp),%rax
+    0.00 :	  5896:       test   %rax,%rax
+    0.00 :	  5899:       je     535b <free@plt+0x445b>
+    0.00 :	  589f:       mov    %rax,%rcx
+    0.00 :	  58a2:       mov    -0x1a0(%rbp),%rdi
+    0.00 :	  58a9:       lea    0xe0(%rdx),%rax
+    0.00 :	  58b0:       lea    0x2227a9(%rip),%rsi        # 228060 <_rtld_global@@GLIBC_PRIVATE>
+    0.00 :	  58b7:       shl    $0x4,%rax
+    0.00 :	  58bb:       mov    %rdi,(%rsi,%rax,1)
+    0.00 :	  58bf:       jmpq   535b <free@plt+0x445b>
+    0.00 :	  58c4:       mov    %rcx,%r14
+    0.00 :	  58c7:       jmpq   5260 <free@plt+0x4360>
+    0.00 :	  58cc:       mov    %rbx,0x222035(%rip)        # 227908 <_rtld_global_ro@@GLIBC_PRIVATE+0x1a8>
+    0.00 :	  58d3:       jmpq   53a2 <free@plt+0x44a2>
+    0.00 :	  58d8:       lea    0x1ce59(%rip),%rcx        # 22738 <_dl_catch_error@@GLIBC_PRIVATE+0x6a78>
+    0.00 :	  58df:       lea    0x1b08c(%rip),%rsi        # 20972 <_dl_catch_error@@GLIBC_PRIVATE+0x4cb2>
+    0.00 :	  58e6:       lea    0x1b302(%rip),%rdi        # 20bef <_dl_catch_error@@GLIBC_PRIVATE+0x4f2f>
+    0.00 :	  58ed:       mov    $0x5e4,%edx
+    0.00 :	  58f2:       callq  1b790 <free@@GLIBC_2.2.5+0x170>

