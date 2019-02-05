@@ -1,0 +1,124 @@
+First, lets see if we can learn something by looking at the strings
+encoded in the binary:
+
+> strings simple_bomb
+
+A lot of output, practice will tell you which to ignore, a couple of interesting
+ones:
+```
+%*s %d
+let's see
+simple_bomb.c
+well done
+```
+
+Maybe just try one of these as inputs?
+
+> echo "let's see" | ./simple_bomb
+
+Doesn't work. Lets look at the "%*s %d" string. Looks like a format string.
+Assuming this string is used in scanf, this string, due to the *, will match
+the first argument, but only stores the second argument. Hence, possibly, the
+first string is ignored, but must still be present in the input. Let's try
+something matching that format string
+
+> echo "sdf 100" | ./simple_bomb
+
+That already gives the additional output "let's see", but still fails.
+Let's statically analyze the binary. Start with the symbol table
+
+> objdump -t simple_bomb
+
+From simple_bomb.c we know that "secret" is an the interesting function.
+
+objdump -d simple_bomb | less
+
+then let's go to <secret> by typing /secret<return>
+
+First, a good idea is to see which functions are called (for instance with callq):
+```__isoc99_sscanf@plt   --> this is the symbol for sscanf```
+```puts``` 
+```fail```
+```fail```
+In this order. Ignoring the option of jumps, it looks like the function is parsing
+something using sscanf, probably using the format string we saw from strings "%*s %d".
+Remember the signature of sscanf is sscanf(input, format, **args).
+While we could now go on and understand the assembly in detail, it might
+be easier to lunch the debugger and check at runtime the behavior.
+Lets prepare a file input with our best guess of input so far so 
+we can pass it as input to the gdb execution.
+
+> gdb simple_bomb
+
+gdb> b secret           (<-- in this case we have debugging information, but
+                          if we have a pure binary, we could also break on addresses)
+gdb> run "sdf 100"
+
+... gdb hits the breakpoint ...
+The usual commands like "l" (list source) are not avail since we don't
+have the source. Hence switch to asm mode
+
+gdb> layout asm
+
+Now step through the function, we think we already have an understanding, it
+will call sscanf and then do something with the return values...
+
+gdb> ni
+gdb> ni
+gdb> ni
+
+Now we should be just before the call to sscanf.
+Remember the calling convention: RDI, RSI, RDX, RCX, R8, R9
+lets, print the first argument
+
+gdb> p $rdi
+
+Decimal is ugly, hence print in hex
+
+gdb> p/x $rdi
+
+Now we get a memory address, but whats at this address? We can use 
+the x command. And we want to interpret whats at this address as string,
+hence we use x/s 
+
+gdb> x/s $rdi
+
+And, as expected it prints our input string, in the second argument to sscanf
+we expect the format string
+
+gdb> x/s $rsi
+
+Yep! So the format string will make scanf store one argument, we expect
+one pointers to be passed where the match is stored, the next args is RDX.
+
+gdb> p/x $rdx
+
+This gives the content of RDX, an address which will be overwritten. Step
+after
+
+gdb> ni
+
+Now RDX should point to our 100. Use /u for the unsigned modifier.
+
+gdb> x/u $rdx
+
+Yep, it's 100. Lets have a look at the assembly how RDX actually got initialized:
+
+0x5555555547e8 <secret+4>       lea    0xc(%rsp),%rdx
+
+Hence it is stored on the stack. Lets see down from the actual code 
+where this address is used the next time:
+
+0x55555555480e <secret+42>      cmpl   $0x7e2,0xc(%rsp)
+
+Our input is compared with the fixed value 0x7e2. Let's just try this
+input:
+
+gdb> quit
+
+Now 0x7e2 is 2018 in decimal, hence let's try "sdf 2018" as input
+
+> ./simple_bomb "sdf 2018"
+
+Great, we found the secret value!
+
